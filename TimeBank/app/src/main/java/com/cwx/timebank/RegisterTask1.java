@@ -24,7 +24,7 @@ public class RegisterTask1 extends AsyncTask {
     protected Object doInBackground(Object[] objects) {
         sPhone=(String)objects[0];
         try {
-            URL url=new URL("http://10.7.88.239:8080/TimeBank/RegisterServlet?phone="+sPhone);
+            URL url=new URL("http://tb.yangke.ink:8080/TimeBank/RegisterServlet?phone="+sPhone);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("contentType","UTF-8");
             InputStream is = connection.getInputStream();

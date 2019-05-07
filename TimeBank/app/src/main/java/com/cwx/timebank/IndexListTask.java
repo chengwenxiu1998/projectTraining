@@ -38,7 +38,7 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
         try {
             //网络访问服务器端
            // URL url = new URL("http://10.7.85.146:8080/TimeBank/IndexServlet");
-            URL url = new URL("http://10.7.88.246:8080/TimeBank/IndexServlet");
+            URL url = new URL("http://tb.yangke.ink:8080/TimeBank/IndexServlet");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");

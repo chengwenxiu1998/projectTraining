@@ -28,13 +28,15 @@
 
         <meta-data android:name="Mob-AppKey" android:value="2941e0eae5638"/>
         <meta-data android:name="Mob-AppSecret" android:value="51bf20e8b8311f93858195d8b2a000eb"/>
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
 
         <activity android:name=".SellTimeActivity"/>

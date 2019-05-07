@@ -57,10 +57,6 @@ public class GroupActivity extends Fragment {
                     Intent intent = new Intent(getContext(),SendTalkActivity.class);
                     startActivity(intent);
                 }else{//用户还没有登陆，跳转到登陆页面
-                    SharedPreferences sp = getContext().getSharedPreferences("isFromMy",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putBoolean("isFromQuanZi",true);
-                    editor.commit();
                     Intent intent = new Intent(getContext(),LoginActivity.class);
                     startActivity(intent);
                 }

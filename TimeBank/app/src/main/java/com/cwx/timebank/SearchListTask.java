@@ -56,7 +56,7 @@ public class SearchListTask extends AsyncTask<String,Void,List>  {
             String res=reader.readLine();
             //解析JSONArray字符串
             JSONArray array=new JSONArray(res);
-            Log.e("123","哈哈哈"+array.toString());
+            Log.e("123",array.length()+"");
             for(int i=0;i<array.length();++i){
                 JSONObject object=array.optJSONObject(i);
                 BuyOrSellTime buyOrSellTime=new BuyOrSellTime();
