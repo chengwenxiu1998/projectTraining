@@ -1,4 +1,4 @@
-package com.cwx.timebank;
+package com.cwx.timebank.releasetask;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -32,8 +32,9 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.cwx.timebank.MainActivity;
+import com.cwx.timebank.R;
 import com.cwx.timebank.bean.TaskBean;
-import com.cwx.timebank.task.RenWuTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
