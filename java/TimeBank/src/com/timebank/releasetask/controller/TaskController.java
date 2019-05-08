@@ -10,10 +10,6 @@ import com.google.gson.Gson;
 
 @Controller
 public class TaskController {
-	@RequestMapping(value = "login", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String index() {
-		return "index";
-	}
+	
 
 }
