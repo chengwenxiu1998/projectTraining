@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,9 +41,12 @@ import com.cwx.timebank.bean.TaskBean;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -96,6 +100,7 @@ public class SendActivity1 extends Fragment {
     String day;
     String hour;
     String min;
+    PopupWindow popupWindow;
     //当创建View时调用
     @Nullable
     @Override
@@ -410,7 +415,7 @@ public class SendActivity1 extends Fragment {
                 etSellSendTask.setCursorVisible(false);
 
                 etSellMiaoshu.setHint("描述详情");
-                // etSellSellTimeMoney.setHint("请输入你得到的时间币");
+
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
 
             }
@@ -451,7 +456,7 @@ public class SendActivity1 extends Fragment {
                 taskBean.setuIdSend(userId);
 
                 InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
-                renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
+               /* renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
                     @Override
                     public void onResponse(Boolean aBoolean) {
                         if (aBoolean==true){
@@ -460,7 +465,13 @@ public class SendActivity1 extends Fragment {
                             Toast.makeText(getContext(),"网络错误，发布失败",Toast.LENGTH_LONG).show();
                         }
                     }
-                });
+                });*/
+               renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
+                   @Override
+                   public void onResponse(Boolean aBoolean) {
+
+                   }
+               });
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
@@ -550,7 +561,7 @@ public class SendActivity1 extends Fragment {
         final View view = getLayoutInflater()
                 .inflate(R.layout.popup_window, null);
         // 2. 创建PopupWindow
-        final PopupWindow popupWindow = new PopupWindow(getContext());
+        popupWindow = new PopupWindow(getContext());
         // 3. 设置PopupWindow的长宽
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -564,75 +575,13 @@ public class SendActivity1 extends Fragment {
         Button btnPhoto = view.findViewById(R.id.btn_photo);
         Button btnSelect = view.findViewById(R.id.btn_select);
         Button btnCancel = view.findViewById(R.id.btn_cancel);
+        MyListener myListener=new MyListener();
+        btnCancel.setOnClickListener(myListener);
+        btnPhoto.setOnClickListener(myListener);
+        btnSelect.setOnClickListener(myListener);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 隐藏PopupWindow
-                popupWindow.dismiss();
-            }
-        });
-        btnPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outputImage = new File(getContext().getExternalCacheDir(), "output_image.jpg");
-                try//判断图片是否存在，存在则删除在创建，不存在则直接创建
-                {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-
-                    outputImage.createNewFile();
-                    Log.e("test","outputImage ="+outputImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (Build.VERSION.SDK_INT >= 24)
-                    //判断安卓的版本是否高于7.0，高于则调用高于的方法，低于则调用低于的方法
-                    //把文件转换成Uri对象
-                    /*
-                    之所以这样，是因为android7.0以后直接使用本地真实路径是不安全的，会抛出异常。
-                    FileProvider是一种特殊的内容提供器，可以对数据进行保护
-                     */ {
-                    imageUri = FileProvider.getUriForFile(getContext(),
-                            "com.cwx.timebank.android.support.v4.content.FileProvider", outputImage);
-                    /*
-                    第一个参数：context对象
-                    第二个参数：任意唯一的字符串
-                    第三个参数：文件对象
-                     */
-
-                } else {
-                    imageUri = Uri.fromFile(outputImage);
-                }
-                //使用隐示的Intent，系统会找到与它对应的活动，即调用摄像头，并把它存储
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, TAKE_PHOTO1);
-                //调用会返回结果的开启方式，返回成功的话，则把它显示出来
-                popupWindow.dismiss();
-
-            }
-        });
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                setImage1();
-
-                popupWindow.dismiss();
-
-            }
-        });
         popupWindow.showAtLocation(ivSellAddImageView, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 
-    }
-    private void setImage1(){
-        // TODO Auto-generated method stub
-        // 使用intent调用系统提供的相册功能，使用startActivityForResult是为了获取用户选择的图片的地址
-        Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
-        getAlbum.setType(Image_Type);
-        startActivityForResult(getAlbum, ImageCode1);
     }
 
     // 弹出PopupWindow
@@ -641,7 +590,7 @@ public class SendActivity1 extends Fragment {
         final View view = getLayoutInflater()
                 .inflate(R.layout.popup_window, null);
         // 2. 创建PopupWindow
-        final PopupWindow popupWindow = new PopupWindow(getContext());
+        popupWindow= new PopupWindow(getContext());
         // 3. 设置PopupWindow的长宽
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -655,210 +604,18 @@ public class SendActivity1 extends Fragment {
         Button btnPhoto = view.findViewById(R.id.btn_photo);
         Button btnSelect = view.findViewById(R.id.btn_select);
         Button btnCancel = view.findViewById(R.id.btn_cancel);
+        MyListener myListener=new MyListener();
+        btnCancel.setOnClickListener(myListener);
+        btnPhoto.setOnClickListener(myListener);
+        btnSelect.setOnClickListener(myListener);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 隐藏PopupWindow
-                popupWindow.dismiss();
-            }
-        });
-        btnPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outputImage = new File(getContext().getExternalCacheDir(), "output_image.jpg");
-                try//判断图片是否存在，存在则删除在创建，不存在则直接创建
-                {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-
-                    outputImage.createNewFile();
-                    Log.e("test","outputImage ="+outputImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (Build.VERSION.SDK_INT >= 24)
-                    //判断安卓的版本是否高于7.0，高于则调用高于的方法，低于则调用低于的方法
-                    //把文件转换成Uri对象
-                    /*
-                    之所以这样，是因为android7.0以后直接使用本地真实路径是不安全的，会抛出异常。
-                    FileProvider是一种特殊的内容提供器，可以对数据进行保护
-                     */ {
-                    imageUri = FileProvider.getUriForFile(getContext(),
-                            "com.cwx.timebank.android.support.v4.content.FileProvider", outputImage);
-                    /*
-                    第一个参数：context对象
-                    第二个参数：任意唯一的字符串
-                    第三个参数：文件对象
-                     */
-
-                } else {
-                    imageUri = Uri.fromFile(outputImage);
-                }
-                //使用隐示的Intent，系统会找到与它对应的活动，即调用摄像头，并把它存储
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, TAKE_PHOTO);
-                //调用会返回结果的开启方式，返回成功的话，则把它显示出来
-                popupWindow.dismiss();
-
-            }
-        });
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                setImage();
-
-                popupWindow.dismiss();
-
-            }
-        });
         popupWindow.showAtLocation(ivAddImageView, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 
     }
 
-    private void setImage(){
-        // TODO Auto-generated method stub
-        // 使用intent调用系统提供的相册功能，使用startActivityForResult是为了获取用户选择的图片的地址
-        Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
-        getAlbum.setType(Image_Type);
-        startActivityForResult(getAlbum, ImageCode);
-    }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // RESULT_OK 是系统自定义得一个常量
-        if (resultCode != RESULT_OK) {
-            Log.e("onActivityResult", "返回的resultCode出错");
-            return;
-        }
 
-        // 外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
-        ContentResolver resolver =getContext().getContentResolver();
-        // 判断接收的Activity是不是选择图片的
-        if (requestCode == ImageCode) {
 
-            // 获得图片的地址Uri
-            Uri originalUri = data.getData();
-            // 新建一个字符串数组用于存储图片地址数据。
-            String[] proj = {MediaStore.Images.Media.DATA};
-
-            // android系统提供的接口，用于根据uri获取数据
-            Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
-                    null);
-
-            // 获得用户选择图片的索引值
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            // 将游标移至开头 ，防止引起队列越界
-            cursor.moveToFirst();
-            // 根据图片的URi生成bitmap
-            Bitmap bm = null;
-
-            try {
-                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-                Log.e("test","即将执行saveBitmap");
-                //saveMyBitmap(bm);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // 显得到bitmap图片
-            imageshow.setImageBitmap(bm);
-            imageshow.setVisibility(View.VISIBLE);
-        }
-        if (requestCode == ImageCode1) {
-
-            // 获得图片的地址Uri
-            Uri originalUri = data.getData();
-            // 新建一个字符串数组用于存储图片地址数据。
-            String[] proj = {MediaStore.Images.Media.DATA};
-
-            // android系统提供的接口，用于根据uri获取数据
-            Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
-                    null);
-
-            // 获得用户选择图片的索引值
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            // 将游标移至开头 ，防止引起队列越界
-            cursor.moveToFirst();
-            // 根据图片的URi生成bitmap
-            Bitmap bm = null;
-
-            try {
-                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-                Log.e("test","即将执行saveBitmap");
-                //saveMyBitmap(bm);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // 显得到bitmap图片
-            imageshowSell.setImageBitmap(bm);
-            imageshowSell.setVisibility(View.VISIBLE);
-        }
-
-        if (requestCode == TAKE_PHOTO ) {
-            try {
-                Bitmap bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(imageUri));
-                Log.e("test","即将执行saveBitmap");
-                //saveMyBitmap(bitmap);
-                imageshow.setImageBitmap(bitmap);
-                imageshow.setVisibility(View.VISIBLE);
-                //将图片解析成Bitmap对象，并把它显现出来
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (requestCode == TAKE_PHOTO1 ) {
-            try {
-                Bitmap bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(imageUri));
-                Log.e("test","即将执行saveBitmap");
-                //saveMyBitmap(bitmap );
-                imageshowSell.setImageBitmap(bitmap);
-                imageshowSell.setVisibility(View.VISIBLE);
-                //将图片解析成Bitmap对象，并把它显现出来
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    /*//已经存在bitmap将其保存到本地
-    public void saveMyBitmap(Bitmap mBitmap) {
-        Log.e("test","开始执行saveMyBitmap");
-        File dir = new File("/sdcard/Note/");
-
-        if (!dir.exists())
-            dir.mkdirs();
-        Log.e("test","dir="+dir);
-        File f = new File("/sdcard/Note/" + i++ + ".jpg");
-        Log.e("test","f="+f);
-        Log.e("test",f.toURI().toString());//////
-        FileOutputStream fOut = null;
-        try {
-            fOut = new FileOutputStream(f);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Log.e("FFF", e.getMessage());
-        }
-        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-        Log.e("test"," mBitmap.compress="+"aaa");
-        try {
-            fOut.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("FFF", e.getMessage());
-        }
-        try {
-            fOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("FFF", e.getMessage());
-        }
-    }*/
     private void setTabHostChanged(String tabId) {
         TextView textView1 = viewList.get(0).findViewById(R.id.tv_text);
         TextView textView2 = viewList.get(1).findViewById(R.id.tv_text);
@@ -885,6 +642,88 @@ public class SendActivity1 extends Fragment {
         viewList.add(view);
         return view;
     }
+    class MyListener implements View.OnClickListener {
 
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.btn_photo:
+                    //调用系统相机
+                    Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    startActivityForResult(intent,1111);
+                    popupWindow.dismiss();
+                    break;
+                case R.id.btn_select:
+                    Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
+                    // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
+                    intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
+                    startActivity(intentToPickPic);
+                    popupWindow.dismiss();
+                    break;
+                case R.id.btn_cancel:
+                    popupWindow.dismiss();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1111 && resultCode==RESULT_OK){
+            Bitmap bitmap=(Bitmap)data.getExtras().get("data");
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date=new Date(System.currentTimeMillis());
+            String fileName=simpleDateFormat.format(date);
+            saveBmp2Gallery(bitmap,fileName);
+        }
+    }
+    public void saveBmp2Gallery(Bitmap bmp, String picName) {
+        //1. 获取内容解析者
+        ContentResolver contentResolver =getActivity().getContentResolver();
+        String fileName = null;
+        //系统相册目录
+        String galleryPath= Environment.getExternalStorageDirectory()
+                + File.separator + Environment.DIRECTORY_DCIM
+                +File.separator+"Camera"+File.separator;
+
+
+        // 声明文件对象
+        File file = null;
+        // 声明输出流
+        FileOutputStream outStream = null;
+
+        try {
+            // 如果有目标文件，直接获得文件对象，否则创建一个以filename为名称的文件
+            file = new File(galleryPath, picName+ ".jpg");
+
+            // 获得文件相对路径
+            fileName = file.toString();
+            // 获得输出流，如果文件中有内容，追加内容
+            outStream = new FileOutputStream(fileName);
+            if (null != outStream) {
+                bmp.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
+            }
+
+        } catch (Exception e) {
+            e.getStackTrace();
+        }finally {
+            try {
+                if (outStream != null) {
+                    outStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //通知相册更新
+        MediaStore.Images.Media.insertImage(contentResolver,
+                bmp, fileName, null);
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri uri = Uri.fromFile(file);
+        intent.setData(uri);
+        getActivity().sendBroadcast(intent);
+    }
 
 }
