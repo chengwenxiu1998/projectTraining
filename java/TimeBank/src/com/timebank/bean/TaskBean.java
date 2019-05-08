@@ -2,13 +2,21 @@ package com.timebank.bean;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 *@author ������
 *@version ����ʱ��:2018��12��5�� ����10:40:25
 *@ClassName ������
 *@Description ������
 */
-
+@Entity
+@Table(name = "cakes")
 public class TaskBean {
 	private int tId;
 	private int uIdSend;
@@ -30,12 +38,14 @@ public class TaskBean {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cake_id")
 	public int gettId() {
 		return tId;
 	}
 
-
+	
 	public void settId(int tId) {
 		this.tId = tId;
 	}
