@@ -33,6 +33,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.cwx.timebank.MainActivity;
+
 import com.cwx.timebank.R;
 import com.cwx.timebank.bean.TaskBean;
 
@@ -448,7 +449,7 @@ public class SendActivity1 extends Fragment {
                 Log.e("test",userId+"");
                 taskBean.setuIdSend(userId);
 
-                RenWuTask renwuTask=new RenWuTask(getContext(),taskBean,month,day,hour,min);
+                 InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
