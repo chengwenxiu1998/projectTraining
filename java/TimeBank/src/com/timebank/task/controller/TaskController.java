@@ -1,5 +1,6 @@
 package com.timebank.task.controller;
 
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.mysql.jdbc.log.Log;
+
 import com.timebank.entity.Task;
 import com.timebank.task.service.TaskServiceImpl;
 
 @Controller
 public class TaskController {
+	
 	@Resource
 	private TaskServiceImpl taskServiceImpl;
 
@@ -39,7 +41,7 @@ public class TaskController {
 //		return temp;
 //	}
 	/*
-	 * 向数据库插入
+	 * 向数据库插入发布的任务	
 	 */
 	@RequestMapping(value = "insertTaskIntoDB", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
@@ -49,20 +51,9 @@ public class TaskController {
 			@RequestParam("tagId") int tagId, @RequestParam("tEndtimeMonth") String tEndtimeMonth,
 			@RequestParam("tEndtimeDay") String tEndtimeDay, @RequestParam("tEndtimeHour") String tEndtimeHour,
 			@RequestParam("tEndtimeMin") String tEndtimeMin, @RequestParam("t_imgurl") String t_imgurl) {
-		System.out.println("uIdSend="+uIdSend);
-		System.out.println("tcId="+tcId);
-		System.out.println("tDesc="+tDesc);
-		System.out.println("tCoinCount="+tCoinCount);
-		System.out.println("tState="+tState);
-		System.out.println("tagId="+tagId);
-		System.out.println("tEndtimeMonth="+tEndtimeMonth);
-		System.out.println("tEndtimeDay="+tEndtimeDay);
-		System.out.println("tEndtimeDay="+tEndtimeDay);
-		return "index";
-		/*List<Task> list = taskServiceImpl.buyTimeTask();
-		model.addAttribute("buyTimeTask", list);
+		Boolean aBoolean=taskServiceImpl.addTask(uIdSend, tcId, tDesc, tCoinCount, tState, uIdAccept, tagId, tEndtimeMonth, tEndtimeDay, tEndtimeHour, tEndtimeMin, t_imgurl);
 		Gson gson = new Gson();
-		String temp = gson.toJson(list);
-		return temp;*/
+		String temp = gson.toJson(aBoolean);
+		return temp;
 	}
 }

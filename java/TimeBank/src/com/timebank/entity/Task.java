@@ -277,6 +277,23 @@ public class Task {
 		this.tAcceptTime = tAcceptTime;
 		this.tFinishTime = tFinishTime;
 	}
+	public Task( int uIdSend, Date uTime, int tcId, String tDesc, int tCoinCount, String tState,
+			int uIdAccept, int tagId, Date tEndTime, String tImgUrl, Date tAcceptTime, Date tFinishTime) {
+		super();
+		
+		this.uIdSend = uIdSend;
+		this.uTime = uTime;
+		this.tcId = tcId;
+		this.tDesc = tDesc;
+		this.tCoinCount = tCoinCount;
+		this.tState = tState;
+		this.uIdAccept = uIdAccept;
+		this.tagId = tagId;
+		this.tEndTime = tEndTime;
+		this.tImgUrl = tImgUrl;
+		this.tAcceptTime = tAcceptTime;
+		this.tFinishTime = tFinishTime;
+	}
 
 
 }

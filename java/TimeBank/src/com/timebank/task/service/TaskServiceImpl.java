@@ -21,4 +21,8 @@ public class TaskServiceImpl {
 //	public List<Task> tasksList(){
 //		return this.taskDaoImpl.findTasks();
 //	}
+	public Boolean addTask(int uIdSend, int tcId, String tDesc, int tCoinCount, String tState, int uIdAccept, int tagId,
+			String tEndtimeMonth, String tEndtimeDay, String tEndtimeHour, String tEndtimeMin, String t_imgurl) {
+		return taskDaoImpl.addTask(uIdSend, tcId, tDesc, tCoinCount, tState, uIdAccept, tagId, tEndtimeMonth, tEndtimeDay, tEndtimeHour, tEndtimeMin, t_imgurl);
+	}
 }
