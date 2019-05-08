@@ -7,24 +7,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
-*@author ������
-*@version ����ʱ��:2018��12��6�� ����10:07:05
-*@ClassName ������
-*@Description ������
+*@author 锟斤拷锟斤拷锟斤拷
+*@version 锟斤拷锟斤拷时锟斤拷:2018锟斤拷12锟斤拷6锟斤拷 锟斤拷锟斤拷10:07:05
+*@ClassName 锟斤拷锟斤拷锟斤拷
+*@Description 锟斤拷锟斤拷锟斤拷
 */
 
 public class DataBase {
 	/*
-	 * ��ȡ�����ݿ������
+	 * 锟斤拷取锟斤拷锟斤拷锟捷匡拷锟斤拷锟斤拷锟�
 	 */
 	public static Connection getConnection() {
 		Connection conn=null;
 		try {
-			//1����������
+			//1锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 			Class.forName("com.mysql.jdbc.Driver");
-			//2����������
+			//2锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 //			conn=DriverManager.getConnection("jdbc:mysql://106.12.151.7:3306/timebank?useUnicode=true&characterEncoding=UTF-8","root","timebank");
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/timebank?useUnicode=true&characterEncoding=UTF-8","root","");
+			conn=DriverManager.getConnection("jdbc:mysql://106.14.222.186:3306/timebank?useUnicode=true&characterEncoding=UTF-8","root","123456");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class DataBase {
 		return conn;
 		
 	}
-	//�ر����ݿ�
+	//锟截憋拷锟斤拷锟捷匡拷
 	public static void close(Connection conn,Statement stmt,ResultSet res) {
 		if(conn!=null) {
 			try {
