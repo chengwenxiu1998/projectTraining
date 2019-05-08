@@ -15,8 +15,7 @@ import javax.persistence.Table;
 *@ClassName ������
 *@Description ������
 */
-@Entity
-@Table(name = "task")
+
 public class TaskBean {
 	private int tId;
 	private int uIdSend;
@@ -38,9 +37,7 @@ public class TaskBean {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "t_id")
+	
 	public int gettId() {
 		return tId;
 	}
@@ -50,7 +47,7 @@ public class TaskBean {
 		this.tId = tId;
 	}
 
-	@Column(name="u_id_send")
+	
 	public int getuIdSend() {
 		return uIdSend;
 	}
@@ -60,7 +57,7 @@ public class TaskBean {
 		this.uIdSend = uIdSend;
 	}
 
-	@Column(name="u_time")
+	
 	public Date getuTime() {
 		return uTime;
 	}
@@ -70,7 +67,7 @@ public class TaskBean {
 		this.uTime = uTime;
 	}
 
-	@Column(name="tc_id")
+	
 	public int getTcId() {
 		return tcId;
 	}
@@ -80,7 +77,7 @@ public class TaskBean {
 		this.tcId = tcId;
 	}
 
-	@Column(name="t_desc")
+	
 	public String gettDesc() {
 		return tDesc;
 	}
@@ -90,7 +87,7 @@ public class TaskBean {
 		this.tDesc = tDesc;
 	}
 
-	@Column(name="t_coin_count")
+	
 	public int gettCoinCount() {
 		return tCoinCount;
 	}
@@ -105,7 +102,7 @@ public class TaskBean {
 		return tState;
 	}
 
-	@Column(name="")
+
 	public void settState(String tState) {
 		this.tState = tState;
 	}
