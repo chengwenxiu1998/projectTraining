@@ -7,7 +7,25 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
+	
+	<mvc:annotation-driven>
+    <mvc:message-converters register-defaults="true">
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes">
+                <list>
+                    <value>text/html;charset=UTF-8</value>
+                    <value>application/json;charset=UTF-8</value>
+                    <value>text/plain;charset=UTF-8</value>
+                    <value>application/xml;charset=UTF-8</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:message-converters>
+</mvc:annotation-driven>
+	
+	
+	
 	<mvc:resources location="/static/" mapping="/static/**" />
 	
 	<!-- 自动扫描且只扫描@Controller -->
@@ -29,6 +47,4 @@
         <!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
         <property name="maxUploadSize" value="200000"/>  
     </bean>  
-   <mvc:default-servlet-handler/>  
-   
 </beans>
