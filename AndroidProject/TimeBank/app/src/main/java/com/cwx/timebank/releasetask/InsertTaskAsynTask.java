@@ -53,11 +53,6 @@ public class InsertTaskAsynTask extends AsyncTask<String,Void,Boolean> {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
             Log.e("cakeRes",res);
-            if(res.equals("true")){
-                aBoolean=true;
-            }else{
-                aBoolean=false;
-            }
             /*//解析一个JSON格式的字符串
             Gson gson = new Gson();
             cakes= gson.fromJson(res, new TypeToken<List<Cake>>(){}.getType());*/

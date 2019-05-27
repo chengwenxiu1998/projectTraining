@@ -32,7 +32,6 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cwx.timebank.MainActivity;
 
@@ -455,10 +454,10 @@ public class SendActivity1 extends Fragment {
                 Log.e("test",userId+"");
                 taskBean.setuIdSend(userId);
 
-
+<<<<<<< HEAD
                  InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
-
-
+=======
+                InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
                /* renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
                     @Override
                     public void onResponse(Boolean aBoolean) {
@@ -469,17 +468,19 @@ public class SendActivity1 extends Fragment {
                         }
                     }
                 });*/
-                renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
-                    @Override
-                    public void onResponse(Boolean aBoolean) {
-                        if (aBoolean==true){
-                            Toast.makeText(getContext(),"发布成功",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(getContext(),"网络错误，发布失败",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+               renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
+                   @Override
+                   public void onResponse(Boolean aBoolean) {
 
+                   }
+               });
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
+=======
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
+=======
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
@@ -621,6 +622,21 @@ public class SendActivity1 extends Fragment {
 
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+
+
+=======
+
+
+
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
+=======
+
+
+
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
     private void setTabHostChanged(String tabId) {
         TextView textView1 = viewList.get(0).findViewById(R.id.tv_text);
         TextView textView2 = viewList.get(1).findViewById(R.id.tv_text);
