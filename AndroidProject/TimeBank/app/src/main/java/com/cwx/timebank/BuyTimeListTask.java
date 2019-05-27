@@ -7,6 +7,10 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cwx.timebank.task.BuyTime;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +30,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class BuyTimeListTask extends AsyncTask<String,Void,List> {
+public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
     private Context mContext=null;
     private ListView lv=null;
 
@@ -36,60 +40,27 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List> {
     }
     @Override
     protected List doInBackground(String... strings){
-        List<BuyOrSellTime> tasksList=new ArrayList();
+        List<BuyTime> tasksList=new ArrayList();
+        //通过网络访问服务器端登录功能
+        URL url = null;
+        String urlStr = "http://10.7.88.251:8080/TimeBank/task";
         try {
-            //通过网络访问服务器端实现获取BuTime列表
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            URL url=new URL(serverUrl+"/BuyTimeServlet");
-            //URL url = new URL("http://192.168.16.1:8080/TimeBank/BuyTimeServlet");
-            HttpURLConnection connection=(HttpURLConnection)url.openConnection();
-            //传入的参数中有中文字符，防止乱码出现
-            connection.setRequestProperty("contentType","utf-8");
-            //获取输入流
-            InputStream in=connection.getInputStream();
-            //字节流转换为字符流
-            InputStreamReader inputStreamReader=new InputStreamReader(in);//转换流
-            BufferedReader reader=new BufferedReader(inputStreamReader);
-            String res=reader.readLine();
-            //解析JSONArray字符串
-            JSONArray array=new JSONArray(res);
-            Log.e("123","哈哈哈"+array.length());
-            for(int i=0;i<array.length();++i){
-                Log.e("123","哈哈哈哈哈哈"+i);
-                JSONObject object=array.optJSONObject(i);
-                BuyOrSellTime buyTime=new BuyOrSellTime();
-                buyTime.setuNickName(object.optString("uNickName"));
-                buyTime.setuImage(object.optString("uImage"));
-                buyTime.setTagText(object.optString("tagText"));
+            url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestProperty("contentType","UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
+            InputStream is = connection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String res = reader.readLine();
+            Log.e("cakeRes",res);
 
-                //获取到JSON中的时间
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String dstr1=object.optString("uTime");
-                String dstr2=object.optString("tEndtime");
-                Date date1= null;
-                Date date2= null;
-                try {
-                    date1 = sdf.parse(dstr1);
-                    date2=sdf.parse(dstr2);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                buyTime.setuTime(date1);
-                buyTime.settEndtime(date2);
-
-                buyTime.settDesc(object.optString("tDesc"));
-                buyTime.settCoinCount(object.getInt("tCoinCount"));
-                buyTime.settImageUrl(object.optString("tImageUrl"));
-                tasksList.add(buyTime);
-            }
-            Log.e("TasksList",tasksList.toString());
-
+            //解析一个JSON格式的字符串
+            Gson gson = new Gson();
+            tasksList= gson.fromJson(res, new TypeToken<List<BuyTime>>(){}.getType());
+            Log.e("taskList",tasksList.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
         return tasksList;
