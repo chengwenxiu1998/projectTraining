@@ -475,6 +475,9 @@ public class SendActivity1 extends Fragment {
                    }
                });
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
+=======
 >>>>>>> parent of cd0c4a3... Revert "limeiqing"
 =======
 >>>>>>> parent of cd0c4a3... Revert "limeiqing"
@@ -620,9 +623,15 @@ public class SendActivity1 extends Fragment {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
 =======
 
 

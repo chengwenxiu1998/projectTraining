@@ -32,7 +32,7 @@ public class TaskDaoImpl extends BaseDao<Task, Integer>{
 			return null;
 		}
 	}
-	//向数据库中插入任务
+	
 	
 	
 }
