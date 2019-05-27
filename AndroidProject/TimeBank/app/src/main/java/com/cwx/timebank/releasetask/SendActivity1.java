@@ -31,7 +31,6 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cwx.timebank.MainActivity;
 
@@ -450,17 +449,7 @@ public class SendActivity1 extends Fragment {
                 Log.e("test",userId+"");
                 taskBean.setuIdSend(userId);
 
-                InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
-                renwuTask.setListener(new InsertTaskAsynTask.OnResponseListener<Boolean>() {
-                    @Override
-                    public void onResponse(Boolean aBoolean) {
-                        if (aBoolean==true){
-                            Toast.makeText(getContext(),"发布成功",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(getContext(),"网络错误，发布失败",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                 InsertTaskAsynTask renwuTask=new InsertTaskAsynTask(getContext(),taskBean,month,day,hour,min);
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
