@@ -474,6 +474,9 @@ public class SendActivity1 extends Fragment {
 
                    }
                });
+<<<<<<< HEAD
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
+=======
 >>>>>>> parent of cd0c4a3... Revert "limeiqing"
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
@@ -616,9 +619,15 @@ public class SendActivity1 extends Fragment {
 
     }
 
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> parent of cd0c4a3... Revert "limeiqing"
     private void setTabHostChanged(String tabId) {
         TextView textView1 = viewList.get(0).findViewById(R.id.tv_text);
         TextView textView2 = viewList.get(1).findViewById(R.id.tv_text);
