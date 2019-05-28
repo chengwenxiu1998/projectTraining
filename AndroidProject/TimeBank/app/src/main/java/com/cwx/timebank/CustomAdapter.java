@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cwx.timebank.bean.Discuss;
 import com.cwx.timebank.bean.DiscussBean;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 public class CustomAdapter extends BaseAdapter {
     private Context context;
     private int itemView;
-    private List<DiscussBean> list;
+    private List<Discuss> list;
 
-    public CustomAdapter(Context context,int itemView,List<DiscussBean> list){
+    public CustomAdapter(Context context,int itemView,List<Discuss> list){
         this.context=context;
         this.itemView=itemView;
         this.list=list;
@@ -52,27 +53,27 @@ public class CustomAdapter extends BaseAdapter {
         TextView textView1=convertView.findViewById(R.id.tv_text);
         TextView textView2=convertView.findViewById(R.id.tv_text1);
 
-        final DiscussBean discussBean=(DiscussBean)list.get(position);
+        final Discuss discussBean=(Discuss)list.get(position);
         imageView1.setImageResource(R.drawable.heart);
         imageView.setImageResource(R.drawable.p5);
-        textView1.setText("#"+discussBean.getTcontent()+"#");
-        textView2.setText(discussBean.getContent());
-
+        textView1.setText("#"+discussBean.getTag().getTagText()+"#");
+        textView2.setText(discussBean.getdTopicCoutent());
         Button btnJoinTalk = convertView.findViewById(R.id.btn_join_talk);
         btnJoinTalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DiscussBean discussBean1=(DiscussBean)list.get(position);
+                Discuss discussBean1=(Discuss)list.get(position);
                 Intent intent = new Intent(context,JoinTalkActivity.class);
-                intent.putExtra("netName",discussBean1.getPetName());
+                /*intent.putExtra("netName",discussBean1.getPetName());
                 intent.putExtra("tag",discussBean1.getTcontent());
                 intent.putExtra("content",discussBean1.getContent());
-                intent.putExtra("which",""+discussBean1.getDId());
+                intent.putExtra("which",""+discussBean1.getDId());*/
                 context.startActivity(intent);
             }
         });
         return convertView;
     }
+
 
 }
 
