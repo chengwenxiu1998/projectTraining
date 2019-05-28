@@ -8,7 +8,10 @@ import android.widget.ListView;
 
 import com.cwx.timebank.CustomAdapter;
 import com.cwx.timebank.R;
+import com.cwx.timebank.bean.Discuss;
 import com.cwx.timebank.bean.DiscussBean;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,49 +39,42 @@ public class DisussTask extends AsyncTask<String,Void,List> {
     }
 
     protected List doInBackground(String... strings) {
-        List<DiscussBean> discussList=new ArrayList<>();
-        URL url= null;
+        URL url = null;
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            url = new URL( serverUrl+"/DisucssServlet");
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("contentType","UTF-8");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/discuss/alldis";
+            url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONArray array=new JSONArray(res);
-            for(int i=array.length()-1;i>=0;i--){
-                JSONObject object=array.optJSONObject(i);
-                DiscussBean discussBean=new DiscussBean();
-                discussBean.setDId(object.getInt("dId"));
-                discussBean.setTID(object.getInt("tId"));
-                discussBean.setUId(object.getInt("uId"));
-                discussBean.setContent(object.getString("content"));
-                discussBean.setTcontent(object.getString("tContent"));
-                discussBean.setPetName(object.getString("petName"));
-                discussList.add(discussBean);
+            Log.e("lm", "Lli" + res);
+            List<Discuss> discussList = new Gson().fromJson(res, new TypeToken<List<Discuss>>() {
+            }.getType());
 
-            }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("lm", discussList.toString());
+            return discussList;
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+            return null;
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            return null;
         }
 
-        return discussList;
+
     }
+
 
     protected void onPostExecute(List list) {
         if(list!=null &&list.size()!=0){
             CustomAdapter customAdapter=new CustomAdapter(context, R.layout.talk_item,list);
             lv.setAdapter(customAdapter);
         }else{
-            Log.e("讨论错误","错误");
+            /*Log.e("讨论错误","错误");*/
         }
     }
 }

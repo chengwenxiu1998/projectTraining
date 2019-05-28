@@ -23,7 +23,6 @@ public class DiscussController {
 	@ResponseBody
 	public String allDis() throws Exception {
 		List<Discuss> discussList=discussServiceImpl.allDis();
-		
 		Gson gson = new Gson();
 		String temp = gson.toJson(discussList);
 		return temp;
