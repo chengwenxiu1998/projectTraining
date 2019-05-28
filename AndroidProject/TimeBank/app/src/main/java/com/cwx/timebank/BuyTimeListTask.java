@@ -1,18 +1,15 @@
 package com.cwx.timebank;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.cwx.timebank.bean.TaskBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
-
->>>>>>> b74a0c6dc61a861566172d7fca2ff3f3f807f418
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,10 +40,10 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
         tasksList=new ArrayList<BuyTime>();
         try {
             //通过网络访问服务器端实现获取BuTime列表
-//            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-//            String serverUrl = sharedPreferences.getString("serverUrl","");
-//            URL url=new URL(serverUrl+"/buytimetask");
-            URL url = new URL("http://10.7.88.241:8080/TimeBank/buytimetask");
+            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", Context.MODE_PRIVATE);
+            String serverUrl = sharedPreferences.getString("serverUrl","");
+            URL url=new URL(serverUrl+"/buytimetask");
+//            URL url = new URL("http://10.7.88.241:8080/TimeBank/buytimetask");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");

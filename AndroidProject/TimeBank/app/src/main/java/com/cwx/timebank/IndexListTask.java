@@ -1,6 +1,7 @@
 package com.cwx.timebank;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class IndexListTask extends AsyncTask<String,Void,List>{
     private Context mContext=null;
     private ListView lv=null;
@@ -37,8 +40,10 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
         List<BuyOrSellTime> tasksList=new ArrayList();
         try {
             //网络访问服务器端
-           // URL url = new URL("http://10.7.85.146:8080/TimeBank/IndexServlet");
-            URL url = new URL("http://10.7.88.251:8080/TimeBank/IndexServlet");
+            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
+            String serverUrl = sharedPreferences.getString("serverUrl","");
+            String urlStr = serverUrl+"/IndexServlet";
+            URL url = new URL(urlStr);
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");
@@ -50,7 +55,6 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
             String res=reader.readLine();
             //解析JSONArray字符串
             JSONArray array=new JSONArray(res);
-            Log.e("12","程文秀"+array.length());
             for(int i=0;i<array.length();++i){
                 JSONObject object=array.optJSONObject(i);
                 BuyOrSellTime buyOrSellTime=new BuyOrSellTime();

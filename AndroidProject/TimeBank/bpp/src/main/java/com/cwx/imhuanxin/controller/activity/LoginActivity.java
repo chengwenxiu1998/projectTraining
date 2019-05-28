@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         initListener();
     }
 
-    private void initListener() {
+    public void initListener() {
         //注册按钮的点击事件处理
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //登录按钮的页面逻辑处理
-    private void login() {
+    public void login() {
         //1.获取输入的用户名和密码
         final String name = etName.getText().toString();
         final String password =etPassword.getText().toString();

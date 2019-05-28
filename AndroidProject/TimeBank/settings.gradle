@@ -1,1 +1,1 @@
-include ':app','bpp',"easeui"
+include ':app',"bpp","easeui"
