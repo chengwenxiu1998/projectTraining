@@ -38,7 +38,7 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
         try {
             //网络访问服务器端
            // URL url = new URL("http://10.7.85.146:8080/TimeBank/IndexServlet");
-            URL url = new URL("http://tb.yangke.ink:8080/TimeBank/IndexServlet");
+            URL url = new URL("http://10.7.88.251:8080/TimeBank/IndexServlet");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");
@@ -77,7 +77,6 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
                 buyOrSellTime.settCoinCount(object.getInt("tCoinCount"));
                 buyOrSellTime.settId(object.getInt("tId"));
                 buyOrSellTime.setuIdAccept(object.getInt("uIdAccept"));
-                buyOrSellTime.setTcId(object.getInt("tcId"));
                 buyOrSellTime.setTagText(object.optString("tagText"));
                 tasksList.add(buyOrSellTime);
             }

@@ -1,8 +1,8 @@
-package com.cwx.timebank;
+package com.cwx.timebank.task;
 
 import java.util.Date;
 
-public class BuyOrSellTime {
+public class BuyTime {
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -16,16 +16,12 @@ public class BuyOrSellTime {
     private String tImageUrl;
 
 
-    private String searchContent;
-    private int tcId;
-    private  int uId;
-    private Date tAcceptTime;
-    public BuyOrSellTime() {
+
+    public BuyTime() {
     }
 
-    public BuyOrSellTime(String uNickName, String uImage, String tagText, Date uTime, String tDesc, int tCoinCount,
-                         String tState, int tId, int uIdAccept, String searchContent, int tcId, Date tEndtime, String tImageUrl,
-                         int uId, Date tAcceptTime) {
+    public BuyTime(String uNickName, String uImage, String tagText, Date uTime, String tDesc, int tCoinCount,
+                   String tState, int tId, int uIdAccept, Date tEndtime, String tImageUrl) {
         this.uNickName = uNickName;
         this.uImage = uImage;
         this.tagText = tagText;
@@ -35,12 +31,10 @@ public class BuyOrSellTime {
         this.tState=tState;
         this.tId=tId;
         this.uIdAccept=uIdAccept;
-        this.searchContent=searchContent;
-        this.tcId=tcId;
+
         this.tEndtime=tEndtime;
         this.tImageUrl=tImageUrl;
-        this.uId=uId;
-        this.tAcceptTime=tAcceptTime;
+
     }
 
     public String getuNickName() {
@@ -103,13 +97,7 @@ public class BuyOrSellTime {
 
     public void setuIdAccept(int uIdAccept) { this.uIdAccept = uIdAccept; }
 
-    public String getSearchContent() { return searchContent; }
 
-    public void setSearchContent(String searchContent) { this.searchContent = searchContent; }
-
-    public int getTcId() { return tcId; }
-
-    public void setTcId(int tcId) { this.tcId = tcId; }
 
     public String gettImageUrl() {
         return tImageUrl;
@@ -127,19 +115,5 @@ public class BuyOrSellTime {
         this.tEndtime = tEndtime;
     }
 
-    public int getuId() {
-        return uId;
-    }
 
-    public void setuId(int uId) {
-        this.uId = uId;
-    }
-
-    public Date gettAcceptTime() {
-        return tAcceptTime;
-    }
-
-    public void settAcceptTime(Date tAcceptTime) {
-        this.tAcceptTime = tAcceptTime;
-    }
 }

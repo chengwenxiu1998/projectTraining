@@ -83,7 +83,6 @@ public class SearchListTask extends AsyncTask<String,Void,List>  {
                 buyOrSellTime.settCoinCount(object.getInt("tCoinCount"));
                 buyOrSellTime.settId(object.getInt("tId"));
                 buyOrSellTime.setuIdAccept(object.getInt("uIdAccept"));
-                buyOrSellTime.setTcId(object.getInt("tcId"));
                 buyOrSellTime.setTagText(object.optString("tagText"));
                 tasksList.add(buyOrSellTime);
             }

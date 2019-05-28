@@ -7,9 +7,14 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.cwx.timebank.bean.TaskBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+=======
+import com.cwx.timebank.task.BuyTime;
+import com.google.gson.Gson;
+>>>>>>> 4e9bcc94b87b0cd9fd120d7b17221bd18421e005
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -42,6 +47,7 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
         this.lv=lv;
     }
     @Override
+<<<<<<< HEAD
     protected List<BuyTime> doInBackground(String... strings){
         tasksList=new ArrayList<BuyTime>();
         try {
@@ -63,7 +69,27 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
             gson = new Gson();
             tasksList = gson.fromJson(res,new TypeToken<List<BuyTime>>(){}.getType());
             Log.e("TasksList",tasksList.toString());
+=======
+    protected List doInBackground(String... strings){
+        List<BuyTime> tasksList=new ArrayList();
+        //通过网络访问服务器端登录功能
+        URL url = null;
+        String urlStr = "http://10.7.88.251:8080/TimeBank/task";
+        try {
+            url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestProperty("contentType","UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
+            InputStream is = connection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String res = reader.readLine();
+            Log.e("cakeRes",res);
+>>>>>>> 4e9bcc94b87b0cd9fd120d7b17221bd18421e005
 
+            //解析一个JSON格式的字符串
+            Gson gson = new Gson();
+            tasksList= gson.fromJson(res, new TypeToken<List<BuyTime>>(){}.getType());
+            Log.e("taskList",tasksList.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

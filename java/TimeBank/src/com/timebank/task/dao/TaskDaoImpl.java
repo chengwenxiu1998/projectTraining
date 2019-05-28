@@ -40,6 +40,7 @@ public class TaskDaoImpl extends BaseDao<BuyTime, Integer>{
 			return null;
 		}
 	}
+<<<<<<< HEAD
 	//查看所有未被接收的任务
 	public List<BuyTime> findAllNotAcceptTask(){
 		try {
@@ -63,4 +64,9 @@ public class TaskDaoImpl extends BaseDao<BuyTime, Integer>{
 			return 0;
 		}
 	}
+=======
+	
+	
+	
+>>>>>>> 4e9bcc94b87b0cd9fd120d7b17221bd18421e005
 }

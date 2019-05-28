@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+<<<<<<< HEAD
 import com.google.gson.GsonBuilder;
 import com.timebank.entity.BuyOrSellTime;
 import com.timebank.entity.BuyTime;
+=======
+import com.mysql.jdbc.log.Log;
+>>>>>>> 4e9bcc94b87b0cd9fd120d7b17221bd18421e005
 import com.timebank.entity.Task;
 import com.timebank.task.service.TaskServiceImpl;
 
@@ -22,6 +26,7 @@ import com.timebank.task.service.TaskServiceImpl;
 public class TaskController {
 	@Resource
 	private TaskServiceImpl taskServiceImpl;
+<<<<<<< HEAD
 	
 	//买时间任务列表
 	@RequestMapping(value = "buytimetask", produces = "text/plain;charset=UTF-8")
@@ -65,4 +70,26 @@ public class TaskController {
 		String temp=gson.toJson(list);
 		return temp;
 	}
+=======
+
+	// 买时间任务列表
+	@RequestMapping(value = "task", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String buyTime(Model model) {
+		List<Task> list = taskServiceImpl.buyTimeTask();
+		model.addAttribute("buyTimeTask", list);
+		Gson gson = new Gson();
+		String temp = gson.toJson(list);
+		return temp;
+	}
+
+//	public String tasks(Model model) {
+//		List<Task> list=taskServiceImpl.tasksList();
+//		model.addAttribute("tasks",list);
+//		Gson gson=new Gson();
+//		String temp=gson.toJson(list);
+//		return temp;
+//	}
+	
+>>>>>>> 4e9bcc94b87b0cd9fd120d7b17221bd18421e005
 }

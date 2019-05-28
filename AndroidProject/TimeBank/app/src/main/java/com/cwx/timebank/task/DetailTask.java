@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.cwx.timebank.DetailAdapter;
+
 import com.cwx.timebank.R;
 import com.cwx.timebank.bean.DisussReplyBean;
 
