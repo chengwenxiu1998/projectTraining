@@ -24,9 +24,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class BuyTimeCustomAdapter extends BaseAdapter {
         private Context context;
         private int itemView;
-        private List<BuyOrSellTime> list;
+        private List<BuyTime> list;
         private ListView lv;
-        public BuyTimeCustomAdapter(Context context, List<BuyOrSellTime> list, int itemView, ListView lv){
+        public BuyTimeCustomAdapter(Context context, List<BuyTime> list, int itemView, ListView lv){
             this.context = context;
             this.list = list;
             this.itemView=itemView;
@@ -61,7 +61,7 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
             TextView taskTag = convertView.findViewById(R.id.tv_task_tag);
             TextView taskDetails = convertView.findViewById(R.id.tv_task_details);
 
-            BuyOrSellTime buyTime = (BuyOrSellTime) list.get(position);
+            BuyTime buyTime = (BuyTime) list.get(position);
 
             if(buyTime.getuImage()!=null && !buyTime.getuImage().equals("")) {
                 SharedPreferences sp = context.getSharedPreferences("myServer", MODE_PRIVATE);
@@ -111,7 +111,7 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClassName("com.cwx.timebank","com.cwx.timebank.TaskDetailActivityLi" );
-                        BuyOrSellTime buyTimeDetail = list.get((int) id);
+                        BuyTime buyTimeDetail = list.get((int) id);
                         intent.putExtra("nickname", buyTimeDetail.getuNickName());
                         //当前时间
                         Calendar currentDate=Calendar.getInstance();

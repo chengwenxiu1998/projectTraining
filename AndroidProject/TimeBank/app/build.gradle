@@ -22,6 +22,8 @@ android {
 }
 
 dependencies {
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
     implementation'com.android.support:recyclerview-v7:28.0.0'

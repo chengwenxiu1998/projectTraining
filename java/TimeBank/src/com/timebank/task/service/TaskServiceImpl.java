@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.timebank.entity.BuyOrSellTime;
+import com.timebank.entity.BuyTime;
 import com.timebank.entity.Task;
 import com.timebank.task.dao.TaskDaoImpl;
 
@@ -15,10 +17,20 @@ import com.timebank.task.dao.TaskDaoImpl;
 public class TaskServiceImpl {
 	@Resource
 	private TaskDaoImpl taskDaoImpl;
-	public List<Task> buyTimeTask(){
+	//买时间
+	public List<BuyTime> buyTimeTask(){
 		return this.taskDaoImpl.findBuyTimeTask();
 	}
-//	public List<Task> tasksList(){
-//		return this.taskDaoImpl.findTasks();
-//	}
+	//卖时间
+	public List<BuyTime> sellTimeTask(){
+		return this.taskDaoImpl.findSellTimeTask();
+	}
+	//未接收的任务
+	public List<BuyTime> allNotAcceptTask(){
+		return this.taskDaoImpl.findAllNotAcceptTask();
+	}
+	//改变任务状态
+	public int changeTaskState(int uid) {
+		return this.taskDaoImpl.updateTaskState(uid);
+	}
 }
