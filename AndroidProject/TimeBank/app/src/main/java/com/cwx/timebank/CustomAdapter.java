@@ -62,12 +62,12 @@ public class CustomAdapter extends BaseAdapter {
         btnJoinTalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Discuss discussBean1=(Discuss)list.get(position);
+                Discuss discuss=(Discuss)list.get(position);
                 Intent intent = new Intent(context,JoinTalkActivity.class);
-                /*intent.putExtra("netName",discussBean1.getPetName());
-                intent.putExtra("tag",discussBean1.getTcontent());
-                intent.putExtra("content",discussBean1.getContent());
-                intent.putExtra("which",""+discussBean1.getDId());*/
+                intent.putExtra("netName",discuss.getUser().getuNickName());
+                intent.putExtra("tag",discuss.getTag().getTagText());
+                intent.putExtra("content",discuss.getdTopicCoutent());
+                intent.putExtra("which",""+discuss.getdId());//讨论的id
                 context.startActivity(intent);
             }
         });
