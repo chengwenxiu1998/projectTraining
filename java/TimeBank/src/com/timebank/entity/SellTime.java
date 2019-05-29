@@ -1,9 +1,9 @@
-package com.cwx.timebank;
+package com.timebank.entity;
 
 import java.util.Date;
 
-public class BuyOrSellTime {
-    private int tId;
+public class SellTime {
+	private int tId;
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -14,36 +14,30 @@ public class BuyOrSellTime {
     private int uIdAccept;
     private Date tEndtime;
     private String tImageUrl;
-    private int tcId;
-    private int uId;
-    private Date tAcceptTime;
-
-    public BuyOrSellTime() {
+ 
+    public SellTime() {
     }
 
 
-    public BuyOrSellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
-                   String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId,int uId,Date tAcceptTime) {
-        super();
-        this.tId = tId;
-        this.uNickName = uNickName;
-        this.uImage = uImage;
-        this.uTime = uTime;
-        this.tDesc = tDesc;
-        this.tCoinCount = tCoinCount;
-        this.tagText = tagText;
-        this.tState = tState;
-        this.uIdAccept = uIdAccept;
-        this.tEndtime = tEndtime;
-        this.tImageUrl = tImageUrl;
-        this.tcId=tcId;
-        this.uId=uId;
-        this.tAcceptTime=tAcceptTime;
-    }
+    public SellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+			String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl) {
+		super();
+		this.tId = tId;
+		this.uNickName = uNickName;
+		this.uImage = uImage;
+		this.uTime = uTime;
+		this.tDesc = tDesc;
+		this.tCoinCount = tCoinCount;
+		this.tagText = tagText;
+		this.tState = tState;
+		this.uIdAccept = uIdAccept;
+		this.tEndtime = tEndtime;
+		this.tImageUrl = tImageUrl;
+	}
 
 
 
-    public String getuNickName() {
+	public String getuNickName() {
         return uNickName;
     }
 
@@ -117,29 +111,5 @@ public class BuyOrSellTime {
 
     public void settEndtime(Date tEndtime) {
         this.tEndtime = tEndtime;
-    }
-
-    public int getTcId() {
-        return tcId;
-    }
-
-    public void setTcId(int tcId) {
-        this.tcId = tcId;
-    }
-
-    public int getuId() {
-        return uId;
-    }
-
-    public void setuId(int uId) {
-        this.uId = uId;
-    }
-
-    public Date gettAcceptTime() {
-        return tAcceptTime;
-    }
-
-    public void settAcceptTime(Date tAcceptTime) {
-        this.tAcceptTime = tAcceptTime;
     }
 }

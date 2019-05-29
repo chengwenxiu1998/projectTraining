@@ -7,18 +7,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cwx.timebank.bean.DisussReplyBean;
+import com.cwx.timebank.bean.DiscussReply;
 
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DetailAdapter extends BaseAdapter {
     private Context context;
     private int itemView;
-    private List<DisussReplyBean> list;
+    private List<DiscussReply> list;
 
-    public DetailAdapter(Context context,int itemView,List<DisussReplyBean> list){
+    public DetailAdapter(Context context,int itemView,List<DiscussReply> list){
         this.context=context;
         this.itemView=itemView;
         this.list=list;
@@ -49,41 +52,49 @@ public class DetailAdapter extends BaseAdapter {
         TextView textView2=convertView.findViewById(R.id.tv_send_time);
         TextView textView3=convertView.findViewById(R.id.tv_talk_text);
 
-        DisussReplyBean disussReplyBean=(DisussReplyBean)list.get(position);
-        textView1.setText(disussReplyBean.getPetName());
-        //当前时间
-        Calendar currentDate=Calendar.getInstance();
+        DiscussReply disussReplyBean=(DiscussReply)list.get(position);
+        textView1.setText(disussReplyBean.getDiscuss().getUser().getuNickName());
+        //时间 字符串转变成Date
+        String retime=disussReplyBean.getReplyTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String getuTime=null;
-        //计算时间差
-        if(disussReplyBean.getReplyTime()!=null) {
-            if (currentDate.get(Calendar.YEAR) - (disussReplyBean.getReplyTime().getYear()+1900) < 1) {
-                if (currentDate.get(Calendar.MONTH) -disussReplyBean.getReplyTime().getMonth() < 1) {
-                    if (currentDate.get(Calendar.DAY_OF_MONTH) - disussReplyBean.getReplyTime().getDate()<1) {
-                        if (currentDate.get(Calendar.HOUR_OF_DAY) -disussReplyBean.getReplyTime().getHours() < 1) {
-                            getuTime = "发布于" + (currentDate.get(Calendar.MINUTE) - disussReplyBean.getReplyTime().getMinutes()) + "分钟前";
-                        } else if (currentDate.get(Calendar.HOUR_OF_DAY) - disussReplyBean.getReplyTime().getHours() > 1) {
-                            if (currentDate.get(Calendar.MINUTE) - disussReplyBean.getReplyTime().getMinutes() > 0) {
-                                getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - disussReplyBean.getReplyTime().getHours()) + "小时前";
-                            } else {
-                                getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - disussReplyBean.getReplyTime().getHours() - 1) + "小时前";
+        try {
+            Date date=sdf.parse(retime);
+            //当前时间
+            Calendar currentDate=Calendar.getInstance();
+
+            //计算时间差
+            if(disussReplyBean.getReplyTime()!=null) {
+                if (currentDate.get(Calendar.YEAR) - (date.getYear()+1900) < 1) {
+                    if (currentDate.get(Calendar.MONTH) -date.getMonth() < 1) {
+                        if (currentDate.get(Calendar.DAY_OF_MONTH) - date.getDate()<1) {
+                            if (currentDate.get(Calendar.HOUR_OF_DAY) -date.getHours() < 1) {
+                                getuTime = "发布于" + (currentDate.get(Calendar.MINUTE) - date.getMinutes()) + "分钟前";
+                            } else if (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours() > 1) {
+                                if (currentDate.get(Calendar.MINUTE) - date.getMinutes() > 0) {
+                                    getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours()) + "小时前";
+                                } else {
+                                    getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours() - 1) + "小时前";
+                                }
                             }
+                        } else if (currentDate.get(Calendar.DAY_OF_MONTH) - date.getDate() < 2) {
+                            getuTime = "昨天" + new SimpleDateFormat("HH:mm").format(date);
+                        } else {
+                            getuTime = new SimpleDateFormat("MM-dd").format(date);
                         }
-                    } else if (currentDate.get(Calendar.DAY_OF_MONTH) - disussReplyBean.getReplyTime().getDate() < 2) {
-                        getuTime = "昨天" + new SimpleDateFormat("HH:mm").format(disussReplyBean.getReplyTime());
                     } else {
-                        getuTime = new SimpleDateFormat("MM-dd").format(disussReplyBean.getReplyTime());
+                        getuTime = new SimpleDateFormat("MM-dd").format(date);
                     }
                 } else {
-                    getuTime = new SimpleDateFormat("MM-dd").format(disussReplyBean.getReplyTime());
+                    getuTime = new SimpleDateFormat("yyyy-MM-dd").format(date);
                 }
-            } else {
-                getuTime = new SimpleDateFormat("yyyy-MM-dd").format(disussReplyBean.getReplyTime());
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         textView2.setText(getuTime);
         textView3.setText(disussReplyBean.getReplyContent());
-
         return convertView;
     }
 

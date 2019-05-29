@@ -8,6 +8,10 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +29,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+<<<<<<< HEAD
+public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
+=======
 import static android.content.Context.MODE_PRIVATE;
 
 public class IndexListTask extends AsyncTask<String,Void,List>{
+>>>>>>> 0d26325e73bf14aaa426e564b209a82589479b6c
     private Context mContext=null;
     private ListView lv=null;
+    private Gson gson;
 
     public IndexListTask(Context mContext,ListView lv){
         this.mContext=mContext;
@@ -37,13 +46,17 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
     }
     @Override
     protected List doInBackground(String... strings) {
-        List<BuyOrSellTime> tasksList=new ArrayList();
+        List<NotAccept> tasksList=new ArrayList();
         try {
             //网络访问服务器端
+<<<<<<< HEAD
+            URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
+=======
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
             String urlStr = serverUrl+"/IndexServlet";
             URL url = new URL(urlStr);
+>>>>>>> 0d26325e73bf14aaa426e564b209a82589479b6c
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");
@@ -53,6 +66,12 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
             InputStreamReader inputStreamReader=new InputStreamReader(in);//转换流
             BufferedReader reader=new BufferedReader(inputStreamReader);
             String res=reader.readLine();
+<<<<<<< HEAD
+            Log.e("res",res);
+            gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            tasksList = gson.fromJson(res,new TypeToken<List<NotAccept>>(){}.getType());
+            Log.e("NotAcceptTasksList",tasksList.toString());
+=======
             //解析JSONArray字符串
             JSONArray array=new JSONArray(res);
             for(int i=0;i<array.length();++i){
@@ -86,11 +105,10 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
                 tasksList.add(buyOrSellTime);
             }
             Log.e("TasksList",tasksList.toString());
+>>>>>>> 0d26325e73bf14aaa426e564b209a82589479b6c
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
         return tasksList;

@@ -23,9 +23,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class IndexCustomAdapter2 extends BaseAdapter {
     private Context context;
     private int itemView;
-    private List<BuyOrSellTime> list;
+    private List<NotAccept> list;
     private ListView lv;
-    public IndexCustomAdapter2(Context context, List<BuyOrSellTime> list, ListView lv){
+    public IndexCustomAdapter2(Context context, List<NotAccept> list, ListView lv){
         this.context = context;
         this.list = list;
         this.lv=lv;
@@ -48,7 +48,7 @@ public class IndexCustomAdapter2 extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final BuyOrSellTime buyTime = (BuyOrSellTime) list.get(position);
+        final NotAccept buyTime = (NotAccept) list.get(position);
         final int tcId=buyTime.getTcId();
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -113,7 +113,7 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                     if(list.get((int) id).getTcId()==1)
                     {
                         intent.setClassName("com.cwx.timebank", "com.cwx.timebank.DetailActivity");
-                        BuyOrSellTime sellTimeDetail = list.get((int) id);
+                        NotAccept sellTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",sellTimeDetail.getuImage());
                         intent.putExtra("nickname", sellTimeDetail.getuNickName());
                         intent.putExtra("hxid",sellTimeDetail.getuId()+"");
@@ -155,7 +155,7 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                         context.startActivity(intent);
                     }else{
                         intent.setClassName("com.cwx.timebank", "com.cwx.timebank.TaskDetailActivityLi");
-                        BuyOrSellTime buyTimeDetail = list.get((int) id);
+                        NotAccept buyTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",buyTimeDetail.getuImage());
                         intent.putExtra("nickname", buyTimeDetail.getuNickName());
                         intent.putExtra("hxid",buyTimeDetail.getuId()+"");
