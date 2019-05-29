@@ -1,8 +1,9 @@
-package com.cwx.timebank.task;
+package com.cwx.timebank;
 
 import java.util.Date;
 
-public class BuyTime {
+public class SellTime {
+	private int tId;
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -11,33 +12,32 @@ public class BuyTime {
     private String tagText;
     private String tState;
     private int uIdAccept;
-    private int tId;
     private Date tEndtime;
     private String tImageUrl;
 
-
-
-    public BuyTime() {
+    public SellTime() {
     }
 
-    public BuyTime(String uNickName, String uImage, String tagText, Date uTime, String tDesc, int tCoinCount,
-                   String tState, int tId, int uIdAccept, Date tEndtime, String tImageUrl) {
-        this.uNickName = uNickName;
-        this.uImage = uImage;
-        this.tagText = tagText;
-        this.uTime = uTime;
-        this.tDesc = tDesc;
-        this.tCoinCount = tCoinCount;
-        this.tState=tState;
-        this.tId=tId;
-        this.uIdAccept=uIdAccept;
 
-        this.tEndtime=tEndtime;
-        this.tImageUrl=tImageUrl;
+    public SellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+                    String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl) {
+		super();
+		this.tId = tId;
+		this.uNickName = uNickName;
+		this.uImage = uImage;
+		this.uTime = uTime;
+		this.tDesc = tDesc;
+		this.tCoinCount = tCoinCount;
+		this.tagText = tagText;
+		this.tState = tState;
+		this.uIdAccept = uIdAccept;
+		this.tEndtime = tEndtime;
+		this.tImageUrl = tImageUrl;
+	}
 
-    }
 
-    public String getuNickName() {
+
+	public String getuNickName() {
         return uNickName;
     }
 
@@ -97,8 +97,6 @@ public class BuyTime {
 
     public void setuIdAccept(int uIdAccept) { this.uIdAccept = uIdAccept; }
 
-
-
     public String gettImageUrl() {
         return tImageUrl;
     }
@@ -114,6 +112,4 @@ public class BuyTime {
     public void settEndtime(Date tEndtime) {
         this.tEndtime = tEndtime;
     }
-
-
 }

@@ -1,7 +1,15 @@
 package com.cwx.timebank;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cwx.imhuanxin.model.Model;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,17 +22,24 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class RegisterTask1 extends AsyncTask {
     private String sPhone;
     private TextView textView;
-    public RegisterTask1(TextView textView){
+    private Context context;
+    public RegisterTask1(Context context,TextView textView){
+        this.context = context;
         this.textView=textView;
     }
     @Override
     protected Object doInBackground(Object[] objects) {
         sPhone=(String)objects[0];
         try {
-            URL url=new URL("http://tb.yangke.ink:8080/TimeBank/RegisterServlet?phone="+sPhone);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
+            String serverUrl = sharedPreferences.getString("serverUrl","");
+            String urlStr = serverUrl+"/RegisterServlet?phone="+sPhone;
+            URL url=new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("contentType","UTF-8");
             InputStream is = connection.getInputStream();
@@ -50,5 +65,7 @@ public class RegisterTask1 extends AsyncTask {
         }
         return null;
     }
+
+
 }
 

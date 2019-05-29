@@ -22,7 +22,7 @@ public abstract class BaseDao<T,PK extends Serializable> {
 	private Class<T> entityClass;
 
 	@Resource
-	public SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	public BaseDao(){
 		Class c = getClass();
