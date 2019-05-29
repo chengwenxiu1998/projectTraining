@@ -1,4 +1,4 @@
-package com.timebank.buytimetask.buytimedao;
+package com.timebank.updatetask.updatetaskdao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.timebank.entity.BuyTime;
 import com.timebank.framework.BaseDao;
 
 @Repository
-public class BuyTimeTaskDaoImpl extends BaseDao<BuyTime, Integer>{
+public class UpdateTaskDaoImpl extends BaseDao<BuyTime, Integer>{
 	//查询买时间任务
 	public List<BuyTime> findBuyTimeTask(){
 		try {

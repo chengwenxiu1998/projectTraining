@@ -1,4 +1,4 @@
-package com.timebank.buytimetask.buytimecontroller;
+package com.timebank.updatetask.upatetaskcontroller;
 
 import java.util.List;
 
@@ -21,20 +21,20 @@ import com.mysql.jdbc.log.Log;
 import com.timebank.entity.Task;
 
 @Controller
-public class BuyTimeTaskController {
+public class UpdateTaskController {
 	@Resource
 	private BuyTimeTaskServiceImpl taskServiceImpl;
 	
 	//买时间任务列表
-	@RequestMapping(value = "buytimetask", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String buyTime(Model model) {
-		List<BuyTime> list=taskServiceImpl.buyTimeTask();
-		model.addAttribute("buyTimeTask",list);
-		Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String temp=gson.toJson(list);
-		return temp;
-	}
+//	@RequestMapping(value = "buytimetask", produces = "text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public String buyTime(Model model) {
+//		List<BuyTime> list=taskServiceImpl.buyTimeTask();
+//		model.addAttribute("buyTimeTask",list);
+//		Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//		String temp=gson.toJson(list);
+//		return temp;
+//	}
 //	//改变任务状态
 //	@RequestMapping(value = "changetaskstate", produces = "text/plain;charset=UTF-8")
 //	@ResponseBody

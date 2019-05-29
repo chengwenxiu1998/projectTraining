@@ -1,4 +1,4 @@
-package com.timebank.buytimetask.buytimeservice;
+package com.timebank.updatetask.updatetaskservice;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.timebank.entity.Task;
 
 @Service
 @Transactional(readOnly=true)
-public class BuyTimeTaskServiceImpl {
+public class UpdateTaskServiceImpl {
 	@Resource
 	private BuyTimeTaskDaoImpl taskDaoImpl;
 	//买时间
