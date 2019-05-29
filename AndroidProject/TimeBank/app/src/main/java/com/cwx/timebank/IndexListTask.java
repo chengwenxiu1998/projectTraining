@@ -58,6 +58,7 @@ public class IndexListTask extends AsyncTask<String,Void,List>{
             for(int i=0;i<array.length();++i){
                 JSONObject object=array.optJSONObject(i);
                 BuyOrSellTime buyOrSellTime=new BuyOrSellTime();
+
                 buyOrSellTime.setuNickName(object.optString("uNickName"));
                 //sellTime.setuImage(object.optString("uImage"));
                 buyOrSellTime.setTagText(object.optString("tagText"));
