@@ -1,5 +1,7 @@
 package com.cwx.timebank.bean;
 
+import java.util.List;
+
 public class Discuss {
 
     private int dId;
@@ -7,6 +9,7 @@ public class Discuss {
     //一对一的关系
     private Tag tag;
     private User user;
+    private transient List<DiscussReply> discussReplys;
     public Discuss() {
         super();
         // TODO Auto-generated constructor stub
@@ -44,6 +47,13 @@ public class Discuss {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<DiscussReply> getDiscussReplys() {
+        return discussReplys;
+    }
+    public void setDiscussReplys(List<DiscussReply> discussReplys) {
+        this.discussReplys = discussReplys;
     }
     @Override
     public String toString() {

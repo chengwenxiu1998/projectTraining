@@ -13,8 +13,10 @@ public class DiscussReplyDaoImpl extends BaseDao<DiscussReply,Integer>{
 	//根据讨论id查找讨论回复
 	public List<DiscussReply> findByProperty(Integer id) throws Exception{
 		String hql="from DiscussReply dr where dr.discuss.dId=?";
-		return super.findByProperty(hql,new Integer[] {id});
-		
+		return super.findByProperty(hql,new Integer[] {id});	
 	}
+	
+	//根据用户人id，讨论id插入新的讨论回复
+	
 	
 }

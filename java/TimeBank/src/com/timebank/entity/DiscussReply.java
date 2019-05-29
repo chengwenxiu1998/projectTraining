@@ -17,14 +17,14 @@ public class DiscussReply {
 	private Integer id;
 	private Integer uId;
 	private String replyContent;
-	private Date replyTime;
+	private String replyTime;
 	//与discuss的关系是多对一（discuss)
 	private Discuss discuss;
 	public DiscussReply() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DiscussReply(Integer uId, String replyContent, Date replyTime) {
+	public DiscussReply(Integer uId, String replyContent, String replyTime) {
 		super();
 		this.uId = uId;
 		this.replyContent = replyContent;
@@ -54,10 +54,10 @@ public class DiscussReply {
 		this.replyContent = replyContent;
 	}
 	@Column(name="dr_reply_time")
-	public Date getReplyTime() {
+	public String getReplyTime() {
 		return replyTime;
 	}
-	public void setReplyTime(Date replyTime) {
+	public void setReplyTime(String replyTime) {
 		this.replyTime = replyTime;
 	}
 	@ManyToOne

@@ -27,6 +27,7 @@ public class DiscussReplyController {
 		List<DiscussReply> discussReplyList=discussReplyServiceImpl.findById(uid);
 		Gson gson = new Gson();
 		String temp = gson.toJson(discussReplyList);
+		System.out.println("回复的信息"+temp);
 		return temp;
 		
 	}

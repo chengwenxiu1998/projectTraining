@@ -6,13 +6,11 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
+
 import com.cwx.timebank.bean.TaskBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
 
->>>>>>> b74a0c6dc61a861566172d7fca2ff3f3f807f418
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
