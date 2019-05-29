@@ -35,4 +35,14 @@ public class BuyTimeTaskController {
 		String temp=gson.toJson(list);
 		return temp;
 	}
+//	//改变任务状态
+//	@RequestMapping(value = "changetaskstate", produces = "text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public String notAccept(Model model,int uid) {
+//		int list=taskServiceImpl.changeTaskState(uid);
+//		model.addAttribute("notAcceptTask",list);
+//		Gson gson=new Gson();
+//		String temp=gson.toJson(list);
+//		return temp;
+//	}
 }
