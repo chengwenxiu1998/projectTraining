@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.cwx.timebank.LoginActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class UpdatePhoneTask extends AsyncTask<Object, Integer, Integer> {
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
-            String urlStr = serverUrl+"/UpdatePhoneByUidServlet?phone="+phone+"&uid="+uid;
+            String urlStr = serverUrl+"/user/updatePhoneByUid?phone="+phone+"&uid="+uid;
             url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("contentType","UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
@@ -48,13 +49,9 @@ public class UpdatePhoneTask extends AsyncTask<Object, Integer, Integer> {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
 
-            //解析一个JSON格式的字符串
-            try {
-                JSONObject jsonObject = new JSONObject(res);
-                insertRowCount = jsonObject.getInt("insertRowCount");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+           Gson gson = new Gson();
+           insertRowCount = gson.fromJson(res,Integer.class);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }catch (IOException e) {
@@ -65,7 +62,7 @@ public class UpdatePhoneTask extends AsyncTask<Object, Integer, Integer> {
 
     @Override
     protected void onPostExecute(Integer integer) {
-        if (integer != 0) {//电话号码修改成功，跳转到登录页面
+        if (integer > 0) {//电话号码修改成功，跳转到登录页面
             Intent intent = new Intent(context, LoginActivity.class);
             context.startActivity(intent);
         } else {
