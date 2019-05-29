@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.cwx.imhuanxin.controller.fragment.ChatFragment;
 import com.cwx.timebank.releasetask.SendActivity1;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTabHost tabHost;
     private int[] tabHostIconNormal = {R.drawable.index_normal, R.drawable.quanzi_normal, R.drawable.faburenwu, R.drawable.xiaoxi_normal, R.drawable.my_normal};
     private String[] tabHostText = {"首页","圈子","","消息","我的"};
-    private Class[] fragmentArr = {BannerActivity.class,GroupActivity.class,SendActivity1.class,FragmentTab4.class,MyInfoActivity.class};
+    private Class[] fragmentArr = {BannerActivity.class,GroupActivity.class,SendActivity1.class,ChatFragment.class,MyInfoActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myServer",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 //        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
-        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
+        editor.putString("serverUrl","http://10.7.88.246:8080/TimeBank");
         editor.commit();
 
         //初始化FragmentTabHost

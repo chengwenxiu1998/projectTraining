@@ -13,10 +13,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +40,10 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
         tasksList=new ArrayList<BuyTime>();
         try {
             //通过网络访问服务器端实现获取BuTime列表
-//            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-//            String serverUrl = sharedPreferences.getString("serverUrl","");
-//            URL url=new URL(serverUrl+"/buytimetask");
-            URL url = new URL("http://10.7.88.211:8080/TimeBank/buytimetask");
+            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", Context.MODE_PRIVATE);
+            String serverUrl = sharedPreferences.getString("serverUrl","");
+            URL url=new URL(serverUrl+"/buytimetask");
+//            URL url = new URL("http://10.7.88.241:8080/TimeBank/buytimetask");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");
