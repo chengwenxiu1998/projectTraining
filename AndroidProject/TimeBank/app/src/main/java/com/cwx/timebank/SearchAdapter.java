@@ -25,9 +25,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class SearchAdapter extends BaseAdapter {
     private Context context;
     private int itemView;
-    private List<BuyOrSellTime> list;
+    private List<SearchTask> list;
     private ListView lv;
-    public SearchAdapter(Context context, List<BuyOrSellTime> list, ListView lv){
+    public SearchAdapter(Context context, List<SearchTask> list, ListView lv){
         this.context = context;
         this.list = list;
         this.lv=lv;
@@ -50,7 +50,7 @@ public class SearchAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final BuyOrSellTime buyTime = (BuyOrSellTime) list.get(position);
+        final SearchTask buyTime = (SearchTask) list.get(position);
         final int tcId=buyTime.getTcId();
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -121,7 +121,7 @@ public class SearchAdapter extends BaseAdapter {
                         if(list.get((int) id).getTcId()==1)
                         {
                             intent.setClassName("com.cwx.timebank", "com.cwx.timebank.DetailActivity");
-                            BuyOrSellTime sellTimeDetail = list.get((int) id);
+                            SearchTask sellTimeDetail = list.get((int) id);
                             intent.putExtra("uImage",sellTimeDetail.getuImage());
                             intent.putExtra("nickname", sellTimeDetail.getuNickName());
                             //当前时间
@@ -161,7 +161,7 @@ public class SearchAdapter extends BaseAdapter {
                             context.startActivity(intent);
                         }else{
                             intent.setClassName("com.cwx.timebank", "com.cwx.timebank.TaskDetailActivityLi");
-                            BuyOrSellTime buyTimeDetail = list.get((int) id);
+                            SearchTask buyTimeDetail = list.get((int) id);
                             intent.putExtra("uImage",buyTimeDetail.getuImage());
                             intent.putExtra("nickname", buyTimeDetail.getuNickName());
                             //当前时间

@@ -26,9 +26,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class SellTimeCustomAdapter extends BaseAdapter {
     private Context context;
     private int itemView;
-    private List<BuyOrSellTime> list;
+    private List<SellTime> list;
     private ListView lv;
-    public SellTimeCustomAdapter(Context context, List<BuyOrSellTime> list, int itemView, ListView lv){
+    public SellTimeCustomAdapter(Context context, List<SellTime> list, int itemView, ListView lv){
         this.context = context;
         this.list = list;
         this.itemView=itemView;
@@ -63,7 +63,7 @@ public class SellTimeCustomAdapter extends BaseAdapter {
         final TextView taskTag = convertView.findViewById(R.id.tv_task_tag);
         TextView taskDetails = convertView.findViewById(R.id.tv_task_details);
 
-        final BuyOrSellTime buyTime = (BuyOrSellTime) list.get(position);
+        final SellTime buyTime = (SellTime) list.get(position);
         //获取任务id
         final int tId=buyTime.gettId();
         if(buyTime.getuImage()!=null && !buyTime.getuImage().equals("")) {
@@ -113,7 +113,7 @@ public class SellTimeCustomAdapter extends BaseAdapter {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent();
                     intent.setClassName("com.cwx.timebank","com.cwx.timebank.DetailActivity" );
-                    BuyOrSellTime sellTimeDetail = list.get((int) id);
+                    SellTime sellTimeDetail = list.get((int) id);
                     intent.putExtra("uImage",sellTimeDetail.getuImage());
                     intent.putExtra("nickname", sellTimeDetail.getuNickName());
                     //当前时间

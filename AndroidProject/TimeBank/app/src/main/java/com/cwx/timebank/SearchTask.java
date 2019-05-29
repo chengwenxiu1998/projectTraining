@@ -2,7 +2,7 @@ package com.cwx.timebank;
 
 import java.util.Date;
 
-public class BuyOrSellTime {
+public class SearchTask {
     private int tId;
     private String uNickName;
     private String uImage;
@@ -15,15 +15,13 @@ public class BuyOrSellTime {
     private Date tEndtime;
     private String tImageUrl;
     private int tcId;
-    private int uId;
-    private Date tAcceptTime;
 
-    public BuyOrSellTime() {
+    public SearchTask() {
     }
 
 
-    public BuyOrSellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
-                   String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId,int uId,Date tAcceptTime) {
+    public SearchTask(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+                      String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId) {
         super();
         this.tId = tId;
         this.uNickName = uNickName;
@@ -37,8 +35,6 @@ public class BuyOrSellTime {
         this.tEndtime = tEndtime;
         this.tImageUrl = tImageUrl;
         this.tcId=tcId;
-        this.uId=uId;
-        this.tAcceptTime=tAcceptTime;
     }
 
 
@@ -119,27 +115,13 @@ public class BuyOrSellTime {
         this.tEndtime = tEndtime;
     }
 
+
     public int getTcId() {
         return tcId;
     }
 
+
     public void setTcId(int tcId) {
         this.tcId = tcId;
-    }
-
-    public int getuId() {
-        return uId;
-    }
-
-    public void setuId(int uId) {
-        this.uId = uId;
-    }
-
-    public Date gettAcceptTime() {
-        return tAcceptTime;
-    }
-
-    public void settAcceptTime(Date tAcceptTime) {
-        this.tAcceptTime = tAcceptTime;
     }
 }
