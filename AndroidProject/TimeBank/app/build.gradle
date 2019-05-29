@@ -40,4 +40,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(':bpp')
     implementation project(':easeui')
+    compile project(path: ':bpp')
 }

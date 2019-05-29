@@ -36,6 +36,7 @@ public class SendTalkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 eContent=editText.getText().toString();
                 SendTalkTask1 sendTalkTask=new SendTalkTask1(getApplication());
+
                 sendTalkTask.execute(eContent,UserId);
             }
         });

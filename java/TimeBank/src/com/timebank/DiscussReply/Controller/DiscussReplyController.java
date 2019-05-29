@@ -31,4 +31,15 @@ public class DiscussReplyController {
 		return temp;
 		
 	}
+	@RequestMapping("/insertI")
+	@ResponseBody
+	public String insertById(@RequestParam("did") Integer did,@RequestParam("uid") Integer uid,
+			@RequestParam("text") String content,@RequestParam("time") String time,HttpSession session) {
+		int id=(int) discussReplyServiceImpl.insertById(did, uid, content, time);
+		Gson gson=new Gson();
+		String temp=gson.toJson(id);
+		return temp;
+		
+	}
+	
 }
