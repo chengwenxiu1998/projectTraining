@@ -3,6 +3,7 @@ package com.cwx.timebank;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +116,8 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                         NotAccept sellTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",sellTimeDetail.getuImage());
                         intent.putExtra("nickname", sellTimeDetail.getuNickName());
+                        intent.putExtra("hxid",sellTimeDetail.getuId()+"");
+                        Log.e("哈哈哈哈哈1111环信id",sellTimeDetail.getuId()+"");
                         //当前时间
                         Calendar currentDate = Calendar.getInstance();
                         String getuTime = null;
@@ -155,6 +158,8 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                         NotAccept buyTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",buyTimeDetail.getuImage());
                         intent.putExtra("nickname", buyTimeDetail.getuNickName());
+                        intent.putExtra("hxid",buyTimeDetail.getuId()+"");
+                        Log.e("哈哈哈哈哈哈哈2222环信id",buyTimeDetail.getuId()+"");
                         //当前时间
                         Calendar currentDate=Calendar.getInstance();
                         String getuTime=null;

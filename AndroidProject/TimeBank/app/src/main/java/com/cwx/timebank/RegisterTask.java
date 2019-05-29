@@ -31,6 +31,7 @@ public class RegisterTask extends AsyncTask
     private String petName;
     private String phone;
     private String password;
+    private String hxid;
 
     public RegisterTask(Context context){
         this.context=context;
@@ -58,6 +59,11 @@ public class RegisterTask extends AsyncTask
             user.setPhone(object.getString("phone"));
             user.setPassword(object.getString("password"));
             Log.e("xinxi",user.toString());
+
+            hxid  = object.getString("id");
+
+            regist();
+
             Intent intent=new Intent();
             intent.setClass(context,LoginActivity.class);
             context.startActivity(intent);
@@ -80,7 +86,7 @@ public class RegisterTask extends AsyncTask
             public void run() {
                 try {
                     //去环信服务器注册账号
-                    EMClient.getInstance().createAccount(phone,password);
+                    EMClient.getInstance().createAccount(hxid,password);
 
                    Log.e("12","在环信服务器注册成功");
                 } catch (HyphenateException e) {

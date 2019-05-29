@@ -95,10 +95,12 @@ public class LoginTask extends AsyncTask<String,Object,Boolean>{
             editor.putBoolean("isRememberPwd",cbRememberPwd.isChecked());//保存该用户是否勾选记住密码，true表示记住密码，false表示不记住密码
             String uphone = "";
             String upassword = "";
+            int uid = 0;
             try {
                 uphone = userJson.getString(2);
                 upassword = userJson.getString(7);
-                editor.putInt("userId", userJson.getInt(0));
+                uid = userJson.getInt(0);
+                editor.putInt("userId",uid);
                 editor.putString("uName", userJson.getString(1));
                 editor.putString("uPhone",uphone);
                 editor.putString("uSex",userJson.getString(3));
@@ -127,7 +129,7 @@ public class LoginTask extends AsyncTask<String,Object,Boolean>{
             context.startActivity(intent);
 
             //本地服务器登陆成功后，去环信服务器登录
-            login(uphone,upassword);
+            login(uid+"",upassword);
 
         }else{//登录失败
             tvError.setText("登录失败");
@@ -135,21 +137,21 @@ public class LoginTask extends AsyncTask<String,Object,Boolean>{
     }
 
     //登录按钮的页面逻辑处理
-    public void login(final String phone, String pwd) {
+    public void login(final String uid, String pwd) {
 
         //登录逻辑处理
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 //去环信服务器登录
-                EMClient.getInstance().login(phone, password, new EMCallBack() {
+                EMClient.getInstance().login(uid, password, new EMCallBack() {
                     //登录成功后的处理
                     @Override
                     public void onSuccess() {
                         //对模型层数据的处理
-                        Model.getInstance().loginSuccess(new UserInfo(phone));
+                        Model.getInstance().loginSuccess(new UserInfo(uid));
                         //保存用户账号信息到本地DB
-                        Model.getInstance().getUserAccountDao().addAccount(new UserInfo(phone));
+                        Model.getInstance().getUserAccountDao().addAccount(new UserInfo(uid));
                         //提示登录成功
                         Log.e("12","环信服务器登录成功");
 
