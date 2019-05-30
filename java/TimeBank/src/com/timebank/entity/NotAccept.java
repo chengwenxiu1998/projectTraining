@@ -1,4 +1,4 @@
-package com.timebank.entity;
+package com.cwx.timebank;
 
 import java.util.Date;
 
@@ -15,13 +15,14 @@ public class NotAccept {
     private Date tEndtime;
     private String tImageUrl;
     private int tcId;
- 
+    private int uId;
+
     public NotAccept() {
     }
 
 
     public NotAccept(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
-			String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId) {
+                     String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId,int uId) {
 		super();
 		this.tId = tId;
 		this.uNickName = uNickName;
@@ -35,6 +36,7 @@ public class NotAccept {
 		this.tEndtime = tEndtime;
 		this.tImageUrl = tImageUrl;
 		this.tcId=tcId;
+		this.uId=uId;
 	}
 
 
@@ -115,14 +117,19 @@ public class NotAccept {
         this.tEndtime = tEndtime;
     }
 
+    public int getTcId() {
+        return tcId;
+    }
 
-	public int getTcId() {
-		return tcId;
-	}
+    public void setTcId(int tcId) {
+        this.tcId = tcId;
+    }
 
+    public int getuId() {
+        return uId;
+    }
 
-	public void setTcId(int tcId) {
-		this.tcId = tcId;
-	}
-    
+    public void setuId(int uId) {
+        this.uId = uId;
+    }
 }
