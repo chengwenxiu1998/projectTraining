@@ -14,6 +14,7 @@ public class User {
     private String uIdCard;
     private Integer uCoin;
     private transient List<Discuss> discuss;
+    private transient List<Shaishai> shaishai;
     public User() {
         super();
         // TODO Auto-generated constructor stub
@@ -109,6 +110,13 @@ public class User {
     }
     public void setDiscuss(List<Discuss> discuss) {
         this.discuss = discuss;
+    }
+
+    public List<Shaishai> getShaishai() {
+        return shaishai;
+    }
+    public void setShaishai(List<Shaishai> shaishai) {
+        this.shaishai = shaishai;
     }
     @Override
     public String toString() {

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cwx.timebank.bean.Discuss;
-import com.cwx.timebank.bean.DiscussBean;
 
 import java.util.List;
 

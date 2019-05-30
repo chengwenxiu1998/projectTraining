@@ -27,6 +27,30 @@ public class UpdateMyInfo extends AppCompatActivity {
             }
         });
 
+       initView();
+
+        //点击手机号，跳转到修改绑定的手机号界面
+        LinearLayout llUpdatePhone = findViewById(R.id.ll_update_phone);
+        llUpdatePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),UpdatePhoneActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //点击地区，修改自己所在的地区
+        LinearLayout llUpdateArea = findViewById(R.id.ll_update_area);
+        llUpdateArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),UpdateAreaActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void initView(){
         //设置要显示的头像
         CircleImageView civHeadImg = findViewById(R.id.civ_head_img);
         SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -55,30 +79,11 @@ public class UpdateMyInfo extends AppCompatActivity {
 
         //设置要显示的性别
         TextView tvSex = findViewById(R.id.tv_sex);
-        tvSex.setText(sp.getString("uSex",""));
+        String sex = (sp.getInt("uSex",0)==0) ? "男" :"女";
+        tvSex.setText(sex);
 
         //设置要显示的地区
         TextView tvArea = findViewById(R.id.tv_area);
         tvArea.setText(sp.getString("uArea",""));
-
-        //点击手机号，跳转到修改绑定的手机号界面
-        LinearLayout llUpdatePhone = findViewById(R.id.ll_update_phone);
-        llUpdatePhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(),UpdatePhoneActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //点击地区，修改自己所在的地区
-        LinearLayout llUpdateArea = findViewById(R.id.ll_update_area);
-        llUpdateArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(),UpdateAreaActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

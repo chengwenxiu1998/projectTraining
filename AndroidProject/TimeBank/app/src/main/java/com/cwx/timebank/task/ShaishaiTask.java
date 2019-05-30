@@ -8,7 +8,11 @@ import android.widget.ListView;
 
 import com.cwx.timebank.R;
 import com.cwx.timebank.ShaiAdapter;
+import com.cwx.timebank.bean.Discuss;
+import com.cwx.timebank.bean.Shaishai;
 import com.cwx.timebank.bean.ShaishaiBean;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,48 +44,31 @@ public class ShaishaiTask extends AsyncTask<String,Void,List> {
 
     @Override
     protected List doInBackground(String... strings) {
-        List<ShaishaiBean> shaishaiList = new ArrayList<ShaishaiBean>();
-
         URL url = null;
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            url = new URL(serverUrl+"/ShaishaiServlet");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/shaishai/allshai";
+            url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("contentType", "UTF-8");
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONArray array = new JSONArray(res);
-            for (int i = array.length() - 1; i >= 0; i--) {
-                JSONObject object = array.optJSONObject(i);
-                ShaishaiBean shaishaiBean = new ShaishaiBean();
-                shaishaiBean.setSid(object.getInt("sid"));
-                shaishaiBean.setUid(object.getInt("uid"));
-                shaishaiBean.setPetName(object.getString("petName"));
-                shaishaiBean.setCount(object.getInt("scount"));
-                shaishaiBean.setReply(object.getInt("reply"));
-                shaishaiBean.setText(object.getString("stext"));
-                //获取到JSON中的时间
-                String d = object.getString("stime");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = sdf.parse(d);
-                shaishaiBean.setTime(date);
-                shaishaiList.add(shaishaiBean);
-            }
-
-        } catch (MalformedURLException e) {
+            Log.e("lm", "Lli" + res);
+            List<Shaishai> shaiList = new Gson().fromJson(res, new TypeToken<List<Shaishai>>() {
+            }.getType());
+            return shaiList;
+            } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Log.e("错误", "false");
+            return null;
         }
-        return shaishaiList;
+
+
     }
 
     protected void onPostExecute(List list) {
