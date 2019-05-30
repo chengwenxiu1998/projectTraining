@@ -3,6 +3,7 @@ package com.cwx.timebank;
 import java.util.Date;
 
 public class NotAccept {
+    private int uId;
 	private int tId;
     private String uNickName;
     private String uImage;
@@ -40,8 +41,15 @@ public class NotAccept {
 	}
 
 
+    public int getuId() {
+        return uId;
+    }
 
-	public String getuNickName() {
+    public void setuId(int uId) {
+        this.uId = uId;
+    }
+
+    public String getuNickName() {
         return uNickName;
     }
 
