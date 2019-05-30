@@ -22,8 +22,4 @@ public class BuyTimeTaskServiceImpl {
 	public List<BuyTime> buyTimeTask(){
 		return this.taskDaoImpl.findBuyTimeTask();
 	}
-//	//改变任务状态
-//	public int changeTaskState(int uid) {
-//		return this.taskDaoImpl.updateTaskState(uid);
-//	}
 }
