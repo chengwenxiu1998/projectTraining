@@ -17,6 +17,7 @@ import com.cwx.timebank.task.ShowHeadImg;
 
 
 public class TaskDetailActivity extends AppCompatActivity {
+    private String hxid;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,8 @@ public class TaskDetailActivity extends AppCompatActivity {
         TextView tvTag = findViewById(R.id.tv_tag);
         TextView tvText = findViewById(R.id.tv_text);
         ImageView ivImg = findViewById(R.id.iv_img);
+
+//        String hxid = intent.getStringExtra("id");
 
         intent.getStringExtra("taskId");
         String headImg = intent.getStringExtra("headImage");

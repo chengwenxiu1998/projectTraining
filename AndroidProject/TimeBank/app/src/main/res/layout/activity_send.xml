@@ -236,8 +236,7 @@
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
                                         android:layout_weight="1.6"
-                                        android:src="@drawable/img19"
-                                        android:visibility="invisible" />
+                                         />
                                     <ImageView
                                         android:id="@+id/iv_add_photo"
                                         android:layout_width="70dp"
@@ -547,8 +546,7 @@
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
                                         android:layout_weight="1.6"
-                                        android:src="@drawable/img19"
-                                        android:visibility="invisible"/>
+                                        />
                                     <ImageView
                                         android:id="@+id/iv_sell_add_photo"
                                         android:layout_width="70dp"

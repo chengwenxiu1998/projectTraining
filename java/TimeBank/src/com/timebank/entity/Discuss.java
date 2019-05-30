@@ -1,5 +1,7 @@
 package com.timebank.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="discuss")
@@ -19,6 +23,7 @@ public class Discuss {
 	//一对一的关系
 	private Tag tag;
 	private User user;
+	private transient List<DiscussReply> discussReplys;
 	public Discuss() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -60,6 +65,15 @@ public class Discuss {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@OneToMany(mappedBy="discuss",targetEntity=DiscussReply.class,
+			cascade=CascadeType.ALL)
+	public List<DiscussReply> getDiscussReplys() {
+		return discussReplys;
+	}
+	public void setDiscussReplys(List<DiscussReply> discussReplys) {
+		this.discussReplys = discussReplys;
 	}
 	@Override
 	public String toString() {

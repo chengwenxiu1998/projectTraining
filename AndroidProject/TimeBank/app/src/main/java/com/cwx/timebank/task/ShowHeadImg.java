@@ -3,6 +3,7 @@ package com.cwx.timebank.task;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class ShowHeadImg extends AsyncTask<Object,Object,Bitmap>{
     public ShowHeadImg(ImageView headImg,String imgUrl){
         this.headImg = headImg;
         this.imgUrl = imgUrl;
+        Log.e("url",imgUrl);
     }
 
     @Override

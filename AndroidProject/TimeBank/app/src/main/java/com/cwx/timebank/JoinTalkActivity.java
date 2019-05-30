@@ -42,17 +42,17 @@ public class JoinTalkActivity extends AppCompatActivity {
         final String string1=intent.getStringExtra("netName");
         final String string2=intent.getStringExtra("tag");
         final String string3=intent.getStringExtra("content");
-        final String did=intent.getStringExtra("which");
+        final String did=intent.getStringExtra("which");//讨论的id
 
 
         //谁发表的话题
         textView1=findViewById(R.id.put);
-        textView1.setText(string1+"发表的话题");
-        textView2=findViewById(R.id.tagc);
+        textView1.setText(string1+"发表的话题");//谁发表的话题
+        textView2=findViewById(R.id.tagc);//发表话题的标签是啥
         textView2.setText(string2);
-        textView3=findViewById(R.id.topic);
+        textView3=findViewById(R.id.topic);//发表话题的内容是啥
         textView3.setText(string3);
-        ListView listView=findViewById(R.id.lv_frame);
+        ListView listView=findViewById(R.id.lv_frame);//回复的列表
         DetailTask detailTask=new DetailTask(getApplication(),listView);
         detailTask.execute(did);
         editText=findViewById(R.id.reply);

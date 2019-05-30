@@ -3,6 +3,7 @@ package com.cwx.timebank;
 import java.util.Date;
 
 public class BuyOrSellTime {
+    private int tId;
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -11,37 +12,36 @@ public class BuyOrSellTime {
     private String tagText;
     private String tState;
     private int uIdAccept;
-    private int tId;
     private Date tEndtime;
     private String tImageUrl;
-
-
-    private String searchContent;
     private int tcId;
-    private  int uId;
+    private int uId;
     private Date tAcceptTime;
+
     public BuyOrSellTime() {
     }
 
-    public BuyOrSellTime(String uNickName, String uImage, String tagText, Date uTime, String tDesc, int tCoinCount,
-                         String tState, int tId, int uIdAccept, String searchContent, int tcId, Date tEndtime, String tImageUrl,
-                         int uId, Date tAcceptTime) {
+
+    public BuyOrSellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+                   String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId,int uId,Date tAcceptTime) {
+        super();
+        this.tId = tId;
         this.uNickName = uNickName;
         this.uImage = uImage;
-        this.tagText = tagText;
         this.uTime = uTime;
         this.tDesc = tDesc;
         this.tCoinCount = tCoinCount;
-        this.tState=tState;
-        this.tId=tId;
-        this.uIdAccept=uIdAccept;
-        this.searchContent=searchContent;
+        this.tagText = tagText;
+        this.tState = tState;
+        this.uIdAccept = uIdAccept;
+        this.tEndtime = tEndtime;
+        this.tImageUrl = tImageUrl;
         this.tcId=tcId;
-        this.tEndtime=tEndtime;
-        this.tImageUrl=tImageUrl;
         this.uId=uId;
         this.tAcceptTime=tAcceptTime;
     }
+
+
 
     public String getuNickName() {
         return uNickName;
@@ -103,14 +103,6 @@ public class BuyOrSellTime {
 
     public void setuIdAccept(int uIdAccept) { this.uIdAccept = uIdAccept; }
 
-    public String getSearchContent() { return searchContent; }
-
-    public void setSearchContent(String searchContent) { this.searchContent = searchContent; }
-
-    public int getTcId() { return tcId; }
-
-    public void setTcId(int tcId) { this.tcId = tcId; }
-
     public String gettImageUrl() {
         return tImageUrl;
     }
@@ -125,6 +117,14 @@ public class BuyOrSellTime {
 
     public void settEndtime(Date tEndtime) {
         this.tEndtime = tEndtime;
+    }
+
+    public int getTcId() {
+        return tcId;
+    }
+
+    public void setTcId(int tcId) {
+        this.tcId = tcId;
     }
 
     public int getuId() {
