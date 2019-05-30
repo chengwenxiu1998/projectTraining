@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(TextUtils.isEmpty(Uphone)){
                         Toast.makeText(RegisterActivity.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
                     }else{
-                        RegisterTask1 registerTask1 = new RegisterTask1(textView2);
+                        RegisterTask1 registerTask1 = new RegisterTask1(getApplicationContext(),textView2);
                         registerTask1.execute(Uphone);
                     }
 

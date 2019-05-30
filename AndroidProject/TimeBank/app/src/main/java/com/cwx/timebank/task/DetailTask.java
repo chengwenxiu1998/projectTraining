@@ -9,7 +9,11 @@ import android.widget.ListView;
 import com.cwx.timebank.DetailAdapter;
 
 import com.cwx.timebank.R;
+import com.cwx.timebank.bean.Discuss;
+import com.cwx.timebank.bean.DiscussReply;
 import com.cwx.timebank.bean.DisussReplyBean;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,51 +45,42 @@ public class DetailTask extends AsyncTask<String,Void,List> {
     @Override
     protected List doInBackground(String... strings) {
         did=Integer.parseInt(strings[0]);
-        List<DisussReplyBean> replyList=new ArrayList<>();
-
         URL url = null;
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            url = new URL(serverUrl+"/DisucssReplyServlet?did="+did);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("contentType","UTF-8");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/reply/alldis?uId="+did;
+            url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONArray array=new JSONArray(res);
-            for(int i=array.length()-1;i>=0;i--){
-                JSONObject object = array.optJSONObject(i);
-                DisussReplyBean replyBean=new DisussReplyBean();
-                replyBean.setDid(object.getInt("did"));
-                replyBean.setRid(object.getInt("rid"));
-                replyBean.setPetName(object.getString("pickName"));
-                replyBean.setReplyContent(object.getString("cotent"));
-                String d=object.getString("time");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date=sdf.parse(d);
-                replyBean.setReplyTime(date);
-                replyList.add(replyBean);
-            }
+            Log.e("lm", "Lli" + res);
+            List<DiscussReply> replyList = new Gson().fromJson(res, new TypeToken<List<DiscussReply>>() {
+            }.getType());
+
+            Log.e("lm", replyList.toString());
+            return replyList;
+
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            return null;
         }
 
-        return replyList;
+
     }
     protected void onPostExecute(List list) {
         if(list!=null &&list.size()!=0){
             DetailAdapter detailAdapter=new DetailAdapter(context, R.layout.join_talk_item,list);
             listView.setAdapter(detailAdapter);
         }else{
-            Log.e("晒晒错误","错误");
+            /*Log.e("晒晒错误","错误");*/
         }
     }
 }

@@ -9,7 +9,9 @@ public class User {
     public User(){
 
     }
-
+    public User(String phone){
+        this.phone = phone;
+    }
 
     public String getPetName() {
         return petName;
