@@ -39,6 +39,8 @@ import com.cwx.timebank.MainActivity;
 import com.cwx.timebank.R;
 import com.cwx.timebank.bean.TaskBean;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -49,26 +51,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SendActivity1 extends Fragment {
+    File uploadFile=null;
+    private final String Image_Type="image/*";
+    public static final int SELECT_PHOTO=9;
+    public static final int CHOOSE_PHOTO=8;
+    private OkHttpClient okHttpClient;
+    String fileName;
     TabHost tabHost;
     private TaskBean taskBean;
-    float scaleWidth;
-    float scaleHeight;
-    int h;
-    boolean num=false;
-    Bitmap bp;
-    ImageView imageview;
     private int i=0;//用来作为图片的名称
-
     public static final int TAKE_PHOTO1 = 3;
     public static final int TAKE_PHOTO = 2;//声明一个请求码，用于识别返回的结果
-    private Uri imageUri;
-
-    private File mPhotoFile;
-    private String mPhotoPath;
     public final static int CAMERA_RESULT = 1;
     ImageView  imageshow;
     ImageView  imageshowSell;
@@ -76,14 +81,8 @@ public class SendActivity1 extends Fragment {
     ImageView ivSellAddImageView;
     private List<View> viewList=new ArrayList<View>();
     private String[] tabHostTag={"tab1","tab2"};
-    private final int ImageCode = 0;
-    private final int ImageCode1 = 1;
-    private final String Image_Type="image/*";
-
     EditText etSendTask;
     EditText etSellSendTask;
-    // EditText etSellTimeMoney;
-    //  EditText etSellSellTimeMoney;
     EditText etMiaoshu;
     EditText etSellMiaoshu;
     Spinner spinner;
@@ -101,6 +100,7 @@ public class SendActivity1 extends Fragment {
     String hour;
     String min;
     PopupWindow popupWindow;
+
     //当创建View时调用
     @Nullable
     @Override
@@ -428,7 +428,8 @@ public class SendActivity1 extends Fragment {
                 showPopupWindow();
             }
         });
-        imageshow = (ImageView)view.findViewById(R.id.iv_photo);
+        imageshow =view.findViewById(R.id.iv_photo);
+
 
         ivSellAddImageView=view.findViewById(R.id.iv_sell_add_photo);
         ivSellAddImageView.setOnClickListener(new View.OnClickListener() {
@@ -437,7 +438,7 @@ public class SendActivity1 extends Fragment {
                 showPopupWindow1();
             }
         });
-        imageshowSell = (ImageView)view.findViewById(R.id.iv_sell_photo);
+        imageshowSell = view.findViewById(R.id.iv_sell_photo);
 
 
 
@@ -483,6 +484,7 @@ public class SendActivity1 extends Fragment {
                 renwuTask.execute();
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
+                complexUploadImg(uploadFile);
                 Log.e("test","点击了发表");
             }
         });
@@ -523,7 +525,13 @@ public class SendActivity1 extends Fragment {
 
 
             //先假设一个路径
-            taskBean.setT_imgurl("aaaaa.jpg");
+            if(fileName==null){
+                taskBean.setT_imgurl("aaaaa.jpg");
+            }else{
+                taskBean.setT_imgurl(fileName);
+                Log.i("Test:",fileName);
+            }
+
 
         } else if (tabId.equals(tabHostTag[1])) {
             taskBean.setTcId(2);
@@ -556,11 +564,18 @@ public class SendActivity1 extends Fragment {
             hour=spinnerEndTimeHour1.getSelectedItem().toString();
             min=spinnerEndTimeMin1.getSelectedItem().toString();
             Log.e("test",month+" "+day+" "+hour+"  "+min);
+
             //先假设一个路径
-            taskBean.setT_imgurl("aaaaa.jpg");
+            if(fileName==null){
+                taskBean.setT_imgurl("aaaaa.jpg");
+            }else{
+                taskBean.setT_imgurl(fileName);
+                Log.i("Test:",fileName);
+            }
 
         }
     }
+
 
 
     // 弹出PopupWindow
@@ -583,10 +598,10 @@ public class SendActivity1 extends Fragment {
         Button btnPhoto = view.findViewById(R.id.btn_photo);
         Button btnSelect = view.findViewById(R.id.btn_select);
         Button btnCancel = view.findViewById(R.id.btn_cancel);
-        MyListener myListener=new MyListener();
-        btnCancel.setOnClickListener(myListener);
-        btnPhoto.setOnClickListener(myListener);
-        btnSelect.setOnClickListener(myListener);
+        MyListener1 myListener1=new MyListener1();
+        btnCancel.setOnClickListener(myListener1);
+        btnPhoto.setOnClickListener(myListener1);
+        btnSelect.setOnClickListener(myListener1);
 
         popupWindow.showAtLocation(ivSellAddImageView, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 
@@ -647,6 +662,30 @@ public class SendActivity1 extends Fragment {
         viewList.add(view);
         return view;
     }
+    class MyListener1 implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.btn_photo:
+                    //调用系统相机
+                    Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,1112);
+                    popupWindow.dismiss();
+                    break;
+                case R.id.btn_select:
+                    // 使用intent调用系统提供的相册功能，使用startActivityForResult是为了获取用户选择的图片的地址
+                    Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
+                    getAlbum.setType(Image_Type);
+                    startActivityForResult(getAlbum,SELECT_PHOTO);
+                    popupWindow.dismiss();
+                    break;
+                case R.id.btn_cancel:
+                    popupWindow.dismiss();
+                    break;
+            }
+        }
+    }
     class MyListener implements View.OnClickListener {
 
         @Override
@@ -655,15 +694,15 @@ public class SendActivity1 extends Fragment {
                 case R.id.btn_photo:
                     //调用系统相机
                     Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
                     startActivityForResult(intent,1111);
                     popupWindow.dismiss();
                     break;
                 case R.id.btn_select:
-                    Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
-                    // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
-                    intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
-                    startActivity(intentToPickPic);
+
+                    // 使用intent调用系统提供的相册功能，使用startActivityForResult是为了获取用户选择的图片的地址
+                    Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
+                    getAlbum.setType(Image_Type);
+                    startActivityForResult(getAlbum,CHOOSE_PHOTO);
                     popupWindow.dismiss();
                     break;
                 case R.id.btn_cancel:
@@ -678,12 +717,121 @@ public class SendActivity1 extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1111 && resultCode==RESULT_OK){
             Bitmap bitmap=(Bitmap)data.getExtras().get("data");
+            imageshow.setImageBitmap(bitmap);
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
             Date date=new Date(System.currentTimeMillis());
-            String fileName=simpleDateFormat.format(date);
+            fileName=simpleDateFormat.format(date)+".jpg";
             saveBmp2Gallery(bitmap,fileName);
+            uploadFile=saveBitmapFile(bitmap);
+
+        }else if(requestCode==1112 && resultCode==RESULT_OK){
+            Bitmap bitmap=(Bitmap)data.getExtras().get("data");
+            imageshowSell.setImageBitmap(bitmap);
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date=new Date(System.currentTimeMillis());
+            fileName=simpleDateFormat.format(date)+".jpg";
+            saveBmp2Gallery(bitmap,fileName);
+            uploadFile=saveBitmapFile(bitmap);
+        }else if(requestCode==CHOOSE_PHOTO && resultCode ==RESULT_OK){
+            ContentResolver resolver =getContext().getContentResolver();
+
+            // 获得图片的地址Uri
+            Uri originalUri = data.getData();
+
+            // 新建一个字符串数组用于存储图片地址数据。
+            String[] proj = {MediaStore.Images.Media.DATA};
+
+            // android系统提供的接口，用于根据uri获取数据
+            Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
+                    null);
+
+            // 获得用户选择图片的索引值
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            // 将游标移至开头 ，防止引起队列越界
+            cursor.moveToFirst();
+
+            // 根据图片的URi生成bitmap
+            Bitmap bm = null;
+            File file=null;
+            try {
+                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+                file=saveBitmapFile(bm);//将BitMap转为File
+                if(file!=null){
+                    Log.e("test:","hahahh");
+                }
+
+                //saveMyBitmap(bm);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 显得到bitmap图片
+            imageshow.setImageBitmap(bm);
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date=new Date(System.currentTimeMillis());
+            fileName=simpleDateFormat.format(date)+".jpg";
+            uploadFile=file;
+        }else if(requestCode==SELECT_PHOTO && resultCode ==RESULT_OK){
+            ContentResolver resolver =getContext().getContentResolver();
+
+            // 获得图片的地址Uri
+            Uri originalUri = data.getData();
+
+            // 新建一个字符串数组用于存储图片地址数据。
+            String[] proj = {MediaStore.Images.Media.DATA};
+
+            // android系统提供的接口，用于根据uri获取数据
+            Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
+                    null);
+
+            // 获得用户选择图片的索引值
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            // 将游标移至开头 ，防止引起队列越界
+            cursor.moveToFirst();
+
+            // 根据图片的URi生成bitmap
+            Bitmap bm = null;
+            File file=null;
+            try {
+                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+                file=saveBitmapFile(bm);//将BitMap转为File
+                if(file!=null){
+                    Log.e("test:","hahahh");
+                }
+
+                //saveMyBitmap(bm);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 显得到bitmap图片
+            imageshowSell.setImageBitmap(bm);
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date=new Date(System.currentTimeMillis());
+            fileName=simpleDateFormat.format(date)+".jpg";
+            uploadFile=file;
         }
     }
+    //Bitmap对象保存味图片文件
+    public File saveBitmapFile(Bitmap bitmap){
+        File file=new File("/sdcard/pic/01.jpg");//将要保存图片的路径
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        Log.e("test","file的路径："+file.getPath());
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
     public void saveBmp2Gallery(Bitmap bmp, String picName) {
         //1. 获取内容解析者
         ContentResolver contentResolver =getActivity().getContentResolver();
@@ -730,5 +878,39 @@ public class SendActivity1 extends Fragment {
         intent.setData(uri);
         getActivity().sendBroadcast(intent);
     }
+    //上传图片
+    private void complexUploadImg(final File file){
+        new Thread(){
+            @Override
+            public void run() {
+                //1.
+                //2.创建Request对象
+                //1)得到JPG图片对应的MIME类型
+                MediaType mediaType=MediaType.parse("application/jpeg");
+//                String img=getFilesDir().getAbsolutePath()+"/Img.jpg";
+                //2)创建RequestBody
+                RequestBody requestBody=RequestBody.create(mediaType,file);
+                //3)创建Request对象
+                final Request request=new Request.Builder()
+                        .url("http://10.7.88.251:8080/TimeBank/upload")
+                        .post(requestBody)
+                        .build();
+                //3.创建Call对象
+                Call call=okHttpClient.newCall(request);
+                //4.提交请求并返回响应
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("test","上传图片失败");
+                    }
 
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Log.e("test",request.body().toString());
+                    }
+                });
+
+            }
+        }.start();
+    }
 }
