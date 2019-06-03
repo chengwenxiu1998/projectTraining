@@ -1,6 +1,8 @@
 package com.cwx.timebank.bean;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class User {
     private Integer uId;
@@ -14,6 +16,7 @@ public class User {
     private String uIdCard;
     private Integer uCoin;
     private transient List<Discuss> discuss;
+    private Set<Task> sendTaskSet = new HashSet<>();
     public User() {
         super();
         // TODO Auto-generated constructor stub
@@ -110,6 +113,15 @@ public class User {
     public void setDiscuss(List<Discuss> discuss) {
         this.discuss = discuss;
     }
+
+
+    public Set<Task> getSendTaskSet() {
+        return sendTaskSet;
+    }
+    public void setSendTaskSet(Set<Task> sendTaskSet) {
+        this.sendTaskSet = sendTaskSet;
+    }
+
     @Override
     public String toString() {
         return "User [uId=" + uId + ", uName=" + uName + ", uPhone=" + uPhone + ", uSex=" + uSex + ", uArea=" + uArea

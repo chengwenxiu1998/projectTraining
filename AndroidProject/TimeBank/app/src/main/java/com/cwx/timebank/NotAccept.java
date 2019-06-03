@@ -16,7 +16,6 @@ public class NotAccept {
     private Date tEndtime;
     private String tImageUrl;
     private int tcId;
-    private int uId;
 
     public NotAccept() {
     }
@@ -133,11 +132,5 @@ public class NotAccept {
         this.tcId = tcId;
     }
 
-    public int getuId() {
-        return uId;
-    }
 
-    public void setuId(int uId) {
-        this.uId = uId;
-    }
 }

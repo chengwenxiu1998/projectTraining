@@ -38,10 +38,16 @@ dependencies {
     implementation files('libs/SDKWrapper-2018.0801.1824.jar')
     implementation files('libs/SMSSDK-3.2.1.jar')
     implementation 'com.google.code.gson:gson:2.8.5'
+<<<<<<< HEAD
 
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
 
     implementation project(':bpp')
     implementation project(':easeui')
 
+=======
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation project(':bpp')
+    implementation project(':easeui')
+>>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
 }
