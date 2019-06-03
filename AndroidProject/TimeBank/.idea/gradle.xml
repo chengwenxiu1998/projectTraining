@@ -5,6 +5,10 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -13,6 +17,11 @@
             <option value="$PROJECT_DIR$/easeui" />
           </set>
         </option>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
+>>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

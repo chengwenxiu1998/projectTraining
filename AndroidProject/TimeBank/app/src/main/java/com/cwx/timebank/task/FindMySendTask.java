@@ -57,14 +57,13 @@ public class FindMySendTask extends AsyncTask<Object,Object,Map<String,List<Map<
         List<Map<String, Object>> readyLists = new ArrayList<>();
         List<Map<String, Object>> doingLists = new ArrayList<>();
         List<Map<String, Object>> finishLists = new ArrayList<>();
-
         //通过网络访问服务器端查询该用户已经发布的任务
         //已发布的任务分为两种：待接收，进行中，已完成
         URL url = null;
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl", "");
-            String urlStr = serverUrl + "/FindMySendServlet?uid=" + uid;
+            String urlStr = serverUrl + "/user/findMySend?uid=" + uid;
             url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
