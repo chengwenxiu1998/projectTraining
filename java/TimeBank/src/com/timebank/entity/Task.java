@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -16,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="task")
 public class Task {
 	private int tId;
-	private int uIdSend;
+//	private int uIdSend;
 	private Date uTime;
 	private int tcId;
 	private String  tDesc;
@@ -28,7 +31,7 @@ public class Task {
 	private String tImgUrl;
 	private Date tAcceptTime;
 	private Date tFinishTime;
-	
+	private transient User user;
 	
 	public Task() {
 		super();
@@ -49,15 +52,15 @@ public class Task {
 	}
 
 
-	@Column(name="u_id_send")
-	public int getuIdSend() {
-		return uIdSend;
-	}
-
-
-	public void setuIdSend(int uIdSend) {
-		this.uIdSend = uIdSend;
-	}
+//	@Column(name="u_id_send")
+//	public int getuIdSend() {
+//		return uIdSend;
+//	}
+//
+//
+//	public void setuIdSend(int uIdSend) {
+//		this.uIdSend = uIdSend;
+//	}
 
 	@Column(name="u_time")
 	public Date getuTime() {
@@ -170,113 +173,32 @@ public class Task {
 		this.tFinishTime = tFinishTime;
 	}
 
+	
+	
+	@ManyToOne
+	@JoinColumn(name="u_id_send")
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 
 	@Override
 	public String toString() {
-		return "TaskBean [tId=" + tId + ", uIdSend=" + uIdSend + ", uTime=" + uTime + ", tcId=" + tcId + ", tDesc="
-				+ tDesc + ", tCoinCount=" + tCoinCount + ", tState=" + tState + ", uIdAccept=" + uIdAccept + ", tagId="
-				+ tagId + ", tEndTime=" + tEndTime + ", tImgUrl=" + tImgUrl + ", tAcceptTime=" + tAcceptTime
-				+ ", tFinishTime=" + tFinishTime + "]";
+		return "Task [tId=" + tId + ", uTime=" + uTime + ", tcId=" + tcId + ", tDesc=" + tDesc + ", tCoinCount="
+				+ tCoinCount + ", tState=" + tState + ", uIdAccept=" + uIdAccept + ", tagId=" + tagId + ", tEndTime="
+				+ tEndTime + ", tImgUrl=" + tImgUrl + ", tAcceptTime=" + tAcceptTime + ", tFinishTime=" + tFinishTime
+				+ "]";
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((tAcceptTime == null) ? 0 : tAcceptTime.hashCode());
-		result = prime * result + tCoinCount;
-		result = prime * result + ((tDesc == null) ? 0 : tDesc.hashCode());
-		result = prime * result + ((tEndTime == null) ? 0 : tEndTime.hashCode());
-		result = prime * result + ((tFinishTime == null) ? 0 : tFinishTime.hashCode());
-		result = prime * result + tId;
-		result = prime * result + ((tImgUrl == null) ? 0 : tImgUrl.hashCode());
-		result = prime * result + ((tState == null) ? 0 : tState.hashCode());
-		result = prime * result + tagId;
-		result = prime * result + tcId;
-		result = prime * result + uIdAccept;
-		result = prime * result + uIdSend;
-		result = prime * result + ((uTime == null) ? 0 : uTime.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (tAcceptTime == null) {
-			if (other.tAcceptTime != null)
-				return false;
-		} else if (!tAcceptTime.equals(other.tAcceptTime))
-			return false;
-		if (tCoinCount != other.tCoinCount)
-			return false;
-		if (tDesc == null) {
-			if (other.tDesc != null)
-				return false;
-		} else if (!tDesc.equals(other.tDesc))
-			return false;
-		if (tEndTime == null) {
-			if (other.tEndTime != null)
-				return false;
-		} else if (!tEndTime.equals(other.tEndTime))
-			return false;
-		if (tFinishTime == null) {
-			if (other.tFinishTime != null)
-				return false;
-		} else if (!tFinishTime.equals(other.tFinishTime))
-			return false;
-		if (tId != other.tId)
-			return false;
-		if (tImgUrl == null) {
-			if (other.tImgUrl != null)
-				return false;
-		} else if (!tImgUrl.equals(other.tImgUrl))
-			return false;
-		if (tState == null) {
-			if (other.tState != null)
-				return false;
-		} else if (!tState.equals(other.tState))
-			return false;
-		if (tagId != other.tagId)
-			return false;
-		if (tcId != other.tcId)
-			return false;
-		if (uIdAccept != other.uIdAccept)
-			return false;
-		if (uIdSend != other.uIdSend)
-			return false;
-		if (uTime == null) {
-			if (other.uTime != null)
-				return false;
-		} else if (!uTime.equals(other.uTime))
-			return false;
-		return true;
-	}
+	
 
 
-	public Task(int tId, int uIdSend, Date uTime, int tcId, String tDesc, int tCoinCount, String tState,
-			int uIdAccept, int tagId, Date tEndTime, String tImgUrl, Date tAcceptTime, Date tFinishTime) {
-		super();
-		this.tId = tId;
-		this.uIdSend = uIdSend;
-		this.uTime = uTime;
-		this.tcId = tcId;
-		this.tDesc = tDesc;
-		this.tCoinCount = tCoinCount;
-		this.tState = tState;
-		this.uIdAccept = uIdAccept;
-		this.tagId = tagId;
-		this.tEndTime = tEndTime;
-		this.tImgUrl = tImgUrl;
-		this.tAcceptTime = tAcceptTime;
-		this.tFinishTime = tFinishTime;
-	}
 
 
 }

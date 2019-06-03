@@ -31,5 +31,9 @@ public class UserServiceImpl {
 		return this.userDaoImpl.updatePhoneByUid(uid,phone);
 		
 	}
+
+	public User findMySendByUid(int uid) {
+		return this.userDaoImpl.findSendByUid(uid);
+	}
 	
 }

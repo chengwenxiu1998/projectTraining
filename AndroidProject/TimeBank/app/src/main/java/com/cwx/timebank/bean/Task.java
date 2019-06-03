@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Task {
 	private int tId;
-	private int uIdSend;
+//	private int uIdSend;
 	private Date uTime;
 	private int tcId;
 	private String  tDesc;
@@ -17,6 +17,7 @@ public class Task {
 	private String tImgUrl;
 	private Date tAcceptTime;
 	private Date tFinishTime;
+	private transient User user;
 	
 	
 	public Task() {
@@ -25,7 +26,14 @@ public class Task {
 	}
 
 
+	public User getUser() {
+		return user;
+	}
 
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int gettId() {
 		return tId;
 	}
@@ -37,14 +45,14 @@ public class Task {
 
 
 
-	public int getuIdSend() {
-		return uIdSend;
-	}
-
-
-	public void setuIdSend(int uIdSend) {
-		this.uIdSend = uIdSend;
-	}
+//	public int getuIdSend() {
+//		return uIdSend;
+//	}
+//
+//
+//	public void setuIdSend(int uIdSend) {
+//		this.uIdSend = uIdSend;
+//	}
 
 
 	public Date getuTime() {
@@ -159,7 +167,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "TaskBean [tId=" + tId + ", uIdSend=" + uIdSend + ", uTime=" + uTime + ", tcId=" + tcId + ", tDesc="
+		return "TaskBean [tId=" + tId  + ", uTime=" + uTime + ", tcId=" + tcId + ", tDesc="
 				+ tDesc + ", tCoinCount=" + tCoinCount + ", tState=" + tState + ", uIdAccept=" + uIdAccept + ", tagId="
 				+ tagId + ", tEndTime=" + tEndTime + ", tImgUrl=" + tImgUrl + ", tAcceptTime=" + tAcceptTime
 				+ ", tFinishTime=" + tFinishTime + "]";
@@ -181,7 +189,6 @@ public class Task {
 		result = prime * result + tagId;
 		result = prime * result + tcId;
 		result = prime * result + uIdAccept;
-		result = prime * result + uIdSend;
 		result = prime * result + ((uTime == null) ? 0 : uTime.hashCode());
 		return result;
 	}
@@ -235,8 +242,6 @@ public class Task {
 			return false;
 		if (uIdAccept != other.uIdAccept)
 			return false;
-		if (uIdSend != other.uIdSend)
-			return false;
 		if (uTime == null) {
 			if (other.uTime != null)
 				return false;
@@ -244,25 +249,4 @@ public class Task {
 			return false;
 		return true;
 	}
-
-
-	public Task(int tId, int uIdSend, Date uTime, int tcId, String tDesc, int tCoinCount, String tState,
-			int uIdAccept, int tagId, Date tEndTime, String tImgUrl, Date tAcceptTime, Date tFinishTime) {
-		super();
-		this.tId = tId;
-		this.uIdSend = uIdSend;
-		this.uTime = uTime;
-		this.tcId = tcId;
-		this.tDesc = tDesc;
-		this.tCoinCount = tCoinCount;
-		this.tState = tState;
-		this.uIdAccept = uIdAccept;
-		this.tagId = tagId;
-		this.tEndTime = tEndTime;
-		this.tImgUrl = tImgUrl;
-		this.tAcceptTime = tAcceptTime;
-		this.tFinishTime = tFinishTime;
-	}
-
-
 }

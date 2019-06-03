@@ -37,21 +37,13 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
             List<NotAccept> tasksList = new ArrayList();
             try {
                 //网络访问服务器端
-<<<<<<< HEAD
-//            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-//            String serverUrl = sharedPreferences.getString("serverUrl","");
-//            String urlStr = serverUrl+"/notaccepttask";
-//            URL url = new URL(urlStr);
-                URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-=======
+
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
             String urlStr = serverUrl+"/notaccepttask";
             URL url = new URL(urlStr);
-//                URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
                 HttpURLConnection connection=(HttpURLConnection)url.openConnection();
->>>>>>> 99ba8b646ae8c80da408d300f00a3366d39552da
+
                 //传入的参数中有中文字符，防止乱码出现
                 connection.setRequestProperty("contentType", "utf-8");
                 //获取输入流
@@ -64,7 +56,9 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
                 gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 tasksList = gson.fromJson(res, new TypeToken<List<NotAccept>>() {
                 }.getType());
-                Log.e("NotAcceptTasksList", tasksList.toString());
+                if(tasksList!=null){
+                    Log.e("NotAcceptTasksList", tasksList.toString());
+                }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -73,7 +67,7 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
 
             return tasksList;
         }
-<<<<<<< HEAD
+
         @Override
         protected void onPostExecute(List list) {
             if(list!=null &&list.size()!=0){
@@ -84,7 +78,4 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
                 Toast.makeText(mContext,"数据加载失败", Toast.LENGTH_SHORT).show();
             }
         }
-=======
-
->>>>>>> 99ba8b646ae8c80da408d300f00a3366d39552da
     }
