@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,8 +20,8 @@ public class UpdateMyInfo extends AppCompatActivity {
         setContentView(R.layout.update_my_info_layout);
 
         //点击返回箭头，返回到上一个页面
-        LinearLayout llReturn = findViewById(R.id.ll_return);
-        llReturn.setOnClickListener(new View.OnClickListener() {
+        ImageView ivReturn = findViewById(R.id.iv_return);
+        ivReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UpdateMyInfo.this.finish();

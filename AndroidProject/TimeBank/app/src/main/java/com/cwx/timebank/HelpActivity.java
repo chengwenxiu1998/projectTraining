@@ -18,9 +18,7 @@ public class HelpActivity extends AppCompatActivity {
         ivReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setClass(HelpActivity.this,SetActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
