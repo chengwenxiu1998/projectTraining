@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cwx.imhuanxin.model.Model;
+import com.google.gson.Gson;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 
@@ -45,7 +46,7 @@ public class RegisterTask extends AsyncTask
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
-            URL url=new URL(serverUrl+"/RegisterActivity?petName="+petName+
+            URL url=new URL(serverUrl+"/user/regist?petName="+petName+
                     "&phone="+phone+"&password="+password);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("contentType","UTF-8");
@@ -53,14 +54,9 @@ public class RegisterTask extends AsyncTask
             InputStreamReader inputStreamReader = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONObject object=new JSONObject(res);
-            User user=new User();
-            user.setPetName(object.getString("petName"));
-            user.setPhone(object.getString("phone"));
-            user.setPassword(object.getString("password"));
-            Log.e("xinxi",user.toString());
 
-            hxid  = object.getString("id");
+            Gson gson = new Gson();
+            hxid = gson.fromJson(res,int.class) + "";
 
             regist();
 
@@ -71,15 +67,13 @@ public class RegisterTask extends AsyncTask
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
         return null;
     }
 
     //注册的业务逻辑处理
     private void regist() {
-
+        Log.e("regist","去环信服务器注册");
         //3.去服务器注册账号
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override

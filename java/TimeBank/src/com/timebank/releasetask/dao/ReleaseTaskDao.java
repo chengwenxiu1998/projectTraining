@@ -14,8 +14,8 @@ public class ReleaseTaskDao extends BaseDao<Task,Integer>{
 	public Boolean insertIntoDB(Task task) {
 		int result=0;
 		try {
-			result=this.excuteBySql("insert into task(u_id_send,u_time,tc_id,t_desc,t_coin_count,t_state,u_id_accept,tag_id,t_endtime,t_accept_time,t_finish_time,t_imgurl) values(?"
-					+ ",?,?,?,?,?,?,?,?,?,?,?)",new Object[] {task.getuIdSend(),task.getuTime(),task.getTcId(),task.gettDesc(),task.gettCoinCount(),task.gettState(),
+			result=this.excuteBySql("insert into task(u_time,tc_id,t_desc,t_coin_count,t_state,u_id_accept,tag_id,t_endtime,t_accept_time,t_finish_time,t_imgurl) values(?"
+					+ ",?,?,?,?,?,?,?,?,?,?,?)",new Object[] {task.getuTime(),task.getTcId(),task.gettDesc(),task.gettCoinCount(),task.gettState(),
 					task.getuIdAccept(),task.getTagId(),task.gettEndTime(),task.gettAcceptTime(),task.gettFinishTime(),task.gettImgUrl()});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
