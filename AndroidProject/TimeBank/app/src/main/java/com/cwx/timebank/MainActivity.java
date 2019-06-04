@@ -2,10 +2,12 @@ package com.cwx.timebank;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -24,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabHostText = {"首页","圈子","","消息","我的"};
     private Class[] fragmentArr = {BannerActivity.class,GroupActivity.class,SendActivity1.class,ChatFragment.class,MyInfoActivity.class};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setNavigationBarColor(Color.parseColor("#FFFFFF"));
 
         //该APP一启动就将要访问的服务器地址保存在getSharedPreferences，方便以后修改只修改这一个地方
         SharedPreferences sharedPreferences = getSharedPreferences("myServer",Context.MODE_PRIVATE);

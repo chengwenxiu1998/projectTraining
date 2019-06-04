@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="GradleSettings">
-<<<<<<< HEAD
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <compositeConfiguration>
@@ -14,26 +13,3 @@
     </option>
   </component>
 </project>
-=======
-​    <option name="linkedExternalProjectsSettings">
-​      <GradleProjectSettings>
-​        <option name="distributionType" value="DEFAULT_WRAPPED" />
-​        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-
-
-
-
- <option name="modules">
-   <set>
- ​    <option value="$PROJECT_DIR$" />
- ​    <option value="$PROJECT_DIR$/app" />
- ​    <option value="$PROJECT_DIR$/bpp" />
- ​    <option value="$PROJECT_DIR$/easeui" />
-   </set>
- </option>
- <option name="resolveModulePerSourceSet" value="false" />
- </GradleProjectSettings>
- </option>
- </component>
- </project>
->>>>>>> c471a25f450c66dd36f43ca29e9346b72688709e

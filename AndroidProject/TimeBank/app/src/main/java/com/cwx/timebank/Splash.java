@@ -3,6 +3,7 @@ package com.cwx.timebank;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.content.Intent;
 
@@ -12,6 +13,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
         //getSupportActionBar().hide();//隐藏标题栏
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        );
         setContentView(R.layout.activity_splash);
         Thread myThread=new Thread(){//创建子线程
             @Override

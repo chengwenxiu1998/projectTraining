@@ -24,7 +24,7 @@
             android:layout_weight="10"
             android:text="修改手机号"
             android:textColor="#ffffff"
-            android:textSize="25dp"
+            android:textSize="18dp"
             android:gravity="center" />
         <View
             android:layout_width="0dp"
@@ -61,16 +61,17 @@
             android:layout_marginTop="30dp"
             android:id="@+id/et_password"
             android:layout_width="320dp"
-            android:layout_height="55dp"
+            android:layout_height="40dp"
             android:hint="请输入密码"
             android:textColor="#101010"
             android:background="@drawable/edittext_shape"
-            android:paddingLeft="20dp"/>
+            android:paddingLeft="30dp"/>
+
         <TextView
             android:id="@+id/tv_pwd_error"
-            android:layout_marginTop="10dp"
             android:layout_width="320dp"
-            android:layout_height="30dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="#f00" />
         <LinearLayout
             android:layout_width="320dp"
@@ -78,8 +79,7 @@
             android:orientation="horizontal"
             android:background="@drawable/edittext_shape">
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="+86"
                 android:textColor="#000"
@@ -89,16 +89,15 @@
                 android:id="@+id/et_phone"
                 android:layout_width="0dp"
                 android:layout_weight="6"
-                android:layout_height="55dp"
+                android:layout_height="40dp"
                 android:hint="请输入新手机号"
-                android:textColor="#101010"
-                android:paddingLeft="20dp"/>
+                android:textColor="#101010" />
         </LinearLayout>
         <TextView
             android:id="@+id/tv_phone_error"
             android:layout_marginTop="10dp"
             android:layout_width="320dp"
-            android:layout_height="30dp"
+            android:layout_height="10dp"
             android:textColor="#f00" />
         <LinearLayout
             android:background="@drawable/edittext_shape"
@@ -110,15 +109,15 @@
                 android:id="@+id/et_code"
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:layout_height="55dp"
+                android:layout_height="40dp"
                 android:hint="请输入验证码"
                 android:textColor="#101010"
-                android:paddingLeft="20dp"/>
+                android:paddingLeft="30dp"/>
             <Button
                 android:id="@+id/btn_get_code"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="55dp"
+                android:layout_height="40dp"
                 android:text="获取验证码"
                 android:gravity="center"
                 android:textColor="#d41c3c"
@@ -133,6 +132,7 @@
             android:layout_height="40dp"
             android:text="提交"
             android:textSize="20dp"
+            android:textColor="@color/titleText"
             android:background="@drawable/button_shape1"/>
     </LinearLayout>
 

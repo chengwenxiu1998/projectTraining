@@ -38,42 +38,26 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
             try {
                 //网络访问服务器端
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
->>>>>>> c471a25f450c66dd36f43ca29e9346b72688709e
 //            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
 //            String serverUrl = sharedPreferences.getString("serverUrl","");
 //            String urlStr = serverUrl+"/notaccepttask";
 //            URL url = new URL(urlStr);
                 URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-<<<<<<< HEAD
                 SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
                 String serverUrl = sharedPreferences.getString("serverUrl","");
                 String urlStr = serverUrl+"/notaccepttask";
 
-=======
-
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            String urlStr = serverUrl+"/notaccepttask";
-<<<<<<< HEAD
+//            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
+//            String serverUrl = sharedPreferences.getString("serverUrl","");
+//            String urlStr = serverUrl+"/notaccepttask";
           /*  URL url = new URL(urlStr);*/
 //                URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
              /*   HttpURLConnection connection=(HttpURLConnection)url.openConnection();*/
 
-=======
-            URL url = new URL(urlStr);
-                HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+//            URL url = new URL(urlStr);
+//                HttpURLConnection connection=(HttpURLConnection)url.openConnection();
 
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
->>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
->>>>>>> c471a25f450c66dd36f43ca29e9346b72688709e
                 //传入的参数中有中文字符，防止乱码出现
                 connection.setRequestProperty("contentType", "utf-8");
                 //获取输入流
@@ -97,18 +81,6 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
 
             return tasksList;
         }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
->>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
->>>>>>> c471a25f450c66dd36f43ca29e9346b72688709e
         @Override
         protected void onPostExecute(List list) {
             if(list!=null &&list.size()!=0){
@@ -119,14 +91,4 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
                 Toast.makeText(mContext,"数据加载失败", Toast.LENGTH_SHORT).show();
             }
         }
-
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
->>>>>>> b600b5bafd91c761bcfc48085d8b2befc576b817
->>>>>>> c471a25f450c66dd36f43ca29e9346b72688709e
     }

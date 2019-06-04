@@ -55,6 +55,7 @@
                 android:id="@+id/civ_head_img"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/gray_person"/>
             <View
                 android:layout_width="0dp"
@@ -71,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="登录"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"/>
                 <View
                     android:layout_width="wrap_content"
@@ -115,8 +116,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="我发布的"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
@@ -148,8 +149,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="我接收的"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
@@ -181,8 +182,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="我的时间币"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
@@ -214,8 +215,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="签到"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
@@ -247,8 +248,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="修改密码"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
@@ -281,8 +282,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="登录"
-                android:gravity="left"
-                android:textSize="25dp"
+                android:gravity="center_vertical|left"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
             <ImageView
                 android:layout_width="0dp"
