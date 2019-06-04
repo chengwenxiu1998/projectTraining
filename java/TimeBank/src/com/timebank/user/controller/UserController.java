@@ -1,10 +1,15 @@
 package com.timebank.user.controller;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.timebank.entity.Task;
 import com.timebank.entity.User;
+import com.timebank.user.dao.UserDaoImpl;
 import com.timebank.user.service.UserServiceImpl;
 
 /**
@@ -43,6 +49,18 @@ public class UserController {
 		return json;
 	}
 	
+	@RequestMapping("/regist")
+	@ResponseBody
+	public String regist(@RequestParam("petName") String petName,
+			@RequestParam("phone") String phone,@RequestParam("password") String password) {
+		int userId = this.userServiceImpl.regist(petName,phone,password);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(userId);
+		
+		return json;		
+	}
+	
 	@RequestMapping("/findPhone")
 	@ResponseBody
 	public String findPhone(@RequestParam("phone") String phone) {
@@ -66,11 +84,10 @@ public class UserController {
 	@RequestMapping("/findMySend")
 	@ResponseBody
 	public String findMySendTask(@RequestParam("uid") String uid) {
-		User user = this.userServiceImpl.findMySendByUid(Integer.parseInt(uid));
-		Gson gson = new Gson();
-		Set<Task> sendTaskSet = user.getSendTaskSet();	
-		String json = gson.toJson(sendTaskSet);
-		return json;
+		JSONObject object = this.userServiceImpl.findMySendByUid(Integer.parseInt(uid));
+		
+		System.out.println("object" + object);
+		return object.toString();
 		
 	}
 }

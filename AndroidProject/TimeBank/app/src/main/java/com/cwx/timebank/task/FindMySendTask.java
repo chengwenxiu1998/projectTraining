@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.cwx.timebank.CircleImageView;
 import com.cwx.timebank.R;
 import com.cwx.timebank.TaskDetailActivity;
+import com.google.gson.Gson;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -158,7 +160,6 @@ public class FindMySendTask extends AsyncTask<Object,Object,Map<String,List<Map<
         List<Map<String, Object>> readyLists = map.get("readyLists");
         List<Map<String, Object>> doingLists = map.get("doingLists");
         List<Map<String, Object>> finishLists = map.get("finishLists");
-        Log.e("12",readyLists.toString());
         //创建Adapter 给ListView设置Adapter
         CustomAdapter adapter1=new CustomAdapter(context, R.layout.layout_item,readyLists);
         lvReady.setAdapter(adapter1);
