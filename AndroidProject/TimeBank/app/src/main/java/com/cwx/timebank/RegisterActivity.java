@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,11 +100,18 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //设置透明度
-        LinearLayout ll=findViewById(R.id.ll_register);
-        ll.getBackground().setAlpha(153);
+//        LinearLayout ll=findViewById(R.id.ll_register);
+//        ll.getBackground().setAlpha(153);
 
+        ImageView ivReturn = findViewById(R.id.iv_return);
+        ivReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         petName=findViewById(R.id.et_petname);
-        petName.getBackground().setAlpha(128);
+//        petName.getBackground().setAlpha(128);
         petName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -117,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         phone=findViewById(R.id.et_phone_number);
-        phone.getBackground().setAlpha(128);
+//        phone.getBackground().setAlpha(128);
         textView2=findViewById(R.id.tv_title2);
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -138,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         password=findViewById(R.id.et_password);
-        password.getBackground().setAlpha(128);
+//        password.getBackground().setAlpha(128);
         password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -152,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         repassword=findViewById(R.id.et_sure_password);
-        repassword.getBackground().setAlpha(128);
+//        repassword.getBackground().setAlpha(128);
         repassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -184,13 +192,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         EditText etMessageCaptcha=findViewById(R.id.et_message_captcha);
-        etMessageCaptcha.getBackground().setAlpha(128);
+//        etMessageCaptcha.getBackground().setAlpha(128);
 
         checkBox=findViewById(R.id.check);
 
 
         btnRegister=findViewById(R.id.btn_register);
-        btnRegister.getBackground().setAlpha(153);
+//        btnRegister.getBackground().setAlpha(153);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

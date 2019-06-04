@@ -38,21 +38,17 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
             try {
                 //网络访问服务器端
 
-<<<<<<< HEAD
+
 //            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
 //            String serverUrl = sharedPreferences.getString("serverUrl","");
 //            String urlStr = serverUrl+"/notaccepttask";
 //            URL url = new URL(urlStr);
                 URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-=======
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            String urlStr = serverUrl+"/notaccepttask";
-            URL url = new URL(urlStr);
-                HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+                SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
+                String serverUrl = sharedPreferences.getString("serverUrl","");
+                String urlStr = serverUrl+"/notaccepttask";
 
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
                 //传入的参数中有中文字符，防止乱码出现
                 connection.setRequestProperty("contentType", "utf-8");
                 //获取输入流
@@ -76,10 +72,7 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
 
             return tasksList;
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
         @Override
         protected void onPostExecute(List list) {
             if(list!=null &&list.size()!=0){
@@ -90,8 +83,5 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
                 Toast.makeText(mContext,"数据加载失败", Toast.LENGTH_SHORT).show();
             }
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 0f5f2aec323868599269e4aacfa22e097e40742e
     }

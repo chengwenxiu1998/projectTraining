@@ -9,17 +9,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cwx.timebank.task.DisussTask;
 import com.cwx.timebank.task.ShaishaiTask;
@@ -108,6 +106,7 @@ public class GroupActivity extends Fragment {
             tvLine2.setBackgroundColor(Color.parseColor("#ffcc66"));
         }
     }
+
     private View getTabView(String text){
         View view= LayoutInflater.from(getContext()).inflate(R.layout.tab_view,null);
         TextView textView= view.findViewById(R.id.tv_text);

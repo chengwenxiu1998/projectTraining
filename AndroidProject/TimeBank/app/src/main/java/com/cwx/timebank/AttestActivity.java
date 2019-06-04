@@ -23,13 +23,13 @@ public class AttestActivity extends AppCompatActivity {
 
         //设置透明度
         LinearLayout ll=findViewById(R.id.ll_shiming);
-        ll.getBackground().setAlpha(153);
+//        ll.getBackground().setAlpha(153);
 
         final EditText etName=findViewById(R.id.et_name);
-        etName.getBackground().setAlpha(128);
+//        etName.getBackground().setAlpha(128);
 
         final EditText etShenfenzheng=findViewById(R.id.et_shenfenzheng);
-        etShenfenzheng.getBackground().setAlpha(128);
+//        etShenfenzheng.getBackground().setAlpha(128);
 
         //返回箭头 返回上一个页面
         ImageView ivReturn = findViewById(R.id.iv_return);
@@ -54,7 +54,7 @@ public class AttestActivity extends AppCompatActivity {
 
         //保存
         Button btnSave=findViewById(R.id.btn_save);
-        btnSave.getBackground().setAlpha(153);
+//        btnSave.getBackground().setAlpha(153);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
