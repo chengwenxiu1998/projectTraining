@@ -90,4 +90,48 @@ public class UserController {
 		return object.toString();
 		
 	}
+	@RequestMapping("/findMyReceive")
+	@ResponseBody
+	public String findMyReceiveTask(@RequestParam("uid") String uid) {
+		JSONObject object = this.userServiceImpl.findMyReceiveByUid(Integer.parseInt(uid));
+		
+		System.out.println("object" + object);
+		return object.toString();
+		
+	}
+	
+	@RequestMapping("/updatePassword")
+	@ResponseBody
+	public String updatePassword(@RequestParam("uid") String uid,
+			@RequestParam("password") String password) {
+		int update = this.userServiceImpl.updatePasswordByUid(Integer.parseInt(uid),password);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
+		return json;
+	}
+	
+	@RequestMapping("/updateArea")
+	@ResponseBody
+	public String updateArea(@RequestParam("uid") String uid,@RequestParam("area") String area) {
+		int update = this.userServiceImpl.updateAreaByUid(Integer.parseInt(uid),area);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
+		return json;
+		
+	}
+	
+	@RequestMapping("/realNameAuthentication")
+	@ResponseBody
+	public String realNameAuthentication(@RequestParam("uid") String uid,
+			@RequestParam("name") String name,@RequestParam("idCard") String idCard) {
+		int update = this.userServiceImpl.realNameAuthentication(Integer.parseInt(uid),name,idCard);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
+		return json;
+		
+		
+	}
 }

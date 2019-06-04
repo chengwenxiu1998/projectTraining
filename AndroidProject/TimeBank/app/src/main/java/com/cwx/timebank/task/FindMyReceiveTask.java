@@ -61,7 +61,7 @@ public class FindMyReceiveTask extends AsyncTask<Object, Object, Map<String, Lis
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl", "");
-            String urlStr = serverUrl + "/FindMyReceiveServlet?uid=" + uid;
+            String urlStr = serverUrl + "/user/findMyReceive?uid=" + uid;
             url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题

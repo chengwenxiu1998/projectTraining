@@ -28,7 +28,7 @@ public class UserServiceImpl {
 	}
 	
 	public int regist(String petName, String phone, String password) {
-		User user = new User("uName",phone,(byte)0,"area",petName,"",password,"",0);
+		User user = new User("",phone,(byte)0,"",petName,"",password,"",0);
 		return userDaoImpl.addUser(user);
 	}
 
@@ -43,6 +43,23 @@ public class UserServiceImpl {
 
 	public JSONObject  findMySendByUid(int uid) {
 		return this.userDaoImpl.findSendByUid(uid);
+	}
+
+	public JSONObject findMyReceiveByUid(int uid) {
+		return this.userDaoImpl.findReceiveByUid(uid);
+	}
+
+	public int updatePasswordByUid(int uid, String password) {
+		
+		return this.userDaoImpl.updatePasswordByUid(uid,password);
+	}
+
+	public int updateAreaByUid(int uid, String area) {
+		return this.userDaoImpl.updateAreaByUid(uid,area);
+	}
+
+	public int realNameAuthentication(int uid, String name, String idCard) {
+		return this.userDaoImpl.updateNameIdCardByUid(uid,name,idCard);
 	}
 
 	
