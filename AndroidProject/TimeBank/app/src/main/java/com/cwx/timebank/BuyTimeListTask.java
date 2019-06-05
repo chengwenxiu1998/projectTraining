@@ -40,11 +40,11 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
     protected List<BuyTime> doInBackground(String... strings){
         tasksList=new ArrayList<BuyTime>();
         try {
-            //通过网络访问服务器端实现获取BuTime列表
+            //通过网络访问服务器端实现获取BuyTime列表
 //            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
 //            String serverUrl = sharedPreferences.getString("serverUrl","");
 //            URL url=new URL(serverUrl+"/buytimetask");
-            URL url = new URL("http://10.7.88.241:8080/TimeBank/buytimetask");
+            URL url = new URL("http://10.7.88.211:8080/TimeBank/buytimetask");
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");
@@ -55,7 +55,7 @@ public class BuyTimeListTask extends AsyncTask<String,Void,List<BuyTime>> {
             BufferedReader reader=new BufferedReader(inputStreamReader);
             String res=reader.readLine();
             Log.e("res",res);
-            gson = new Gson();
+            gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
             tasksList = gson.fromJson(res,new TypeToken<List<BuyTime>>(){}.getType());
             Log.e("TasksList",tasksList.toString());
         } catch (MalformedURLException e) {
