@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.cwx.timebank.LoginActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ public class UpdatePasswordTask extends AsyncTask<String, Integer, Integer> {
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl", "");
-            String urlStr = serverUrl + "/UpdatePasswordServlet?uid=" + strings[0] + "&password=" + strings[1];
+            String urlStr = serverUrl + "/user/updatePassword?uid=" + strings[0] + "&password=" + strings[1];
             url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
@@ -47,13 +48,8 @@ public class UpdatePasswordTask extends AsyncTask<String, Integer, Integer> {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
 
-            //解析一个JSON格式的字符串
-            try {
-                JSONObject jsonObject = new JSONObject(res);
-                insertRowCount = jsonObject.getInt("insertRowCount");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Gson gson = new Gson();
+            insertRowCount = gson.fromJson(res,int.class);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

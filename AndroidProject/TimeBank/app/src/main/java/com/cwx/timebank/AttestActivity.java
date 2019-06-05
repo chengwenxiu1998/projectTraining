@@ -62,7 +62,10 @@ public class AttestActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String shenFenZheng = etShenfenzheng.getText().toString();
                 if(name.equals("") || shenFenZheng.equals("") || name==null || shenFenZheng==null){
-                    Toast.makeText(getApplication(),"请输入真是姓名和身份证号",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),"请输入真实姓名和身份证号",Toast.LENGTH_LONG).show();
+
+                }else if(shenFenZheng.length()<18){
+                    Toast.makeText(getApplication(),"请输入正确的身份证号",Toast.LENGTH_LONG).show();
                 }else{
                     RealNameAuthenticationTask realNameAuthenticationTast = new RealNameAuthenticationTask(getApplication(),uid,name,shenFenZheng);
                     realNameAuthenticationTast.execute();
