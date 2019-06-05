@@ -1,16 +1,22 @@
 package com.timebank.releasetask.controller;
 
+import java.awt.event.FocusAdapter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.timebank.entity.Task;
 import com.timebank.releasetask.service.ReleaseTaskService;
@@ -25,24 +31,16 @@ public class ReleaseTaskController {
 	 */
 	@RequestMapping(value = "insertTaskIntoDB", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public String insertTaskIntoDB(@RequestParam("uIdSend") int uIdSend, @RequestParam("tcId") int tcId,
+	public String insertTaskIntoDB( @RequestParam("tcId") int tcId,
 			@RequestParam("tDesc") String tDesc, @RequestParam("tCoinCount") int tCoinCount,
 			@RequestParam("tState") String tState, @RequestParam("uIdAccept") int uIdAccept,
 			@RequestParam("tagId") int tagId, @RequestParam("tEndtimeMonth") String tEndtimeMonth,
 			@RequestParam("tEndtimeDay") String tEndtimeDay, @RequestParam("tEndtimeHour") String tEndtimeHour,
-			@RequestParam("tEndtimeMin") String tEndtimeMin, @RequestParam("t_imgurl") String t_imgurl) {
-		/*System.out.println("uIdSend="+uIdSend);
-		System.out.println("tcId="+tcId);
-		System.out.println("tDesc="+tDesc);
-		System.out.println("tCoinCount="+tCoinCount);
-		System.out.println("tState="+tState);
-		System.out.println("tagId="+tagId);
-		System.out.println("tEndtimeMonth="+tEndtimeMonth);
-		System.out.println("tEndtimeDay="+tEndtimeDay);
-		System.out.println("tEndtimeDay="+tEndtimeDay);*/
-		
+			@RequestParam("tEndtimeMin") String tEndtimeMin, @RequestParam("t_imgurl") String t_imgurl
+			) {
+			
 		Task task=new Task();
-		task.setuIdSend(uIdSend);
+		
 		task.setuTime(new Timestamp(System.currentTimeMillis()));
 		task.setTcId(tcId);
 		task.settDesc(tDesc);
@@ -78,10 +76,32 @@ public class ReleaseTaskController {
 		}else {
 			return "false";
 		}
-		/*List<Task> list = taskServiceImpl.buyTimeTask();
-		model.addAttribute("buyTimeTask", list);
-		Gson gson = new Gson();
-		String temp = gson.toJson(list);
-		return temp;*/
+		
+	}
+	@RequestMapping(value = "upload", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String upload(@RequestParam(value="upfile") MultipartFile file,
+            HttpServletRequest request) {
+		//文件上传
+		String rootPath=request.getServletContext().getRealPath("/");
+		if(!file.isEmpty()){
+		try {
+			InputStream is=file.getInputStream();
+			FileOutputStream fos=new FileOutputStream(
+					rootPath+"/"+"upload/"
+					+file.getOriginalFilename());
+			System.out.println(fos.toString());
+			byte []cache=new byte[is.available()];
+			is.read(cache);
+			fos.write(cache);
+			is.close();
+			fos.flush();
+			fos.close();
+			System.out.println("文件上传成功");
+			} catch (IOException e) {
+			e.printStackTrace();
+			}
+		}
+		return rootPath;
 	}
 }

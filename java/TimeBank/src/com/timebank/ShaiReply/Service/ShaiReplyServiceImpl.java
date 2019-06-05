@@ -20,5 +20,12 @@ public class ShaiReplyServiceImpl {
 		return this.shaiReplyDaoImpl.findAllById(sid);
 	}
 	
+	public List<ShaiReply> findAll() throws Exception{
+		return this.shaiReplyDaoImpl.findAll();
+	}
+	
+	public int addSr(Integer sid,Integer uid,String time,String content) throws Exception {
+		return this.shaiReplyDaoImpl.addSr(sid, uid, time, content);
+	}
 
 }

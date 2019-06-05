@@ -21,7 +21,7 @@ public class Shaishai {
 	private String stime;
 	private Integer scount;
 	private User user;
-	private List<ShaiReply> shaiReplys;
+	private  List<ShaiReply> shaiReplys;
 	public Shaishai() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -81,7 +81,7 @@ public class Shaishai {
 	@Override
 	public String toString() {
 		return "Shaishai [sid=" + sid + ", stext=" + stext + ", stime=" + stime + ", scount=" + scount + ", user="
-				+ user + "]";
+				+ user + ", shaiReplys=" + shaiReplys + "]";
 	}
 	
 	

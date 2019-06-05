@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cwx.timebank.bean.Shaishai;
-import com.cwx.timebank.bean.ShaishaiBean;
 import com.cwx.timebank.task.ClickTask;
 import com.cwx.timebank.task.ShaiReplyTask;
 
@@ -82,16 +81,17 @@ public class ShaiAdapter extends BaseAdapter {
         }
 
         //将评论的个数放在一个list中
-      /*  for(int i=0;i<list.size();i++){
-            Shaishai shaishai=(Shaishai)list.get(i);
-            listComment.add(shaishai.getReply());
-        }*/
+        for(int i=0;i<list.size();i++){
+            Shaishai shaishai=list.get(i);
+            listComment.add(shaishai.getShaiReplys().size());
+        }
+
 
 
         final Shaishai  shaishai=(Shaishai)list.get(position);
         textView1.setText(shaishai.getUser().getuNickName());
         textView3.setText(shaishai.getStext());
-        textView4.setText(""+1);//回复的个数
+        textView4.setText(""+shaishai.getShaiReplys().size());//回复的个数
         textView5.setText(""+shaishai.getScount());//赞的个数
 
         //当前时间
@@ -175,7 +175,7 @@ public class ShaiAdapter extends BaseAdapter {
                 String content=comment_content.getText().toString();
                 //获取晒晒是那个
                 Shaishai shaishaiBean2=(Shaishai)list.get(position);
-                int sid1=shaishai.getSid();
+                int sid1=shaishaiBean2.getSid();
                 int uid=sp.getInt("userId",0);
                 Date date=new Date();
                 SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -183,10 +183,10 @@ public class ShaiAdapter extends BaseAdapter {
                 InputMethodManager im = (InputMethodManager)context.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 im.hideSoftInputFromWindow(comment_content.getWindowToken(), 0);
                 rl_comment.setVisibility(View.GONE);
-                int reply=Integer.valueOf(String.valueOf(listComment.get(position)))+1;
+                int reply=shaishaiBean2.getShaiReplys().size()+1;
                 textView4.setText(""+reply);
-                /*ShaiReplyTask shaiReplyTask=new ShaiReplyTask(context);
-                shaiReplyTask.execute(sid1,uid,content,time);*/
+                ShaiReplyTask shaiReplyTask=new ShaiReplyTask(context);
+                shaiReplyTask.execute(sid1,uid,content,time);
             }
         });
 
@@ -196,15 +196,14 @@ public class ShaiAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Shaishai shaishaiBean1=(Shaishai)list.get(position);
-                int sid=shaishai.getSid();
+                int sid=shaishaiBean1.getSid();
                 int count=Integer.valueOf(String.valueOf(listCount.get(position)))+1;
                 listCount.set(position,count);
                 textView5.setText(""+count);
-                /*ClickTask clickTask=new ClickTask(context);
-                clickTask.execute(sid,count);*/
+                ClickTask clickTask=new ClickTask(context);
+                clickTask.execute(sid,count);
             }
         });
-
         return convertView;
     }
 

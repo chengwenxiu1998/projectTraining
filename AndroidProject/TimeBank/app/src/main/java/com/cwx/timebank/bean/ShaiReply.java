@@ -4,18 +4,18 @@ public class ShaiReply {
     private Integer rid;
     private String rtime;
     private String rcontent;
-    private Integer uid;
     //晒晒回复与晒晒的关系 多对一
-    private Shaishai shaishai;
+    private transient Shaishai shaishai;
+    private User user;
     public ShaiReply() {
         super();
         // TODO Auto-generated constructor stub
     }
-    public ShaiReply(String rtime, String rcontent, Integer uid) {
+    public ShaiReply(String rtime, String rcontent) {
         super();
         this.rtime = rtime;
         this.rcontent = rcontent;
-        this.uid = uid;
+
     }
 
     public Integer getRid() {
@@ -40,22 +40,22 @@ public class ShaiReply {
         this.rcontent = rcontent;
     }
 
-    public Integer getUid() {
-        return uid;
-    }
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
     public Shaishai getShaishai() {
         return shaishai;
     }
     public void setShaishai(Shaishai shaishai) {
         this.shaishai = shaishai;
     }
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
     @Override
     public String toString() {
-        return "ShaiReply [rid=" + rid + ", rtime=" + rtime + ", rcontent=" + rcontent + ", uid=" + uid + ", shaishai="
-                + shaishai + "]";
+        return "ShaiReply [rid=" + rid + ", rtime=" + rtime + ", rcontent=" + rcontent +  ", user="
+                + user + "]";
     }
 }

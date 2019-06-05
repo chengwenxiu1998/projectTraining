@@ -1,5 +1,7 @@
 package com.timebank.user.controller;
 
+import java.util.Set;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.timebank.entity.Task;
 import com.timebank.entity.User;
 import com.timebank.user.service.UserServiceImpl;
 
@@ -59,4 +62,15 @@ public class UserController {
 		String json = gson.toJson(updatePhoneByUid);
 		return json;
 	}
+	/*
+	@RequestMapping("/findMySend")
+	@ResponseBody
+	public String findMySendTask(@RequestParam("uid") String uid) {
+		User user = this.userServiceImpl.findMySendByUid(Integer.parseInt(uid));
+		Gson gson = new Gson();
+		Set<Task> sendTaskSet = user.getSendTaskSet();	
+		String json = gson.toJson(sendTaskSet);
+		return json;
+		
+	}*/
 }

@@ -20,5 +20,9 @@ public class ShaishaiServiceImpl {
 		return shaishaiDaoImpl.allShai();
 	}
 	
+	public Object updateShai(Integer sid,Integer count) {
+		return shaishaiDaoImpl.updateShai(sid, count);
+	}
+	
 
 }

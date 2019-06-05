@@ -34,10 +34,10 @@ public class HandleDatabaseTask extends AsyncTask{
         uId=(Integer) objects[1];
         try {
             //通过网络访问服务器端
-            SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            URL url=new URL(serverUrl+"/HandleDatabaseServlet?tid="+tId+"&&uId="+uId);
-            //URL url = new URL("http://192.168.16.1:8080/TimeBank/HandleDatabaseServlet?tid="+tId+"&&uId="+uId);
+//            SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
+//            String serverUrl = sharedPreferences.getString("serverUrl","");
+//            URL url=new URL(serverUrl+"/changetask?tid="+tId+"&&uId="+uId);
+            URL url = new URL("\"http://10.7.88.241:8080/TimeBank//changetask?tid="+tId+"&&uId="+uId);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType", "utf-8");
@@ -47,27 +47,9 @@ public class HandleDatabaseTask extends AsyncTask{
             InputStreamReader inputStreamReader = new InputStreamReader(in);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            //解析JSON格式字符串
-            if(res!=null) {
-                JSONObject object = new JSONObject(res);
-                BuyOrSellTime buyOrSellTime=new BuyOrSellTime();
-                buyOrSellTime.settId(object.optInt("tId"));
-                buyOrSellTime.setuId(object.optInt("uId"));
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String dstr=object.optString("tAcceptTime");
-                Date date= null;
-                try {
-                    date = sdf.parse(dstr);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                buyOrSellTime.settAcceptTime(date);
-            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;

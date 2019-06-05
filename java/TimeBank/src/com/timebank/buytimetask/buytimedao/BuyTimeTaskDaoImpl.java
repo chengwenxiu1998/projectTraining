@@ -23,15 +23,5 @@ public class BuyTimeTaskDaoImpl extends BaseDao<BuyTime, Integer>{
 			return null;
 		}
 	}
-//	//根据用户id改变任务状态
-//	public int updateTaskState(int uid) {
-//		try {
-//			return super.excuteBySql("update task set t_state='进行中'  where u_id_send="+1,null);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return 0;
-//		}
-//	}
 
 }

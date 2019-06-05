@@ -2,6 +2,8 @@ package com.cwx.timebank;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cwx.timebank.bean.Discuss;
 
+import java.io.File;
 import java.util.List;
 
 public class CustomAdapter extends BaseAdapter {
@@ -48,13 +53,17 @@ public class CustomAdapter extends BaseAdapter {
         }
 
         ImageView imageView1=convertView.findViewById(R.id.lv_image1);
-        CircleImageView imageView=convertView.findViewById(R.id.lv_image);
+        final CircleImageView imageView=convertView.findViewById(R.id.lv_image);
         TextView textView1=convertView.findViewById(R.id.tv_text);
         TextView textView2=convertView.findViewById(R.id.tv_text1);
 
         final Discuss discussBean=(Discuss)list.get(position);
         imageView1.setImageResource(R.drawable.heart);
         imageView.setImageResource(R.drawable.p5);
+//                String myUrl="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559637564898&di=dcff1d28774ef308c0c1caf07f6a32b0&imgtype=0&src=http%3A%2F%2Fpic32.nipic.com%2F20130818%2F12381074_163453432115_2.jpg";
+//
+//                Glide.with(context.getApplicationContext()).load(myUrl).into(imageView);
+
         textView1.setText("#"+discussBean.getTag().getTagText()+"#");
         textView2.setText(discussBean.getdTopicCoutent());
         Button btnJoinTalk = convertView.findViewById(R.id.btn_join_talk);

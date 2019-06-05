@@ -14,5 +14,14 @@ public class ShaishaiDaoImpl extends BaseDao<Shaishai,Integer>{
 		public List<Shaishai> allShai() throws Exception{
 			return super.findAll();
 		}
+		//将对应的晒晒的个数进行更改
+		public Object updateShai(Integer sid,Integer count) {
+			//根据sid将晒晒找出来
+			Shaishai shaishai=super.sessionFactory.openSession().get(Shaishai.class,sid);
+			shaishai.setScount(count);
+			//将晒晒进行更新
+			super.sessionFactory.openSession().update(shaishai);
+			return shaishai;
+		}
 
 }

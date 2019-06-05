@@ -1,6 +1,9 @@
 package com.timebank.entity;
 
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,9 +35,12 @@ public class User {
 	private Integer uCoin;
 	private transient List<Discuss> discuss;
 	private transient List<Shaishai> shaishai;
+	private transient List<ShaiReply> shaiReply;
+
+
+
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public User(String uName, String uPhone, Byte uSex, String uArea, String uNickName, String uImage, String uPassword,
 			String uIdCard, Integer uCoin) {
@@ -132,6 +138,7 @@ public class User {
 	public void setDiscuss(List<Discuss> discuss) {
 		this.discuss = discuss;
 	}
+
 	
 	@OneToMany(mappedBy="user",targetEntity=Shaishai.class,
 			cascade=CascadeType.ALL)
@@ -141,6 +148,18 @@ public class User {
 	public void setShaishai(List<Shaishai> shaishai) {
 		this.shaishai = shaishai;
 	}
+	@OneToMany(mappedBy="user",targetEntity=ShaiReply.class,
+			cascade=CascadeType.ALL)
+	public List<ShaiReply> getShaiReply() {
+		return shaiReply;
+	}
+	public void setShaiReply(List<ShaiReply> shaiReply) {
+		this.shaiReply = shaiReply;
+	}
+
+		
+	
+
 	@Override
 	public String toString() {
 		return "User [uId=" + uId + ", uName=" + uName + ", uPhone=" + uPhone + ", uSex=" + uSex + ", uArea=" + uArea

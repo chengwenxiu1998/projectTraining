@@ -15,18 +15,18 @@ public class ShaiReply {
 	private Integer rid;
 	private String rtime;
 	private String rcontent;
-	private Integer uid;
 	//晒晒回复与晒晒的关系 多对一
-	private Shaishai shaishai;
+	private transient Shaishai shaishai;
+	private User user;
 	public ShaiReply() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ShaiReply(String rtime, String rcontent, Integer uid) {
+	public ShaiReply(String rtime, String rcontent) {
 		super();
 		this.rtime = rtime;
 		this.rcontent = rcontent;
-		this.uid = uid;
+	
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -52,13 +52,6 @@ public class ShaiReply {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	@Column(name="u_id_comment")
-	public Integer getUid() {
-		return uid;
-	}
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
 	@ManyToOne
 	@JoinColumn(name="s_id")
 	public Shaishai getShaishai() {
@@ -67,10 +60,18 @@ public class ShaiReply {
 	public void setShaishai(Shaishai shaishai) {
 		this.shaishai = shaishai;
 	}
+	@ManyToOne
+	@JoinColumn(name="u_id_comment")
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
-		return "ShaiReply [rid=" + rid + ", rtime=" + rtime + ", rcontent=" + rcontent + ", uid=" + uid + ", shaishai="
-				+ shaishai + "]";
+		return "ShaiReply [rid=" + rid + ", rtime=" + rtime + ", rcontent=" + rcontent +  ", user="
+				+ user + "]";
 	}
 	
 	

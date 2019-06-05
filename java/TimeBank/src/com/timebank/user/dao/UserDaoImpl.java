@@ -55,4 +55,14 @@ public class UserDaoImpl extends BaseDao<User, Integer> {
 		
 	}
 
+	public User findSendByUid(int uid) {
+		User user = null;
+		try {
+			user = this.findOne("from User u where u.uId=?",new Object[] {uid});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
 }
