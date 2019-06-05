@@ -126,14 +126,15 @@ public class LoginTask extends AsyncTask<String,Object,User>{
     }
 
     //登录按钮的页面逻辑处理
-    public void login(final String uid, String pwd) {
+    public void login(final String uid, final String pwd) {
 
         //登录逻辑处理
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 //去环信服务器登录
-                EMClient.getInstance().login(uid, password, new EMCallBack() {
+                Log.e("login",uid+":::" + pwd);
+                EMClient.getInstance().login(uid, pwd, new EMCallBack() {
                     //登录成功后的处理
                     @Override
                     public void onSuccess() {

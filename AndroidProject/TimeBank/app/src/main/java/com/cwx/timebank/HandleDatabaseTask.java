@@ -3,6 +3,7 @@ package com.cwx.timebank;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +37,8 @@ public class HandleDatabaseTask extends AsyncTask{
             //通过网络访问服务器端
 //            SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
 //            String serverUrl = sharedPreferences.getString("serverUrl","");
-//            URL url=new URL(serverUrl+"/changetask?tid="+tId+"&&uId="+uId);
-            URL url = new URL("\"http://10.7.88.241:8080/TimeBank//changetask?tid="+tId+"&&uId="+uId);
+//            URL url=new URL(serverUrl+"/updatetask?tId="+tId+"&&uId="+uId);
+            URL url = new URL("http://10.7.88.211:8080/TimeBank/changetask?tId="+tId+"&&uId="+uId);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType", "utf-8");
@@ -47,6 +48,7 @@ public class HandleDatabaseTask extends AsyncTask{
             InputStreamReader inputStreamReader = new InputStreamReader(in);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
+            Log.e("changetask",res);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

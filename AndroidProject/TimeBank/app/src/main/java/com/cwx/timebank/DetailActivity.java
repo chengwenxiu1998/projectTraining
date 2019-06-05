@@ -34,8 +34,8 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sp=DetailActivity.this.getSharedPreferences("userInfo", MODE_PRIVATE);
                 if(sp.getInt("userId",0)!=0) {//若该用户已登录
-//                    Intent intent=new Intent(DetailActivity.this,ContactSellerActivity.class);
-//                    startActivity(intent);
+                    Intent intent=new Intent(DetailActivity.this,ContactSellerActivity.class);
+                    startActivity(intent);
                     jumpToTalkDetail();
                 }else{//用户还没有登陆，跳转到登陆页面
                     Intent intent = new Intent(DetailActivity.this,LoginActivity.class);
@@ -48,7 +48,9 @@ public class DetailActivity extends AppCompatActivity {
         //获取intent中的数据
         final Intent intent=getIntent();
         hxid = intent.getStringExtra("hxid");
-Log.e("DetailActivity",hxid);
+
+
+//Log.e("DetailActivity",hxid);
         String uImage=intent.getStringExtra("uImage");
         String nickname=intent.getStringExtra("nickname");
         String Time=intent.getStringExtra("Time");

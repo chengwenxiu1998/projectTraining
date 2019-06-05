@@ -51,7 +51,7 @@ public class TaskDetailActivityLi extends AppCompatActivity {
         String tImageUrl = intent.getStringExtra("tImageUrl");
         String tCoinCount = intent.getStringExtra("tCoinCount");
         hxid = intent.getStringExtra("hxid");
-        Log.e("TaskDetailActivityLi",hxid);
+//        Log.e("TaskDetailActivityLi",hxid);
         CircleImageView touxiang = findViewById(R.id.iv_touxiang);
         TextView petname = findViewById(R.id.tv_detail_petname);
         TextView time = findViewById(R.id.tv_put_time);
