@@ -7,20 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="#ffcc66">
-        <View
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center"
-            />
+        android:background="@color/colorPrimary">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="消息"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            android:layout_marginRight="30dp"
+            android:textSize="18dp"
             android:textColor="#ffffff"
             android:gravity="center"
             />

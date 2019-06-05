@@ -23,6 +23,7 @@ public abstract class BaseDao<T,PK extends Serializable> {
 
 	@Resource
 	public SessionFactory sessionFactory;
+
 	
 	public BaseDao(){
 		Class c = getClass();
@@ -342,4 +343,6 @@ public abstract class BaseDao<T,PK extends Serializable> {
 
         return page;
     }
+    
+    
 }

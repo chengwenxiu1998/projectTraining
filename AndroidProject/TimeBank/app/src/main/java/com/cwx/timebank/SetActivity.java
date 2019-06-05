@@ -22,7 +22,7 @@ public class SetActivity extends AppCompatActivity {
         ivReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetActivity.this.finish();
+                finish();
             }
         });
 

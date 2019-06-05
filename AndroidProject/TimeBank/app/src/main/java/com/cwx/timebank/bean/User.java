@@ -19,7 +19,6 @@ public class User {
     private transient List<Shaishai> shaishai;
     private transient List<ShaiReply> shaiReply;
 
-
     public User() {
         super();
         // TODO Auto-generated constructor stub
@@ -132,7 +131,6 @@ public class User {
     public void setShaiReply(List<ShaiReply> shaiReply) {
         this.shaiReply = shaiReply;
     }
-
 
 
     @Override

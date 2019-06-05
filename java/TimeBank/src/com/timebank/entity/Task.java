@@ -1,3 +1,4 @@
+
 package com.timebank.entity;
 
 import java.util.Date;
@@ -32,6 +33,7 @@ public class Task {
 	private Date tAcceptTime;
 	private Date tFinishTime;
 	private transient User user;
+
 	
 	public Task() {
 		super();
@@ -174,7 +176,6 @@ public class Task {
 	}
 
 	
-	
 	@ManyToOne
 	@JoinColumn(name="u_id_send")
 	public User getUser() {
@@ -186,6 +187,23 @@ public class Task {
 		this.user = user;
 	}
 
+
+
+	
+
+
+//	
+//	@ManyToOne
+//	@JoinColumn(name="u_id_send")
+//	public User getUser() {
+//		return user;
+//	}
+//
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
 
 	@Override
 	public String toString() {

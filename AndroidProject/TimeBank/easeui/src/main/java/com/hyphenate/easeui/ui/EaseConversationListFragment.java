@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -27,6 +29,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.widget.EaseConversationList;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +49,8 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
     protected EaseConversationList conversationListView;
     protected FrameLayout errorItemContainer;
+    private EaseTitleBar easeTitleBar;
+    private LinearLayout llAll;
 
     protected boolean isConflict;
     
@@ -60,11 +65,17 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.ease_fragment_conversation_list, container, false);
+       View view = inflater.inflate(R.layout.ease_fragment_conversation_list, container, false);
+       easeTitleBar = view.findViewById(R.id.title_bar);
+       easeTitleBar.setTitle("消息");
+        llAll = view.findViewById(R.id.ll_all);
+       return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
+        easeTitleBar.setBackgroundColor(0xffffcc00);
         if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
         super.onActivityCreated(savedInstanceState);

@@ -13,7 +13,7 @@ import com.timebank.releasetask.dao.ReleaseTaskDao;
 public class ReleaseTaskService {
 	@Resource
 	ReleaseTaskDao releaseTaskDao;
-	public Boolean insertIntoDB(Task task) {
-		return releaseTaskDao.insertIntoDB(task);
+	public Boolean insertIntoDB(Task task,int id) {
+		return releaseTaskDao.insertIntoDB(task,id);
 	}
 }

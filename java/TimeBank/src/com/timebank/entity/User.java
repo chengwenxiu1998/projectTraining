@@ -34,6 +34,7 @@ public class User {
 	private String uIdCard;
 	private Integer uCoin;
 	private transient List<Discuss> discuss;
+
 	private transient List<Shaishai> shaishai;
 	private transient List<ShaiReply> shaiReply;
 
@@ -42,6 +43,11 @@ public class User {
 	public User() {
 		super();
 	}
+	
+	public User(int uid) {
+		this.uId = uid;
+	}
+	
 	public User(String uName, String uPhone, Byte uSex, String uArea, String uNickName, String uImage, String uPassword,
 			String uIdCard, Integer uCoin) {
 		super();
@@ -56,6 +62,12 @@ public class User {
 		this.uCoin = uCoin;
 	}
 	
+	public User(String petName, String phone, String password) {
+		this.uPhone = phone;
+		this.uNickName = petName;
+		this.uPassword = password;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="u_id")
@@ -158,6 +170,18 @@ public class User {
 	}
 
 		
+	
+
+
+		
+	@OneToMany(mappedBy="user", targetEntity=Task.class, 
+	        cascade=CascadeType.ALL)
+//	public Set<Task> getSendTaskSet() {
+//		return sendTaskSet;
+//	}
+//	public void setSendTaskSet(Set<Task> sendTaskSet) {
+//		this.sendTaskSet = sendTaskSet;
+//	}
 	
 
 	@Override

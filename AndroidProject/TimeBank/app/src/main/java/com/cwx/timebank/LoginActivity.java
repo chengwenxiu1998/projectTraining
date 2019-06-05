@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //设置透明度
-        mySetAlpha();
+        //mySetAlpha();
 
         //点击注册跳转到注册页面
         TextView tvRegister = findViewById(R.id.tv_register);

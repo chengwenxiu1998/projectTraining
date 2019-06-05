@@ -1,10 +1,15 @@
 package com.timebank.user.controller;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.timebank.entity.Task;
 import com.timebank.entity.User;
+import com.timebank.user.dao.UserDaoImpl;
 import com.timebank.user.service.UserServiceImpl;
 
 /**
@@ -43,6 +49,18 @@ public class UserController {
 		return json;
 	}
 	
+	@RequestMapping("/regist")
+	@ResponseBody
+	public String regist(@RequestParam("petName") String petName,
+			@RequestParam("phone") String phone,@RequestParam("password") String password) {
+		int userId = this.userServiceImpl.regist(petName,phone,password);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(userId);
+		
+		return json;		
+	}
+	
 	@RequestMapping("/findPhone")
 	@ResponseBody
 	public String findPhone(@RequestParam("phone") String phone) {
@@ -62,15 +80,58 @@ public class UserController {
 		String json = gson.toJson(updatePhoneByUid);
 		return json;
 	}
-	/*
+	
 	@RequestMapping("/findMySend")
 	@ResponseBody
 	public String findMySendTask(@RequestParam("uid") String uid) {
-		User user = this.userServiceImpl.findMySendByUid(Integer.parseInt(uid));
+		JSONObject object = this.userServiceImpl.findMySendByUid(Integer.parseInt(uid));
+		
+		System.out.println("object" + object);
+		return object.toString();
+		
+	}
+	@RequestMapping("/findMyReceive")
+	@ResponseBody
+	public String findMyReceiveTask(@RequestParam("uid") String uid) {
+		JSONObject object = this.userServiceImpl.findMyReceiveByUid(Integer.parseInt(uid));
+		
+		System.out.println("object" + object);
+		return object.toString();
+		
+	}
+	
+	@RequestMapping("/updatePassword")
+	@ResponseBody
+	public String updatePassword(@RequestParam("uid") String uid,
+			@RequestParam("password") String password) {
+		int update = this.userServiceImpl.updatePasswordByUid(Integer.parseInt(uid),password);
+		
 		Gson gson = new Gson();
-		Set<Task> sendTaskSet = user.getSendTaskSet();	
-		String json = gson.toJson(sendTaskSet);
+		String json = gson.toJson(update);
+		return json;
+	}
+	
+	@RequestMapping("/updateArea")
+	@ResponseBody
+	public String updateArea(@RequestParam("uid") String uid,@RequestParam("area") String area) {
+		int update = this.userServiceImpl.updateAreaByUid(Integer.parseInt(uid),area);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
 		return json;
 		
-	}*/
+	}
+	
+	@RequestMapping("/realNameAuthentication")
+	@ResponseBody
+	public String realNameAuthentication(@RequestParam("uid") String uid,
+			@RequestParam("name") String name,@RequestParam("idCard") String idCard) {
+		int update = this.userServiceImpl.realNameAuthentication(Integer.parseInt(uid),name,idCard);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
+		return json;
+		
+		
+	}
 }

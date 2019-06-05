@@ -67,8 +67,8 @@ public class SendActivity1 extends Fragment {
     private final String Image_Type="image/*";
     public static final int SELECT_PHOTO=9;
     public static final int CHOOSE_PHOTO=8;
-    private OkHttpClient okHttpClient;
-    String fileName;
+    private OkHttpClient okHttpClient=new OkHttpClient();
+    String fileName="aaaa";
     TabHost tabHost;
     private TaskBean taskBean;
     private int i=0;//用来作为图片的名称
@@ -470,9 +470,11 @@ public class SendActivity1 extends Fragment {
                 });
 
                 renwuTask.execute();
+
+                complexUploadImg(uploadFile,fileName);
                 Intent intent = new Intent(getContext(),MainActivity.class);
                 startActivity(intent);
-//                complexUploadImg(uploadFile);
+
                 Log.e("test","点击了发表");
             }
         });
@@ -710,7 +712,11 @@ public class SendActivity1 extends Fragment {
             Date date=new Date(System.currentTimeMillis());
             fileName=simpleDateFormat.format(date)+".jpg";
             saveBmp2Gallery(bitmap,fileName);
-            uploadFile=saveBitmapFile(bitmap);
+            try {
+                uploadFile=saveFile(bitmap,"save.jpg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }else if(requestCode==1112 && resultCode==RESULT_OK){
             Bitmap bitmap=(Bitmap)data.getExtras().get("data");
@@ -719,7 +725,11 @@ public class SendActivity1 extends Fragment {
             Date date=new Date(System.currentTimeMillis());
             fileName=simpleDateFormat.format(date)+".jpg";
             saveBmp2Gallery(bitmap,fileName);
-            uploadFile=saveBitmapFile(bitmap);
+            try {
+                uploadFile=saveFile(bitmap,"save.jpg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else if(requestCode==CHOOSE_PHOTO && resultCode ==RESULT_OK){
             ContentResolver resolver =getContext().getContentResolver();
 
@@ -744,7 +754,7 @@ public class SendActivity1 extends Fragment {
             File file=null;
             try {
                 bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-                file=saveBitmapFile(bm);//将BitMap转为File
+                file=saveFile(bm,"save.jpg");//将BitMap转为File
                 if(file!=null){
                     Log.e("test:","hahahh");
                 }
@@ -784,7 +794,7 @@ public class SendActivity1 extends Fragment {
             File file=null;
             try {
                 bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-                file=saveBitmapFile(bm);//将BitMap转为File
+                file=saveFile(bm,"save.jpg");//将BitMap转为File
                 if(file!=null){
                     Log.e("test:","hahahh");
                 }
@@ -802,23 +812,7 @@ public class SendActivity1 extends Fragment {
             uploadFile=file;
         }
     }
-    //Bitmap对象保存味图片文件
-    public File saveBitmapFile(Bitmap bitmap){
-        File file=new File("/sdcard/pic/01.jpg");//将要保存图片的路径
-        if(!file.exists()){
-            file.mkdirs();
-        }
-        Log.e("test","file的路径："+file.getPath());
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
+
 
     public void saveBmp2Gallery(Bitmap bmp, String picName) {
         //1. 获取内容解析者
@@ -867,38 +861,62 @@ public class SendActivity1 extends Fragment {
         getActivity().sendBroadcast(intent);
     }
     //上传图片
-    private void complexUploadImg(final File file){
-        new Thread(){
-            @Override
-            public void run() {
-                //1.
-                //2.创建Request对象
-                //1)得到JPG图片对应的MIME类型
-                MediaType mediaType=MediaType.parse("application/jpeg");
+    private void complexUploadImg(final File file, final String name){
+        Log.e("test+name:",name);
+        if(file!=null){
+            new Thread(){
+                @Override
+                public void run() {
+                    //1.
+                    //2.创建Request对象
+                    //1)得到JPG图片对应的MIME类型
+                    MediaType mediaType= MediaType.parse("application/jpeg");
 //                String img=getFilesDir().getAbsolutePath()+"/Img.jpg";
-                //2)创建RequestBody
-                RequestBody requestBody=RequestBody.create(mediaType,file);
-                //3)创建Request对象
-                final Request request=new Request.Builder()
-                        .url("http://10.7.88.251:8080/TimeBank/upload")
-                        .post(requestBody)
-                        .build();
-                //3.创建Call对象
-                Call call=okHttpClient.newCall(request);
-                //4.提交请求并返回响应
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("test","上传图片失败");
-                    }
+                    //2)创建RequestBody
+                    RequestBody requestBody=RequestBody.create(mediaType,file);
+                    //3)创建Request对象
+                    final Request request=new Request.Builder()
+                            .url("http://10.7.88.251:8080/TimeBank/upload?name="+name)
+                            .post(requestBody)
+                            .build();
+                    //3.创建Call对象
+                    Call call=okHttpClient.newCall(request);
+                    //4.提交请求并返回响应
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("test","上传图片失败");
+                        }
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        Log.e("test",request.body().toString());
-                    }
-                });
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("test",request.body().toString());
+                        }
+                    });
 
-            }
-        }.start();
+                }
+            }.start();
+        }
+
+
+    }
+    public File saveFile(Bitmap bm, String fileName) throws IOException {//将Bitmap类型的图片转化成file类型，便于上传到服务器
+        String path = Environment.getExternalStorageDirectory() + "/Ask";
+
+        File dirFile = new File(path);
+
+        if(!dirFile.exists()){
+            dirFile.mkdir();
+        }
+        File myCaptureFile = new File(path + fileName);
+
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+
+        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+
+        bos.flush();
+        bos.close();
+        return myCaptureFile;
+
     }
 }
