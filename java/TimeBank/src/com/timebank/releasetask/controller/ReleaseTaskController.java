@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.xml.internal.ws.encoding.fastinfoset.FastInfosetCodec;
 import com.timebank.entity.Task;
+import com.timebank.entity.User;
 import com.timebank.releasetask.service.ReleaseTaskService;
 
 @Controller

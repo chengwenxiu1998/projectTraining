@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.cwx.timebank.SetActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +43,7 @@ public class RealNameAuthenticationTask extends AsyncTask<Object,Object,Boolean>
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
-            String urlStr = serverUrl+"/RealNameAuthenticationServlet?uid="+uid+"&name="+name+"&idCard="+shenFenZheng;
+            String urlStr = serverUrl+"/user/realNameAuthentication?uid="+uid+"&name="+name+"&idCard="+shenFenZheng;
             url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("contentType","UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
@@ -51,17 +52,14 @@ public class RealNameAuthenticationTask extends AsyncTask<Object,Object,Boolean>
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
 
-            //解析一个JSON格式的字符串
-            try {
-                JSONObject jsonObject = new JSONObject(res);
-                int updateRowCount = jsonObject.getInt("updateRowCount");
+
+
+                int updateRowCount =  new Gson().fromJson(res,int.class);
                 if(updateRowCount != 0){
                     isAuthenticationSuccessful = true;
                 }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -79,6 +77,12 @@ public class RealNameAuthenticationTask extends AsyncTask<Object,Object,Boolean>
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("uName",name);
             editor.putString("uIdCard",shenFenZheng);
+            editor.remove("uSex");
+            //根据身份证号的倒数第二位判断性别
+            String substring = shenFenZheng.substring(16, 17);
+            System.out.println("substring" + substring);
+            byte sex = (byte)((Integer.parseInt(substring)%2==0)? 1 : 0);//女1，男0
+            editor.putInt("uSex",sex);
             editor.commit();
             Intent intent=new Intent();
             intent.setClass(context,SetActivity.class);

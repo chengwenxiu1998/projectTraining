@@ -3,8 +3,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -13,6 +17,8 @@
             <option value="$PROJECT_DIR$/easeui" />
           </set>
         </option>
+=======
+>>>>>>> 45ea81a6cefd01602579160c8a4e4417a65f2f25
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

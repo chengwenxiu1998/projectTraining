@@ -121,4 +121,17 @@ public class UserController {
 		return json;
 		
 	}
+	
+	@RequestMapping("/realNameAuthentication")
+	@ResponseBody
+	public String realNameAuthentication(@RequestParam("uid") String uid,
+			@RequestParam("name") String name,@RequestParam("idCard") String idCard) {
+		int update = this.userServiceImpl.realNameAuthentication(Integer.parseInt(uid),name,idCard);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(update);
+		return json;
+		
+		
+	}
 }
