@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
-public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
+public class IndexListTask__ extends AsyncTask<String,Void,List<NotAccept>>{
     private Context mContext=null;
     private ListView lv=null;
     private Gson gson;
 
-    public IndexListTask(Context mContext,ListView lv){
+    public IndexListTask__(Context mContext,ListView lv){
         this.mContext=mContext;
         this.lv=lv;
     }
