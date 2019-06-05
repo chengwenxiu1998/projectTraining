@@ -25,10 +25,10 @@
     </mvc:message-converters>
 </mvc:annotation-driven>
 	
-	
-	
+	<mvc:resources mapping="/taskimg/**" location="/META-INF/taskimg/" />
+	<!-- <mvc:resources mapping="/images/**" location="/taskimg/" /> -->
 	<mvc:resources location="/static/" mapping="/static/**" />
-	
+
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.timebank">
 		<context:include-filter type="annotation"

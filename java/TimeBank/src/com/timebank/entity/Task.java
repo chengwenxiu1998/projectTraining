@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="task")
 public class Task {
 	private int tId;
-//	private int uIdSend;
+	private int uIdSend;
 	private Date uTime;
 	private int tcId;
 	private String  tDesc;
@@ -31,7 +31,7 @@ public class Task {
 	private String tImgUrl;
 	private Date tAcceptTime;
 	private Date tFinishTime;
-	private transient User user;
+//	private transient User user;
 	
 	public Task() {
 		super();
@@ -52,15 +52,15 @@ public class Task {
 	}
 
 
-//	@Column(name="u_id_send")
-//	public int getuIdSend() {
-//		return uIdSend;
-//	}
-//
-//
-//	public void setuIdSend(int uIdSend) {
-//		this.uIdSend = uIdSend;
-//	}
+	@Column(name="u_id_send")
+	public int getuIdSend() {
+		return uIdSend;
+	}
+
+
+	public void setuIdSend(int uIdSend) {
+		this.uIdSend = uIdSend;
+	}
 
 	@Column(name="u_time")
 	public Date getuTime() {
@@ -174,18 +174,18 @@ public class Task {
 	}
 
 	
-	
-	@ManyToOne
-	@JoinColumn(name="u_id_send")
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+//	
+//	@ManyToOne
+//	@JoinColumn(name="u_id_send")
+//	public User getUser() {
+//		return user;
+//	}
+//
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
 
 	@Override
 	public String toString() {
