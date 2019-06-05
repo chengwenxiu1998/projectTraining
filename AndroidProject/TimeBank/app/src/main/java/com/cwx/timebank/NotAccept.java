@@ -1,5 +1,4 @@
-
-
+package com.cwx.timebank;
 import java.util.Date;
 
 public class NotAccept {
