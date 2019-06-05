@@ -20,7 +20,7 @@ public class ChatFragment extends EaseConversationListFragment {
     protected void initView() {
         super.initView();
 
-        //跳转到回话详情页面
+        //跳转到会话详情页面
         setConversationListItemClickListener(new EaseConversationListItemClickListener() {
             @Override
             public void onListItemClicked(EMConversation conversation) {

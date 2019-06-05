@@ -4,33 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/ll_all">
 
-	<com.hyphenate.easeui.widget.EaseTitleBar 
+	<com.hyphenate.easeui.widget.EaseTitleBar
 	    android:id="@+id/title_bar"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    hyphenate:titleBarTitle="@string/session"
 	    />
     
-    <include layout="@layout/ease_search_bar" />
+  <include layout="@layout/ease_search_bar" />
     
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fl_error_item"
-        >
+    android:layout_marginBottom="80dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fl_error_item">
+
     </FrameLayout>
 
 
     <com.hyphenate.easeui.widget.EaseConversationList
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="@android:color/transparent"
         android:cacheColorHint="#00000000"
         android:divider="@null"
-        hyphenate:cvsListPrimaryTextSize="16sp"
-         />
-
+        hyphenate:cvsListPrimaryTextSize="16sp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="90dp"></LinearLayout>
 </LinearLayout>

@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         //获取intent中的数据
         final Intent intent=getIntent();
         hxid = intent.getStringExtra("hxid");
-Log.e("DetailActivity",hxid);
+        Log.e("DetailActivity",hxid);
         String uImage=intent.getStringExtra("uImage");
         String nickname=intent.getStringExtra("nickname");
         String Time=intent.getStringExtra("Time");
