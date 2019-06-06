@@ -31,24 +31,19 @@ public class ClickTask extends AsyncTask {
         count=Integer.valueOf(String.valueOf(objects[1]));
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            URL url=new URL(serverUrl+"/ClickServlet?sid="+Sid+"&zancount="+count);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("contentType","UTF-8");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/shaishai/updateshai?sid="+Sid+"&count="+count;
+            URL url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONObject object=new JSONObject(res);
-            int flg=object.getInt("over");
-            if(flg!=0){
-                Log.e("数据库","更新成功");
-            }
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
 

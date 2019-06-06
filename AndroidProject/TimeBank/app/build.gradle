@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
 apply plugin: 'com.android.application'
 
 android {
@@ -45,6 +49,7 @@ dependencies {
 
     implementation project(':bpp')
     implementation project(':easeui')
+<<<<<<< HEAD
 
 
 
@@ -52,13 +57,18 @@ dependencies {
 
     implementation project(':bpp')
     implementation project(':easeui')
+=======
 
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
-    implementation project(':bpp')
-    implementation project(':easeui')
 
+
+>>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
+
+
+<<<<<<< HEAD
     implementation project(path: ':bpp')
 
 
 
+=======
+>>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
 }

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private List<View> viewList = new ArrayList<>();
     private FragmentTabHost tabHost;
     private int[] tabHostIconNormal = {R.drawable.index_normal, R.drawable.quanzi_normal, R.drawable.faburenwu, R.drawable.xiaoxi_normal, R.drawable.my_normal};
-    private String[] tabHostText = {"首页","圈子","","消息","我的"};
+    private String[] tabHostText = {"首页","圈子"," ","消息","我的"};
     private Class[] fragmentArr = {BannerActivity.class,GroupActivity.class,SendActivity1.class,ChatFragment.class,MyInfoActivity.class};
 
 
@@ -37,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myServer",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 //        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
+<<<<<<< HEAD
         editor.putString("serverUrl","http://10.7.88.251:8080/TimeBank");
+=======
+        editor.putString("serverUrl","http://10.7.88.239:8080/TimeBank");
+>>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
         editor.commit();
 
         //初始化FragmentTabHost
@@ -85,10 +89,12 @@ public class MainActivity extends AppCompatActivity {
     private void setTabHostIcon(String tabId){
         ImageView imageView0 = viewList.get(0).findViewById(R.id.iv_image);
         ImageView imageView1 = viewList.get(1).findViewById(R.id.iv_image);
+        ImageView imageView2 = viewList.get(2).findViewById(R.id.iv_image);
         ImageView imageView3 = viewList.get(3).findViewById(R.id.iv_image);
         ImageView imageView4 = viewList.get(4).findViewById(R.id.iv_image);
         imageView0.setImageResource(R.drawable.index_normal);
         imageView1.setImageResource(R.drawable.quanzi_normal);
+        imageView2.setImageResource(R.drawable.faburenwu);
         imageView3.setImageResource(R.drawable.xiaoxi_normal);
         imageView4.setImageResource(R.drawable.my_normal);
 
@@ -97,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
             imageView0.setImageResource(R.drawable.index_selected);
         }else if(tabId.equals("圈子")){
             imageView1.setImageResource(R.drawable.quanzi_selected);
+        }else if(tabId.equals(" ")){
+//            imageView2.setMaxWidth(imageView2.getWidth()+20);
+////            imageView2.setMaxHeight(imageView2.getHeight()+20);
         }else if(tabId.equals("消息")){
             imageView3.setImageResource(R.drawable.xiaoxi_selected);
         }else{

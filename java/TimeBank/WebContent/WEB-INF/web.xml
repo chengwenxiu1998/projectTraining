@@ -29,6 +29,10 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+    <servlet-mapping>  
+       <servlet-name>default</servlet-name>  
+       <url-pattern>*.jpg</url-pattern>  
+    </servlet-mapping> 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

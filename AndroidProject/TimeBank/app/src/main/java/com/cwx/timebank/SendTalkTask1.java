@@ -8,6 +8,10 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.cwx.timebank.bean.Discuss;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -36,16 +41,16 @@ public class SendTalkTask1 extends AsyncTask {
         URL url = null;
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            url = new URL(serverUrl+"/SendTalkServlet1?content="+content+"&userId="+UserId);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("contentType","UTF-8");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/discuss/insertByUid?text="+content+"&uid="+UserId;
+            url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONObject object=new JSONObject(res);
-            Log.e("讨论个数",object.getString("Last"));
+            Log.e("fabu",res);
 
             SharedPreferences sp = context.getSharedPreferences("isFromMy",Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
@@ -57,9 +62,7 @@ public class SendTalkTask1 extends AsyncTask {
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }  catch (IOException e) {
             e.printStackTrace();
         }
 

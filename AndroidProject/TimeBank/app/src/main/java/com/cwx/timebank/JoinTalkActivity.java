@@ -31,6 +31,7 @@ public class JoinTalkActivity extends AppCompatActivity {
     private TextView textView1;
     private TextView textView2;
     private TextView textView3;
+    private CircleImageView imageView;
     private Button button;
     private EditText editText;
     private SharedPreferences sp;
@@ -42,6 +43,7 @@ public class JoinTalkActivity extends AppCompatActivity {
         final String string1=intent.getStringExtra("netName");
         final String string2=intent.getStringExtra("tag");
         final String string3=intent.getStringExtra("content");
+        final String string4=intent.getStringExtra("image");
         final String did=intent.getStringExtra("which");//讨论的id
 
 

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.cwx.timebank.bean.ShaiReply;
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,24 +38,26 @@ public class ShaiReplyTask extends AsyncTask {
         replyTime=(String)objects[3];
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
-            String serverUrl = sharedPreferences.getString("serverUrl","");
-            URL url=new URL(serverUrl+"/AddCommentServlet?Sid="+sid+"&content="+content+"&reply="+replyTime+"&uid="+uid);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("contentType","UTF-8");
+            String serverUrl = sharedPreferences.getString("serverUrl", "");
+            String urlStr = serverUrl + "/shaireply/addsr?sid="+sid+"&uid="+uid+"&time="+replyTime+"&content="+content;
+            URL url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("contentType", "UTF-8");//如果给服务器端传的字符有中文，防止字符乱码问题
             InputStream is = connection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);//转换流
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String res = reader.readLine();
-            JSONObject object=new JSONObject(res);
-            Log.e("结果",object.getString("lasty"));
+
+
+           return null;
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 }
 

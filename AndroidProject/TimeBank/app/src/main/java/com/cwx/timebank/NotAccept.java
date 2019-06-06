@@ -8,7 +8,11 @@ public class NotAccept {
     private String uNickName;
     private String uImage;
     private Date uTime;
+<<<<<<< HEAD
     private String  tDesc;
+=======
+    private String tDesc;
+>>>>>>> 2971f2f66d132bb15340c4d27aa1cf4758a7b59e
     private int tCoinCount;
     private String tagText;
     private String tState;
@@ -16,8 +20,14 @@ public class NotAccept {
     private Date tEndtime;
     private String tImageUrl;
     private int tcId;
+<<<<<<< HEAD
 
     /*  private int uId;*/
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 2971f2f66d132bb15340c4d27aa1cf4758a7b59e
+>>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
 
 
     public NotAccept() {

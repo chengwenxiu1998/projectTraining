@@ -34,7 +34,12 @@ public class User {
 	private String uIdCard;
 	private Integer uCoin;
 	private transient List<Discuss> discuss;
-//	private Set<Task> sendTaskSet = new HashSet<>();
+
+	private transient List<Shaishai> shaishai;
+	private transient List<ShaiReply> shaiReply;
+
+
+
 	public User() {
 		super();
 	}
@@ -145,6 +150,29 @@ public class User {
 	public void setDiscuss(List<Discuss> discuss) {
 		this.discuss = discuss;
 	}
+
+	
+	@OneToMany(mappedBy="user",targetEntity=Shaishai.class,
+			cascade=CascadeType.ALL)
+	public List<Shaishai> getShaishai() {
+		return shaishai;
+	}
+	public void setShaishai(List<Shaishai> shaishai) {
+		this.shaishai = shaishai;
+	}
+	@OneToMany(mappedBy="user",targetEntity=ShaiReply.class,
+			cascade=CascadeType.ALL)
+	public List<ShaiReply> getShaiReply() {
+		return shaiReply;
+	}
+	public void setShaiReply(List<ShaiReply> shaiReply) {
+		this.shaiReply = shaiReply;
+	}
+
+		
+	
+
+
 		
 	@OneToMany(mappedBy="user", targetEntity=Task.class, 
 	        cascade=CascadeType.ALL)
@@ -155,6 +183,7 @@ public class User {
 //		this.sendTaskSet = sendTaskSet;
 //	}
 	
+
 	@Override
 	public String toString() {
 		return "User [uId=" + uId + ", uName=" + uName + ", uPhone=" + uPhone + ", uSex=" + uSex + ", uArea=" + uArea
