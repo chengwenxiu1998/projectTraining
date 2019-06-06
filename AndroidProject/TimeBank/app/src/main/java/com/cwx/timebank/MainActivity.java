@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 //        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
 
-        editor.putString("serverUrl","http://10.7.88.251:8080/TimeBank");
+        editor.putString("serverUrl","http://106.14.222.186:8080/TimeBank");
 
 //        editor.putString("serverUrl","http://10.7.88.239:8080/TimeBank");
 
