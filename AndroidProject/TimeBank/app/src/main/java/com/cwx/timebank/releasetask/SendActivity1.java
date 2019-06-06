@@ -68,7 +68,7 @@ public class SendActivity1 extends Fragment {
     public static final int SELECT_PHOTO=9;
     public static final int CHOOSE_PHOTO=8;
     private OkHttpClient okHttpClient=new OkHttpClient();
-    String fileName;
+    String fileName="aaaa";
     TabHost tabHost;
     private TaskBean taskBean;
     private int i=0;//用来作为图片的名称
@@ -463,6 +463,8 @@ public class SendActivity1 extends Fragment {
                     public void onResponse(Boolean aBoolean) {
                         if (aBoolean==true){
                             Toast.makeText(getContext(),"发布成功",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getContext(),MainActivity.class);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(getContext(),"网络错误，发布失败",Toast.LENGTH_LONG).show();
                         }
@@ -472,8 +474,7 @@ public class SendActivity1 extends Fragment {
                 renwuTask.execute();
 
                 complexUploadImg(uploadFile,fileName);
-                Intent intent = new Intent(getContext(),MainActivity.class);
-                startActivity(intent);
+
 
                 Log.e("test","点击了发表");
             }
@@ -862,8 +863,10 @@ public class SendActivity1 extends Fragment {
     }
     //上传图片
     private void complexUploadImg(final File file, final String name){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myServer", MODE_PRIVATE);
+        final String serverUrl = sharedPreferences.getString("serverUrl","");
         Log.e("test+name:",name);
-        if(!name.equals("aaaaa.jpg")){
+        if(file!=null){
             new Thread(){
                 @Override
                 public void run() {
@@ -876,7 +879,7 @@ public class SendActivity1 extends Fragment {
                     RequestBody requestBody=RequestBody.create(mediaType,file);
                     //3)创建Request对象
                     final Request request=new Request.Builder()
-                            .url("http://10.7.88.251:8080/TimeBank/upload?name="+name)
+                            .url(serverUrl+"/upload?name="+name)
                             .post(requestBody)
                             .build();
                     //3.创建Call对象

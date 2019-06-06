@@ -1,6 +1,7 @@
 package com.cwx.timebank.releasetask;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,6 +15,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class InsertTaskAsynTask extends AsyncTask<String,Void,Boolean> {
     String month;
@@ -37,9 +40,12 @@ public class InsertTaskAsynTask extends AsyncTask<String,Void,Boolean> {
     }
     @Override
     protected Boolean doInBackground(String... strings) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myServer", MODE_PRIVATE);
+        String serverUrl = sharedPreferences.getString("serverUrl","");
+//        URL url=new URL(serverUrl+"/ClickServlet?sid="+Sid+"&zancount="+count);
         //通过网络访问服务器端登录功能
         URL url = null;
-        String urlStr = "http://10.7.88.251:8080/TimeBank/insertTaskIntoDB?uIdSend="+taskBean.getuIdSend()+"&tcId="+taskBean.getTcId()+
+        String urlStr = serverUrl+"/insertTaskIntoDB?uIdSend="+taskBean.getuIdSend()+"&tcId="+taskBean.getTcId()+
                 "&tDesc="+taskBean.gettDesc()+"&tCoinCount="+taskBean.gettCoinCount()+"&tState="+taskBean.gettState()
                 +"&uIdAccept="+taskBean.getuIdAccept()+"&tagId="+taskBean.getTagId()+"&tEndtimeMonth="+month+"&tEndtimeDay="+day
                 +"&tEndtimeHour="+hour+"&tEndtimeMin="+min
