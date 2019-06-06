@@ -68,7 +68,7 @@ public class SendActivity1 extends Fragment {
     public static final int SELECT_PHOTO=9;
     public static final int CHOOSE_PHOTO=8;
     private OkHttpClient okHttpClient=new OkHttpClient();
-    String fileName;
+    String fileName="aaaaa";
     TabHost tabHost;
     private TaskBean taskBean;
     private int i=0;//用来作为图片的名称
@@ -876,7 +876,7 @@ public class SendActivity1 extends Fragment {
                     RequestBody requestBody=RequestBody.create(mediaType,file);
                     //3)创建Request对象
                     final Request request=new Request.Builder()
-                            .url("http://10.7.88.251:8080/TimeBank/upload?name="+name)
+                            .url("http://10.7.88.246:8080/TimeBank/upload?name="+name)
                             .post(requestBody)
                             .build();
                     //3.创建Call对象

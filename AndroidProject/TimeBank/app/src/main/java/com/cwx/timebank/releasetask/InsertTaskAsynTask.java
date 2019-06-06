@@ -39,7 +39,7 @@ public class InsertTaskAsynTask extends AsyncTask<String,Void,Boolean> {
     protected Boolean doInBackground(String... strings) {
         //通过网络访问服务器端登录功能
         URL url = null;
-        String urlStr = "http://10.7.88.251:8080/TimeBank/insertTaskIntoDB?uIdSend="+taskBean.getuIdSend()+"&tcId="+taskBean.getTcId()+
+        String urlStr = "http://10.7.88.246:8080/TimeBank/insertTaskIntoDB?uIdSend="+taskBean.getuIdSend()+"&tcId="+taskBean.getTcId()+
                 "&tDesc="+taskBean.gettDesc()+"&tCoinCount="+taskBean.gettCoinCount()+"&tState="+taskBean.gettState()
                 +"&uIdAccept="+taskBean.getuIdAccept()+"&tagId="+taskBean.getTagId()+"&tEndtimeMonth="+month+"&tEndtimeDay="+day
                 +"&tEndtimeHour="+hour+"&tEndtimeMin="+min

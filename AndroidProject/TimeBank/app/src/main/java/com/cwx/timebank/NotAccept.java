@@ -2,19 +2,19 @@ package com.cwx.timebank;
 import java.util.Date;
 
 public class NotAccept {
-​    private int uId;
-​	private int tId;
-​    private String uNickName;
-​    private String uImage;
-​    private Date uTime;
-​    private String  tDesc;
-​    private int tCoinCount;
-​    private String tagText;
-​    private String tState;
-​    private int uIdAccept;
-​    private Date tEndtime;
-​    private String tImageUrl;
-​    private int tcId;
+    private int uId;
+	private int tId;
+    private String uNickName;
+    private String uImage;
+    private Date uTime;
+   private String  tDesc;
+    private int tCoinCount;
+    private String tagText;
+    private String tState;
+    private int uIdAccept;
+    private Date tEndtime;
+    private String tImageUrl;
+    private int tcId;
 
 
     public NotAccept() {

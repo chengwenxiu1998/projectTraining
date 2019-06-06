@@ -14,6 +14,11 @@ public class UserInfo {
         this.hxid = name;
         this.nick = name;
     }
+    public UserInfo(String name, String hxid,String nick) {
+        this.name = name;
+        this.hxid = hxid;
+        this.nick = nick;
+    }
 
     public String getName() {
         return name;

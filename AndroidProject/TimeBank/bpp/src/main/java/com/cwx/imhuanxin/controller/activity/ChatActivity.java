@@ -14,6 +14,7 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 //会话详情页面
 public class ChatActivity extends FragmentActivity {
     private String mHxid;
+    private String mNickname;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +23,13 @@ public class ChatActivity extends FragmentActivity {
         initData();
     }
 
+
     private void initData() {
         //创建一个会话的fragment
         EaseChatFragment easeChatFragment = new EaseChatFragment();
         mHxid = getIntent().getStringExtra(EaseConstant.EXTRA_USER_ID);
+        mNickname = getIntent().getStringExtra(EaseConstant.EXTRA_USER_NICK);
+
         easeChatFragment.setArguments(getIntent().getExtras());
         Log.e("getIntent().getExtras()",getIntent().getExtras().toString());
         //替换fragment

@@ -25,8 +25,10 @@ import android.widget.LinearLayout;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
 import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.widget.EaseConversationList;
 import com.hyphenate.easeui.widget.EaseTitleBar;
@@ -62,6 +64,8 @@ public class EaseConversationListFragment extends EaseBaseFragment{
 		}
     	
     };
+
+
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class EaseConversationListFragment extends EaseBaseFragment{
         if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
         super.onActivityCreated(savedInstanceState);
+
+
     }
 
     @Override
@@ -294,6 +300,8 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     public void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(connectionListener);
+
+
     }
     
     @Override

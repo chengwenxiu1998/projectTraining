@@ -98,6 +98,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected Bundle fragmentArgs;
     protected int chatType;
     protected String toChatUsername;
+    private String nickname;
     protected EaseChatMessageList messageList;
     protected EaseChatInputMenu inputMenu;
 
@@ -156,11 +157,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     public void onActivityCreated(Bundle savedInstanceState) {
         easeTitleBar.setBackgroundColor(0xffffcc00);
         fragmentArgs = getArguments();
+
+
         // check if single chat or group chat
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
+        nickname = fragmentArgs.getString(EaseConstant.EXTRA_USER_NICK);
 
+        Log.e("nickname","nick--------"+nickname);
         this.turnOnTyping = turnOnTyping();
 
         super.onActivityCreated(savedInstanceState);
@@ -298,7 +303,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     protected void setUpView() {
-        titleBar.setTitle(toChatUsername);
+        titleBar.setTitle(nickname);
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             // set title
             if(EaseUserUtils.getUserInfo(toChatUsername) != null){
@@ -898,6 +903,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (message == null) {
             return;
         }
+        message.setAttribute("nickname",EaseConstant.EXTRA_USER_NICK);
+
         if(chatFragmentHelper != null){
             //set extension
             chatFragmentHelper.onSetMessageAttributes(message);

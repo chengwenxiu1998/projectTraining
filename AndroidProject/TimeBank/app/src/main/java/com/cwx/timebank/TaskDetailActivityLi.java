@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.List;
 
 public class TaskDetailActivityLi extends AppCompatActivity {
     private String hxid;
+    private String nickname;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,7 @@ public class TaskDetailActivityLi extends AppCompatActivity {
 
         final Intent intent = getIntent();
         String uImage = intent.getStringExtra("uImage");
-        String nickname = intent.getStringExtra("nickname");
+        nickname = intent.getStringExtra("nickname");
         String putTime = intent.getStringExtra("tPutTime");
         String taskTag = intent.getStringExtra("taskTag");
         String taskDetails = intent.getStringExtra("taskDetails");
@@ -97,6 +99,7 @@ public class TaskDetailActivityLi extends AppCompatActivity {
 
             Intent intent1 = new Intent(getApplicationContext(), ChatActivity.class);
             intent1.putExtra(EaseConstant.EXTRA_USER_ID,hxid);
+            intent1.putExtra(EaseConstant.EXTRA_USER_NICK,nickname);
             startActivity(intent1);
 
             EMClient.getInstance().chatManager().addMessageListener(emMassageListener);
@@ -108,6 +111,11 @@ public class TaskDetailActivityLi extends AppCompatActivity {
             //设置数据
             //EaseUI.getInstance().getNotifier().onNewMesg(list);
             EaseUI.getInstance().getNotifier().notify(list);
+
+//            for(int i=0;i<list.size();i++){
+//                new Fragment().getArguments().putString(EaseConstant.EXTRA_USER_NICK,list.get(i).getStringAttribute("nickname",""));
+//            }
+
             //刷新页面
             new com.hyphenate.easeui.ui.EaseConversationListFragment().refresh();
         }
