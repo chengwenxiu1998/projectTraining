@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myServer",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 //        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
-<<<<<<< HEAD
+
         editor.putString("serverUrl","http://10.7.88.251:8080/TimeBank");
-=======
-        editor.putString("serverUrl","http://10.7.88.239:8080/TimeBank");
->>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
+
+//        editor.putString("serverUrl","http://10.7.88.239:8080/TimeBank");
+
         editor.commit();
 
         //初始化FragmentTabHost

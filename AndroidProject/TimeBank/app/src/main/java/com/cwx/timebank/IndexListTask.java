@@ -36,27 +36,19 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
     protected List doInBackground(String... strings) {
         List<NotAccept> tasksList = new ArrayList();
         try {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
             //网络访问服务器端
 
 //            SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
 //            String serverUrl = sharedPreferences.getString("serverUrl","");
 //            String urlStr = serverUrl+"/notaccepttask";
 //            URL url = new URL(urlStr);
-            URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
-<<<<<<< HEAD
-=======
-=======
+//            URL url = new URL("http://10.7.88.211:8080/TimeBank/notaccepttask");
+
             //网络访问服务器端​
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
             String urlStr = serverUrl+"/notaccepttask";
             URL url = new URL(urlStr);
->>>>>>> 2971f2f66d132bb15340c4d27aa1cf4758a7b59e
->>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType", "utf-8");
@@ -69,13 +61,6 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
             Log.e("res", res);
             gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
             tasksList = gson.fromJson(res, new TypeToken<List<NotAccept>>() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 2971f2f66d132bb15340c4d27aa1cf4758a7b59e
->>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
             }.getType());
             if(tasksList!=null){
                 Log.e("NotAcceptTasksList", tasksList.toString());
@@ -88,23 +73,17 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
 
         return tasksList;
     }
-    @Override
-    protected void onPostExecute(List list) {
-        if(list!=null &&list.size()!=0){
-            IndexCustomAdapter2 adapter=new IndexCustomAdapter2(mContext,list,lv);
-            lv.setAdapter(adapter);
-
-        }else{
-            Toast.makeText(mContext,"数据加载失败", Toast.LENGTH_SHORT).show();
-        }
-    }
-<<<<<<< HEAD
-}
-=======
-}
-=======
-        return tasksList;
-    }
+//    @Override
+//    protected void onPostExecute(List list) {
+//        if(list!=null &&list.size()!=0){
+//            IndexCustomAdapter2 adapter=new IndexCustomAdapter2(mContext,list,lv);
+//            lv.setAdapter(adapter);
+//
+//        }else{
+//            Toast.makeText(mContext,"数据加载失败", Toast.LENGTH_SHORT).show();
+//        }
+//        return tasksList;
+//    }
 
 //    @Override
 //    protected void onPostExecute(List list) {
@@ -154,5 +133,3 @@ public class IndexListTask extends AsyncTask<String,Void,List<NotAccept>>{
         }
     }
 }
->>>>>>> 2971f2f66d132bb15340c4d27aa1cf4758a7b59e
->>>>>>> b227764edbd04c219e90a64f5c593776cc068b1e
