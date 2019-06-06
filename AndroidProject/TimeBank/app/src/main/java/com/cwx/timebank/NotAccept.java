@@ -1,42 +1,47 @@
 package com.cwx.timebank;
+
 import java.util.Date;
 
 public class NotAccept {
-    private int uId;
-	private int tId;
-    private String uNickName;
-    private String uImage;
-    private Date uTime;
-   private String  tDesc;
-    private int tCoinCount;
-    private String tagText;
-    private String tState;
-    private int uIdAccept;
-    private Date tEndtime;
-    private String tImageUrl;
-    private int tcId;
+​    private int uId;
+private int tId;
+​    private String uNickName;
+​    private String uImage;
+​    private Date uTime;
 
+private String  tDesc;
 
+private int tCoinCount;
+private String tagText;
+private String tState;
+private int uIdAccept;
+private Date tEndtime;
+private String tImageUrl;
+private int tcId;
+
+>>
+
+    
     public NotAccept() {
     }
 
 
     public NotAccept(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
                      String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl,int tcId,int uId) {
-    	super();
-    	this.tId = tId;
-    	this.uNickName = uNickName;
-    	this.uImage = uImage;
-    	this.uTime = uTime;
-    	this.tDesc = tDesc;
-    	this.tCoinCount = tCoinCount;
-    	this.tagText = tagText;
-    	this.tState = tState;
-    	this.uIdAccept = uIdAccept;
-    	this.tEndtime = tEndtime;
-    	this.tImageUrl = tImageUrl;
-    	this.tcId=tcId;
-    	this.uId=uId;
+        super();
+        this.tId = tId;
+        this.uNickName = uNickName;
+        this.uImage = uImage;
+        this.uTime = uTime;
+        this.tDesc = tDesc;
+        this.tCoinCount = tCoinCount;
+        this.tagText = tagText;
+        this.tState = tState;
+        this.uIdAccept = uIdAccept;
+        this.tEndtime = tEndtime;
+        this.tImageUrl = tImageUrl;
+        this.tcId=tcId;
+        this.uId=uId;
     }
 
 
@@ -134,7 +139,11 @@ public class NotAccept {
 
 
     
-    }
+    
+    
+    
+    
+    
+    
 
-
-
+}

@@ -8,18 +8,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cwx.timebank.bean.ShaiShaiCommentBean;
+import com.cwx.timebank.bean.ShaiReply;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ShaiDetailAdapter extends BaseAdapter{
     private Context context;
     private int itemView;
-    private List<ShaiShaiCommentBean> list;
-
-    public  ShaiDetailAdapter(Context context,int itemView,List<ShaiShaiCommentBean> list){
+    private List<ShaiReply> list;
+    private int rcount;
+    public  ShaiDetailAdapter(Context context,int itemView,List<ShaiReply> list){
         this.context=context;
         this.itemView=itemView;
         this.list=list;
@@ -45,44 +47,55 @@ public class ShaiDetailAdapter extends BaseAdapter{
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(itemView, null);
         }
+
+
         TextView textView1=convertView.findViewById(R.id.tv_nickname);
         TextView textView2=convertView.findViewById(R.id.tv_send_time);
         TextView textView3=convertView.findViewById(R.id.tv_talk_text);
 
-        ShaiShaiCommentBean shaiShaiCommentBean=(ShaiShaiCommentBean) list.get(position);
-        textView1.setText(shaiShaiCommentBean.getrNickName());
-        //当前时间
-        Calendar currentDate=Calendar.getInstance();
+        ShaiReply shaiReply=(ShaiReply) list.get(position);
+        textView1.setText(shaiReply.getUser().getuNickName());
+         //时间 字符串转变成Date
+        String retime=shaiReply.getRtime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String getuTime=null;
-        //计算时间差
-        if(shaiShaiCommentBean.getDate()!=null) {
-            if (currentDate.get(Calendar.YEAR) - (shaiShaiCommentBean.getDate().getYear()+1900) < 1) {
-                if (currentDate.get(Calendar.MONTH) -shaiShaiCommentBean.getDate().getMonth() < 1) {
-                    if (currentDate.get(Calendar.DAY_OF_MONTH) - shaiShaiCommentBean.getDate().getDate()<1) {
-                        if (currentDate.get(Calendar.HOUR_OF_DAY) -shaiShaiCommentBean.getDate().getHours() < 1) {
-                            getuTime = "发布于" + (currentDate.get(Calendar.MINUTE) - shaiShaiCommentBean.getDate().getMinutes()) + "分钟前";
-                        } else if (currentDate.get(Calendar.HOUR_OF_DAY) - shaiShaiCommentBean.getDate().getHours() > 1) {
-                            if (currentDate.get(Calendar.MINUTE) - shaiShaiCommentBean.getDate().getMinutes() > 0) {
-                                getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - shaiShaiCommentBean.getDate().getHours()) + "小时前";
-                            } else {
-                                getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - shaiShaiCommentBean.getDate().getHours() - 1) + "小时前";
+        try {
+            Date date=sdf.parse(retime);
+            //当前时间
+            Calendar currentDate=Calendar.getInstance();
+
+            //计算时间差
+            if(shaiReply.getRtime()!=null) {
+                if (currentDate.get(Calendar.YEAR) - (date.getYear()+1900) < 1) {
+                    if (currentDate.get(Calendar.MONTH) -date.getMonth() < 1) {
+                        if (currentDate.get(Calendar.DAY_OF_MONTH) - date.getDate()<1) {
+                            if (currentDate.get(Calendar.HOUR_OF_DAY) -date.getHours() < 1) {
+                                getuTime = "发布于" + (currentDate.get(Calendar.MINUTE) - date.getMinutes()) + "分钟前";
+                            } else if (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours() > 1) {
+                                if (currentDate.get(Calendar.MINUTE) - date.getMinutes() > 0) {
+                                    getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours()) + "小时前";
+                                } else {
+                                    getuTime = "发布于" + (currentDate.get(Calendar.HOUR_OF_DAY) - date.getHours() - 1) + "小时前";
+                                }
                             }
+                        } else if (currentDate.get(Calendar.DAY_OF_MONTH) - date.getDate() < 2) {
+                            getuTime = "昨天" + new SimpleDateFormat("HH:mm").format(date);
+                        } else {
+                            getuTime = new SimpleDateFormat("MM-dd").format(date);
                         }
-                    } else if (currentDate.get(Calendar.DAY_OF_MONTH) - shaiShaiCommentBean.getDate().getDate() < 2) {
-                        getuTime = "昨天" + new SimpleDateFormat("HH:mm").format(shaiShaiCommentBean.getDate());
                     } else {
-                        getuTime = new SimpleDateFormat("MM-dd").format(shaiShaiCommentBean.getDate());
+                        getuTime = new SimpleDateFormat("MM-dd").format(date);
                     }
                 } else {
-                    getuTime = new SimpleDateFormat("MM-dd").format(shaiShaiCommentBean.getDate());
+                    getuTime = new SimpleDateFormat("yyyy-MM-dd").format(date);
                 }
-            } else {
-                getuTime = new SimpleDateFormat("yyyy-MM-dd").format(shaiShaiCommentBean.getDate());
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         textView2.setText(getuTime);
-        textView3.setText(shaiShaiCommentBean.getContent());
+        textView3.setText(shaiReply.getRcontent());
 
         return convertView;
     }

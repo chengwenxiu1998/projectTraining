@@ -20,5 +20,9 @@ public class DiscussServiceImpl {
 	public List<Discuss> allDis() throws Exception{
 		return discussDaoImpl.allDis();
 	}
+	
+	public int insertByUid(String content,Integer uid) {
+		return discussDaoImpl.insertByUid(content, uid);
+	}
 
 }

@@ -63,43 +63,46 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SendActivity1 extends Fragment {
-    File uploadFile=null;
-    private final String Image_Type="image/*";
-    public static final int SELECT_PHOTO=9;
-    public static final int CHOOSE_PHOTO=8;
-    private OkHttpClient okHttpClient=new OkHttpClient();
-    String fileName="aaaaa";
-    TabHost tabHost;
-    private TaskBean taskBean;
-    private int i=0;//用来作为图片的名称
-    public static final int TAKE_PHOTO1 = 3;
-    public static final int TAKE_PHOTO = 2;//声明一个请求码，用于识别返回的结果
-    public final static int CAMERA_RESULT = 1;
-    ImageView  imageshow;
-    ImageView  imageshowSell;
-    ImageView ivAddImageView;
-    ImageView ivSellAddImageView;
-    private List<View> viewList=new ArrayList<View>();
-    private String[] tabHostTag={"tab1","tab2"};
-    EditText etSendTask;
-    EditText etSellSendTask;
-    EditText etMiaoshu;
-    EditText etSellMiaoshu;
-    Spinner spinner;
-    Spinner spinner1;
-    Spinner spinnerEndTimeMonth;
-    Spinner spinnerEndTimeDay;
-    Spinner spinnerEndTimeHour;
-    Spinner spinnerEndTimeMin;
-    Spinner spinnerEndTimeMonth1;
-    Spinner spinnerEndTimeDay1;
-    Spinner spinnerEndTimeHour1;
-    Spinner spinnerEndTimeMin1;
-    String month;
-    String day;
-    String hour;
-    String min;
-    PopupWindow popupWindow;
+​    File uploadFile=null;
+​    private final String Image_Type="image/*";
+​    public static final int SELECT_PHOTO=9;
+​    public static final int CHOOSE_PHOTO=8;
+​    private OkHttpClient okHttpClient=new OkHttpClient()
+
+ 
+
+    String fileName="aaaa";
+>TabHost tabHost;
+>private TaskBean taskBean;
+>private int i=0;//用来作为图片的名称
+>public static final int TAKE_PHOTO1 = 3;
+>public static final int TAKE_PHOTO = 2;//声明一个请求码，用于识别返回的结果
+>public final static int CAMERA_RESULT = 1;
+>ImageView  imageshow;
+>ImageView  imageshowSell;
+>ImageView ivAddImageView;
+>ImageView ivSellAddImageView;
+>private List<View> viewList=new ArrayList<View>();
+>private String[] tabHostTag={"tab1","tab2"};
+>EditText etSendTask;
+>EditText etSellSendTask;
+>EditText etMiaoshu;
+>EditText etSellMiaoshu;
+>Spinner spinner;
+>Spinner spinner1;
+>Spinner spinnerEndTimeMonth;
+>Spinner spinnerEndTimeDay;
+>Spinner spinnerEndTimeHour;
+>Spinner spinnerEndTimeMin;
+>Spinner spinnerEndTimeMonth1;
+>Spinner spinnerEndTimeDay1;
+>Spinner spinnerEndTimeHour1;
+>Spinner spinnerEndTimeMin1;
+>String month;
+>String day;
+>String hour;
+>String min;
+>PopupWindow popupWindow;
 
     //当创建View时调用
     @Nullable
@@ -108,12 +111,12 @@ public class SendActivity1 extends Fragment {
         final View view = inflater.inflate(R.layout.activity_send,container,false);
         return view;
     }
-
+    
     //当View创建完成
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+    
         //返回箭头 到首页
         ImageView ivReturn = view.findViewById(R.id.iv_return);
         ivReturn.setOnClickListener(new View.OnClickListener() {
@@ -123,19 +126,19 @@ public class SendActivity1 extends Fragment {
                 startActivity(intent);
             }
         });
-
+    
         tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec(tabHostTag[0]).setIndicator(getTabView("买时间")). setContent(R.id.tab1));
         tabHost.addTab(tabHost.newTabSpec(tabHostTag[1]).setIndicator(getTabView("卖时间")) .setContent(R.id.tab2));
-
+    
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
                 setTabHostChanged(tabId);
             }
         });
-
+    
         setTabHostChanged(tabHost.getCurrentTabTag());
 
 
@@ -145,10 +148,10 @@ public class SendActivity1 extends Fragment {
 
         etSellSendTask=view.findViewById(R.id.et_sell_send_task);
         etSellMiaoshu=view.findViewById(R.id.et_sell_miaoshu);
-
+    
         final TextView tvSellTimeMoney=view.findViewById(R.id.tv_time_money);
         // etSellTimeMoney=view.findViewById(R.id.et_time_money);
-
+    
         final TextView tvSellSellTimeMoney=view.findViewById(R.id.tv_sell_time_money);
         //etSellSellTimeMoney=view.findViewById(R.id.et_sell_time_money);
 
@@ -190,7 +193,7 @@ public class SendActivity1 extends Fragment {
                     }
                 }
             }
-
+    
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 ArrayAdapter daySpinnerAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,strDay1);
@@ -219,14 +222,14 @@ public class SendActivity1 extends Fragment {
                     }
                 }
             }
-
+    
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 ArrayAdapter daySpinnerAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,strDay1);
                 spinnerEndTimeDay.setAdapter(daySpinnerAdapter);
             }
         });
-
+    
         spinnerEndTimeHour = view.findViewById(R.id.sp_endtime_hour);
         spinnerEndTimeHour1 = view.findViewById(R.id.sp_endtime_hour1);
         spinnerEndTimeMin = view.findViewById(R.id.sp_endtime_min);
@@ -242,10 +245,10 @@ public class SendActivity1 extends Fragment {
                 etMiaoshu.setHint("描述详情");
                 // etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnSellHelpBuyFood=view.findViewById(R.id.btn_sell_help_buy_food);
         btnSellHelpBuyFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,172 +258,172 @@ public class SendActivity1 extends Fragment {
                 etSellMiaoshu.setHint("描述详情");
                 //  etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnDaiqu=view.findViewById(R.id.btn_daiqukuaidi);
         btnDaiqu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnDaiqu.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 //  etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellDaiqu=view.findViewById(R.id.btn_sell_daiqukuaidi);
         btnSellDaiqu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellDaiqu.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
                 //  etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnDaijie=view.findViewById(R.id.btn_daijieshui);
         btnDaijie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnDaijie.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 //etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellDaijie=view.findViewById(R.id.btn_sell_daijieshui);
         btnSellDaijie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellDaijie.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
                 //   etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnYueguang=view.findViewById(R.id.btn_yueguangjie);
         btnYueguang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnYueguang.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 // etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellYueguang=view.findViewById(R.id.btn_sell_yueguangjie);
         btnSellYueguang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellYueguang.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
                 //etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnYueyun=view.findViewById(R.id.btn_yueyundong);
         btnYueyun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnYueyun.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 //etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellYueyun=view.findViewById(R.id.btn_sell_yueyundong);
         btnSellYueyun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellYueyun.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
                 //etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnYuexue=view.findViewById(R.id.btn_yuexuexi);
         btnYuexue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnYuexue.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 // etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellYuexue=view.findViewById(R.id.btn_sell_yuexuexi);
         btnSellYuexue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellYuexue.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
                 // etSellSellTimeMoney.setHint("请输入你得到的时间币");
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         final Button btnQita=view.findViewById(R.id.btn_qita);
         btnQita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSendTask.setText(btnQita.getText());
                 etSendTask.setCursorVisible(false);
-
+    
                 etMiaoshu.setHint("描述详情");
                 // etSellTimeMoney.setHint("请输入你想花费的时间币");
                 tvSellTimeMoney.setVisibility(View.VISIBLE);
             }
         });
-
+    
         final Button btnSellQita=view.findViewById(R.id.btn_sell_qita);
         btnSellQita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSellSendTask.setText(btnSellQita.getText());
                 etSellSendTask.setCursorVisible(false);
-
+    
                 etSellMiaoshu.setHint("描述详情");
-
+    
                 tvSellSellTimeMoney.setVisibility(View.VISIBLE);
-
+    
             }
         });
-
+    
         ivAddImageView=view.findViewById(R.id.iv_add_photo);
         ivAddImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -447,7 +450,7 @@ public class SendActivity1 extends Fragment {
             @Override
             public void onClick(View v) {
                 taskBean=new TaskBean();
-
+    
                 //发布任务
                 task(tabHost.getCurrentTabTag());
                 //假设发布者ID为1
@@ -463,22 +466,23 @@ public class SendActivity1 extends Fragment {
                     public void onResponse(Boolean aBoolean) {
                         if (aBoolean==true){
                             Toast.makeText(getContext(),"发布成功",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getContext(),MainActivity.class);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(getContext(),"网络错误，发布失败",Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
+    
                 renwuTask.execute();
-
+    
                 complexUploadImg(uploadFile,fileName);
-                Intent intent = new Intent(getContext(),MainActivity.class);
-                startActivity(intent);
+
 
                 Log.e("test","点击了发表");
             }
         });
-
+    
     }
     public void task(String tabId){
         if (tabId.equals(tabHostTag[0])) {
@@ -554,7 +558,7 @@ public class SendActivity1 extends Fragment {
             hour=spinnerEndTimeHour1.getSelectedItem().toString();
             min=spinnerEndTimeMin1.getSelectedItem().toString();
             Log.e("test",month+" "+day+" "+hour+"  "+min);
-
+    
             //先假设一个路径
             if(fileName==null){
                 taskBean.setT_imgurl("aaaaa.jpg");
@@ -562,7 +566,7 @@ public class SendActivity1 extends Fragment {
                 taskBean.setT_imgurl(fileName);
                 Log.i("Test:",fileName);
             }
-
+    
         }
     }
 
@@ -592,11 +596,11 @@ public class SendActivity1 extends Fragment {
         btnCancel.setOnClickListener(myListener1);
         btnPhoto.setOnClickListener(myListener1);
         btnSelect.setOnClickListener(myListener1);
-
+    
         popupWindow.showAtLocation(ivSellAddImageView, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-
+    
     }
-
+    
     // 弹出PopupWindow
     private void showPopupWindow() {
         // 1. 创建PopupWindow显示的view
@@ -621,11 +625,11 @@ public class SendActivity1 extends Fragment {
         btnCancel.setOnClickListener(myListener);
         btnPhoto.setOnClickListener(myListener);
         btnSelect.setOnClickListener(myListener);
-
+    
         popupWindow.showAtLocation(ivAddImageView, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-
+    
     }
-
+    
     private void setTabHostChanged(String tabId) {
         TextView textView1 = viewList.get(0).findViewById(R.id.tv_text);
         TextView textView2 = viewList.get(1).findViewById(R.id.tv_text);
@@ -637,12 +641,12 @@ public class SendActivity1 extends Fragment {
             textView1.setText(Html.fromHtml("<font color=#ffcc66>买时间</font>"));
             tvLine1.setBackgroundColor(Color.parseColor("#ffcc66"));
             tvLine2.setBackgroundColor(Color.parseColor("#aaaaaa"));
-
+    
         } else if (tabId.equals(tabHostTag[1])) {
             textView2.setText(Html.fromHtml("<font color=#ffcc66>卖时间</font>"));
             tvLine1.setBackgroundColor(Color.parseColor("#aaaaaa"));
             tvLine2.setBackgroundColor(Color.parseColor("#ffcc66"));
-
+    
         }
     }
     private View getTabView(String text){
@@ -653,7 +657,7 @@ public class SendActivity1 extends Fragment {
         return view;
     }
     class MyListener1 implements View.OnClickListener {
-
+    
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -677,7 +681,7 @@ public class SendActivity1 extends Fragment {
         }
     }
     class MyListener implements View.OnClickListener {
-
+    
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -688,7 +692,7 @@ public class SendActivity1 extends Fragment {
                     popupWindow.dismiss();
                     break;
                 case R.id.btn_select:
-
+    
                     // 使用intent调用系统提供的相册功能，使用startActivityForResult是为了获取用户选择的图片的地址
                     Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
                     getAlbum.setType(Image_Type);
@@ -701,7 +705,7 @@ public class SendActivity1 extends Fragment {
             }
         }
     }
-
+    
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -717,7 +721,7 @@ public class SendActivity1 extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+    
         }else if(requestCode==1112 && resultCode==RESULT_OK){
             Bitmap bitmap=(Bitmap)data.getExtras().get("data");
             imageshowSell.setImageBitmap(bitmap);
@@ -732,23 +736,23 @@ public class SendActivity1 extends Fragment {
             }
         }else if(requestCode==CHOOSE_PHOTO && resultCode ==RESULT_OK){
             ContentResolver resolver =getContext().getContentResolver();
-
+    
             // 获得图片的地址Uri
             Uri originalUri = data.getData();
-
+    
             // 新建一个字符串数组用于存储图片地址数据。
             String[] proj = {MediaStore.Images.Media.DATA};
-
+    
             // android系统提供的接口，用于根据uri获取数据
             Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
                     null);
-
+    
             // 获得用户选择图片的索引值
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             // 将游标移至开头 ，防止引起队列越界
             cursor.moveToFirst();
-
+    
             // 根据图片的URi生成bitmap
             Bitmap bm = null;
             File file=null;
@@ -758,12 +762,12 @@ public class SendActivity1 extends Fragment {
                 if(file!=null){
                     Log.e("test:","hahahh");
                 }
-
+    
                 //saveMyBitmap(bm);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+    
             // 显得到bitmap图片
             imageshow.setImageBitmap(bm);
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -772,23 +776,23 @@ public class SendActivity1 extends Fragment {
             uploadFile=file;
         }else if(requestCode==SELECT_PHOTO && resultCode ==RESULT_OK){
             ContentResolver resolver =getContext().getContentResolver();
-
+    
             // 获得图片的地址Uri
             Uri originalUri = data.getData();
-
+    
             // 新建一个字符串数组用于存储图片地址数据。
             String[] proj = {MediaStore.Images.Media.DATA};
-
+    
             // android系统提供的接口，用于根据uri获取数据
             Cursor cursor =getContext().getContentResolver().query(originalUri, proj, null, null,
                     null);
-
+    
             // 获得用户选择图片的索引值
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             // 将游标移至开头 ，防止引起队列越界
             cursor.moveToFirst();
-
+    
             // 根据图片的URi生成bitmap
             Bitmap bm = null;
             File file=null;
@@ -798,12 +802,12 @@ public class SendActivity1 extends Fragment {
                 if(file!=null){
                     Log.e("test:","hahahh");
                 }
-
+    
                 //saveMyBitmap(bm);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+    
             // 显得到bitmap图片
             imageshowSell.setImageBitmap(bm);
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -828,11 +832,11 @@ public class SendActivity1 extends Fragment {
         File file = null;
         // 声明输出流
         FileOutputStream outStream = null;
-
+    
         try {
             // 如果有目标文件，直接获得文件对象，否则创建一个以filename为名称的文件
             file = new File(galleryPath, picName+ ".jpg");
-
+    
             // 获得文件相对路径
             fileName = file.toString();
             // 获得输出流，如果文件中有内容，追加内容
@@ -840,7 +844,7 @@ public class SendActivity1 extends Fragment {
             if (null != outStream) {
                 bmp.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
             }
-
+    
         } catch (Exception e) {
             e.getStackTrace();
         }finally {
@@ -862,8 +866,10 @@ public class SendActivity1 extends Fragment {
     }
     //上传图片
     private void complexUploadImg(final File file, final String name){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myServer", MODE_PRIVATE);
+        final String serverUrl = sharedPreferences.getString("serverUrl","");
         Log.e("test+name:",name);
-        if(!name.equals("aaaaa.jpg")){
+        if(file!=null){
             new Thread(){
                 @Override
                 public void run() {
@@ -872,28 +878,30 @@ public class SendActivity1 extends Fragment {
                     //1)得到JPG图片对应的MIME类型
                     MediaType mediaType= MediaType.parse("application/jpeg");
 //                String img=getFilesDir().getAbsolutePath()+"/Img.jpg";
-                    //2)创建RequestBody
-                    RequestBody requestBody=RequestBody.create(mediaType,file);
-                    //3)创建Request对象
-                    final Request request=new Request.Builder()
-                            .url("http://10.7.88.246:8080/TimeBank/upload?name="+name)
-                            .post(requestBody)
-                            .build();
-                    //3.创建Call对象
-                    Call call=okHttpClient.newCall(request);
-                    //4.提交请求并返回响应
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.e("test","上传图片失败");
-                        }
+​                    //2)创建RequestBody
+​                    RequestBody requestBody=RequestBody.create(mediaType,file);
+​                    //3)创建Request对象
+​                    final Request request=new Request.Builder()
+
+                            .url(serverUrl+"/upload?name="+name)
+>>>>>
+>>>>>​                    .post(requestBody)
+>>>>>​                    .build();
+>>>>>​            //3.创建Call对象
+>>>>>​            Call call=okHttpClient.newCall(request);
+>>>>>​            //4.提交请求并返回响应
+>>>>>​            call.enqueue(new Callback() {
+>>>>>​                @Override
+>>>>>​                public void onFailure(Call call, IOException e) {
+>>>>>​                    Log.e("test","上传图片失败");
+>>>>>​                }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             Log.e("test",request.body().toString());
                         }
                     });
-
+    
                 }
             }.start();
         }
@@ -902,21 +910,21 @@ public class SendActivity1 extends Fragment {
     }
     public File saveFile(Bitmap bm, String fileName) throws IOException {//将Bitmap类型的图片转化成file类型，便于上传到服务器
         String path = Environment.getExternalStorageDirectory() + "/Ask";
-
+    
         File dirFile = new File(path);
-
+    
         if(!dirFile.exists()){
             dirFile.mkdir();
         }
         File myCaptureFile = new File(path + fileName);
-
+    
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-
+    
         bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-
+    
         bos.flush();
         bos.close();
         return myCaptureFile;
-
+    
     }
 }

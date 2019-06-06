@@ -16,7 +16,9 @@ public class User {
     private String uIdCard;
     private Integer uCoin;
     private transient List<Discuss> discuss;
-    private Set<Task> sendTaskSet = new HashSet<>();
+    private transient List<Shaishai> shaishai;
+    private transient List<ShaiReply> shaiReply;
+
     public User() {
         super();
         // TODO Auto-generated constructor stub
@@ -115,12 +117,21 @@ public class User {
     }
 
 
-    public Set<Task> getSendTaskSet() {
-        return sendTaskSet;
+
+    public List<Shaishai> getShaishai() {
+        return shaishai;
     }
-    public void setSendTaskSet(Set<Task> sendTaskSet) {
-        this.sendTaskSet = sendTaskSet;
+    public void setShaishai(List<Shaishai> shaishai) {
+        this.shaishai = shaishai;
     }
+
+    public List<ShaiReply> getShaiReply() {
+        return shaiReply;
+    }
+    public void setShaiReply(List<ShaiReply> shaiReply) {
+        this.shaiReply = shaiReply;
+    }
+
 
     @Override
     public String toString() {
@@ -128,6 +139,8 @@ public class User {
                 + ", uNickName=" + uNickName + ", uImage=" + uImage + ", uPassword=" + uPassword + ", uIdCard="
                 + uIdCard + ", uCoin=" + uCoin + "]";
     }
+
+
 
 
 }

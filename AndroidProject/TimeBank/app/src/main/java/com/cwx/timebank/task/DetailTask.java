@@ -9,15 +9,9 @@ import android.widget.ListView;
 import com.cwx.timebank.DetailAdapter;
 
 import com.cwx.timebank.R;
-import com.cwx.timebank.bean.Discuss;
 import com.cwx.timebank.bean.DiscussReply;
-import com.cwx.timebank.bean.DisussReplyBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,10 +20,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
