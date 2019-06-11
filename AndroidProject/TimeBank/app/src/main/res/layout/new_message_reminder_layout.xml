@@ -41,6 +41,7 @@
             android:layout_height="match_parent"
             android:text="接收新消息通知"
             android:textSize="16dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:textColor="#000000"/>
         <ToggleButton
@@ -69,6 +70,7 @@
             android:layout_height="match_parent"
             android:text="声音"
             android:textSize="16dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:textColor="#000000"/>
         <ToggleButton
@@ -97,6 +99,7 @@
             android:layout_height="match_parent"
             android:text="震动"
             android:textSize="16dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:textColor="#000000"/>
         <ToggleButton

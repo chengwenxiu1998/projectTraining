@@ -36,6 +36,7 @@
         android:layout_weight="8.3"
         android:orientation="vertical">
         <LinearLayout
+            android:layout_marginLeft="6dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
@@ -46,10 +47,10 @@
                 android:layout_weight="0.2" />
             <com.cwx.timebank.CircleImageView
                 android:id="@+id/iv_touxiang"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/img18"
-                android:layout_marginTop="10dp" />
+                android:layout_gravity="center_vertical"/>
             <TextView
                 android:id="@+id/tv_detail_petname"
                 android:layout_width="0dp"
@@ -81,6 +82,7 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
             <LinearLayout
+                android:layout_marginLeft="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
@@ -94,7 +96,7 @@
                     android:layout_weight="0.35"
                     android:layout_height="match_parent"
                     android:text="发布时间:"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"/>
                 <TextView
                     android:id="@+id/tv_put_time"
@@ -102,7 +104,7 @@
                     android:layout_weight="0.2"
                     android:layout_height="match_parent"
                     android:text="11:04"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"/>
                 <View
                     android:layout_width="0dp"
@@ -113,7 +115,7 @@
                     android:layout_weight="0.35"
                     android:layout_height="match_parent"
                     android:text="结束时间:"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"/>
                 <TextView
                     android:id="@+id/tv_end_time"
@@ -121,7 +123,7 @@
                     android:layout_weight="0.2"
                     android:layout_height="match_parent"
                     android:text="12:04"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"/>
                 <View
                     android:layout_width="0dp"
@@ -135,13 +137,13 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.04" />
+                    android:layout_weight="0.046" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.94"
                     android:text="发布地点：河北师范大学启智园3号楼"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textColor="#000000" />
                 <View
                     android:layout_width="0dp"
@@ -156,10 +158,10 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.04" />
+                    android:layout_weight="0.03" />
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
                     android:text="描述:"
                     android:background="@drawable/button_shape2"
                     android:textColor="#ffffff"
@@ -170,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
                     android:text="#代买饭#"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000" />
                 <View
                     android:layout_width="0dp"
@@ -185,14 +187,14 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.04" />
+                    android:layout_weight="0.05" />
                 <TextView
                     android:id="@+id/tv_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.92"
                     android:text="去河北师范大学四食堂一楼带一份米饭和菜（鱼香肉丝和烧茄子），记得要一双筷子。"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:textColor="#000000" />
                 <View
                     android:layout_width="0dp"
