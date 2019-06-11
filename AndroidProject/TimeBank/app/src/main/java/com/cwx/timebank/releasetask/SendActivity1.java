@@ -63,46 +63,44 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SendActivity1 extends Fragment {
-​    File uploadFile=null;
-​    private final String Image_Type="image/*";
-​    public static final int SELECT_PHOTO=9;
-​    public static final int CHOOSE_PHOTO=8;
-​    private OkHttpClient okHttpClient=new OkHttpClient()
-
- 
+   private File uploadFile=null;
+    private final String Image_Type="image/*";
+    public static final int SELECT_PHOTO=9;
+   public static final int CHOOSE_PHOTO=8;
+    private OkHttpClient okHttpClient=new OkHttpClient();
 
     String fileName="aaaa";
->TabHost tabHost;
->private TaskBean taskBean;
->private int i=0;//用来作为图片的名称
->public static final int TAKE_PHOTO1 = 3;
->public static final int TAKE_PHOTO = 2;//声明一个请求码，用于识别返回的结果
->public final static int CAMERA_RESULT = 1;
->ImageView  imageshow;
->ImageView  imageshowSell;
->ImageView ivAddImageView;
->ImageView ivSellAddImageView;
->private List<View> viewList=new ArrayList<View>();
->private String[] tabHostTag={"tab1","tab2"};
->EditText etSendTask;
->EditText etSellSendTask;
->EditText etMiaoshu;
->EditText etSellMiaoshu;
->Spinner spinner;
->Spinner spinner1;
->Spinner spinnerEndTimeMonth;
->Spinner spinnerEndTimeDay;
->Spinner spinnerEndTimeHour;
->Spinner spinnerEndTimeMin;
->Spinner spinnerEndTimeMonth1;
->Spinner spinnerEndTimeDay1;
->Spinner spinnerEndTimeHour1;
->Spinner spinnerEndTimeMin1;
->String month;
->String day;
->String hour;
->String min;
->PopupWindow popupWindow;
+    TabHost tabHost;
+    private TaskBean taskBean;
+    private int i=0;//用来作为图片的名称
+    public static final int TAKE_PHOTO1 = 3;
+    public static final int TAKE_PHOTO = 2;//声明一个请求码，用于识别返回的结果
+    public final static int CAMERA_RESULT = 1;
+    ImageView  imageshow;
+    ImageView  imageshowSell;
+    ImageView ivAddImageView;
+    ImageView ivSellAddImageView;
+    private List<View> viewList=new ArrayList<View>();
+    private String[] tabHostTag={"tab1","tab2"};
+    EditText etSendTask;
+    EditText etSellSendTask;
+    EditText etMiaoshu;
+    EditText etSellMiaoshu;
+    Spinner spinner;
+    Spinner spinner1;
+    Spinner spinnerEndTimeMonth;
+    Spinner spinnerEndTimeDay;
+    Spinner spinnerEndTimeHour;
+    Spinner spinnerEndTimeMin;
+    Spinner spinnerEndTimeMonth1;
+    Spinner spinnerEndTimeDay1;
+    Spinner spinnerEndTimeHour1;
+    Spinner spinnerEndTimeMin1;
+    String month;
+    String day;
+    String hour;
+    String min;
+    PopupWindow popupWindow;
 
     //当创建View时调用
     @Nullable
@@ -878,23 +876,18 @@ public class SendActivity1 extends Fragment {
                     //1)得到JPG图片对应的MIME类型
                     MediaType mediaType= MediaType.parse("application/jpeg");
 //                String img=getFilesDir().getAbsolutePath()+"/Img.jpg";
-​                    //2)创建RequestBody
-​                    RequestBody requestBody=RequestBody.create(mediaType,file);
-​                    //3)创建Request对象
-​                    final Request request=new Request.Builder()
-
-                            .url(serverUrl+"/upload?name="+name)
->>>>>
->>>>>​                    .post(requestBody)
->>>>>​                    .build();
->>>>>​            //3.创建Call对象
->>>>>​            Call call=okHttpClient.newCall(request);
->>>>>​            //4.提交请求并返回响应
->>>>>​            call.enqueue(new Callback() {
->>>>>​                @Override
->>>>>​                public void onFailure(Call call, IOException e) {
->>>>>​                    Log.e("test","上传图片失败");
->>>>>​                }
+                    //2)创建RequestBody
+                   RequestBody requestBody=RequestBody.create(mediaType,file);
+                   //3)创建Request对象
+                    final Request request=new Request.Builder().url(serverUrl+"/upload?name="+name).post(requestBody).build();
+                    //3.创建Call对象
+                   Call call=okHttpClient.newCall(request);
+                    //4.提交请求并返回响应
+                   call.enqueue(new Callback() {
+                       @Override
+                       public void onFailure(Call call, IOException e) {
+                           Log.e("test", "上传图片失败");
+                       }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {

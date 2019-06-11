@@ -48,8 +48,7 @@ public class SearchListTask extends AsyncTask<String,Void,List<SearchTask>>  {
             //通过网络访问服务器端实现获取SearchContent列表
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
-//            URL url=new URL(serverUrl+"/searchtask?searchContent="+searchContent);
-            URL url = new URL("http://10.7.88.211:8080/TimeBank/searchtask?searchContent="+searchContent);
+            URL url=new URL(serverUrl+"/searchtask?searchContent="+searchContent);
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType","utf-8");

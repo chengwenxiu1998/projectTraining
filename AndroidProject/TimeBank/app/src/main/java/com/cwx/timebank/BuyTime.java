@@ -3,7 +3,8 @@ package com.cwx.timebank;
 import java.util.Date;
 
 public class BuyTime {
-	private int tId;
+    private int tId;
+    private int uIdSend;
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -14,30 +15,41 @@ public class BuyTime {
     private int uIdAccept;
     private Date tEndtime;
     private String tImageUrl;
- 
+
     public BuyTime() {
     }
 
 
-    public BuyTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
-			String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl) {
-		super();
-		this.tId = tId;
-		this.uNickName = uNickName;
-		this.uImage = uImage;
-		this.uTime = uTime;
-		this.tDesc = tDesc;
-		this.tCoinCount = tCoinCount;
-		this.tagText = tagText;
-		this.tState = tState;
-		this.uIdAccept = uIdAccept;
-		this.tEndtime = tEndtime;
-		this.tImageUrl = tImageUrl;
-	}
+    public BuyTime(int tId, int uIdSend,String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+                   String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl) {
+        super();
+        this.uIdSend = uIdSend;
+        this.tId = tId;
+        this.uNickName = uNickName;
+        this.uImage = uImage;
+        this.uTime = uTime;
+        this.tDesc = tDesc;
+        this.tCoinCount = tCoinCount;
+        this.tagText = tagText;
+        this.tState = tState;
+        this.uIdAccept = uIdAccept;
+        this.tEndtime = tEndtime;
+        this.tImageUrl = tImageUrl;
+    }
 
 
 
-	public String getuNickName() {
+    public int getuIdSend() {
+        return uIdSend;
+    }
+
+
+    public void setuIdSend(int uIdSend) {
+        this.uIdSend = uIdSend;
+    }
+
+
+    public String getuNickName() {
         return uNickName;
     }
 
@@ -111,5 +123,14 @@ public class BuyTime {
 
     public void settEndtime(Date tEndtime) {
         this.tEndtime = tEndtime;
+    }
+
+
+    @Override
+    public String toString() {
+        return "BuyTime [tId=" + tId + ", uIdSend=" + uIdSend + ", uNickName=" + uNickName + ", uImage=" + uImage
+                + ", uTime=" + uTime + ", tDesc=" + tDesc + ", tCoinCount=" + tCoinCount + ", tagText=" + tagText
+                + ", tState=" + tState + ", uIdAccept=" + uIdAccept + ", tEndtime=" + tEndtime + ", tImageUrl="
+                + tImageUrl + "]";
     }
 }

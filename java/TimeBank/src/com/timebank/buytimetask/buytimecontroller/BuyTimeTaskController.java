@@ -33,6 +33,7 @@ public class BuyTimeTaskController {
 		model.addAttribute("buyTimeTask",list);
 		Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String temp=gson.toJson(list);
+		System.out.println(list);
 		return temp;
 	}
 }

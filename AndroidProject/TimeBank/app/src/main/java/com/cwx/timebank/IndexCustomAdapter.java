@@ -99,6 +99,7 @@ public class IndexCustomAdapter extends RecyclerView.Adapter<IndexCustomAdapter.
                     BuyOrSellTime sellTimeDetail = mDatas.get((int) i);
                     //头像没写
                     intent.putExtra("nickname", sellTimeDetail.getuNickName());
+                    intent.putExtra("hxid",sellTimeDetail.getuId()+"");
                     //当前时间
                     Calendar currentDate = Calendar.getInstance();
                     String getuTime = null;
@@ -139,6 +140,7 @@ public class IndexCustomAdapter extends RecyclerView.Adapter<IndexCustomAdapter.
                     BuyOrSellTime buyTimeDetail = mDatas.get((int) i);
                     //头像没写
                     intent.putExtra("nickname", buyTimeDetail.getuNickName());
+                    intent.putExtra("hxid",buyTimeDetail.getuId()+"");
                     //当前时间
                     Calendar currentDate = Calendar.getInstance();
                     String getuTime = null;

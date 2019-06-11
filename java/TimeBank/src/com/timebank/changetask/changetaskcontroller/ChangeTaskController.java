@@ -14,7 +14,7 @@ public class ChangeTaskController {
 	@Resource
 	private ChangeTaskServiceImpl changeTaskServiceImpl;
 	//改变任务状态、领取人id、领取时间
-		@RequestMapping(value ="changetask", produces = "text/plain;charset=UTF-8")
+		@RequestMapping(value ="changetask1", produces = "text/plain;charset=UTF-8")
 		@ResponseBody
 		public String changetask(@RequestParam("tId")int tId,@RequestParam("uId")int uId) {
 			System.out.println(uId+" "+tId);

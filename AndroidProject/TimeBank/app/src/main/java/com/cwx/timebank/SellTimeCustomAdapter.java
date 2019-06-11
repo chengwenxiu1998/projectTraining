@@ -116,6 +116,8 @@ public class SellTimeCustomAdapter extends BaseAdapter {
                     SellTime sellTimeDetail = list.get((int) id);
                     intent.putExtra("uImage",sellTimeDetail.getuImage());
                     intent.putExtra("nickname", sellTimeDetail.getuNickName());
+                    intent.putExtra("hxid",sellTimeDetail.getuIdSend()+"");
+                    Log.e("12","我要卖时间的环信id"+sellTimeDetail.getuIdSend());
                     //当前时间
                     Calendar currentDate=Calendar.getInstance();
                     String getuTime=null;
