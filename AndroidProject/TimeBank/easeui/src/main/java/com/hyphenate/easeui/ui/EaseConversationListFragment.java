@@ -1,11 +1,14 @@
 package com.hyphenate.easeui.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +24,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -30,6 +34,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
+import com.hyphenate.easeui.adapter.EaseConversationAdapter;
 import com.hyphenate.easeui.widget.EaseConversationList;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
@@ -109,6 +114,41 @@ public class EaseConversationListFragment extends EaseBaseFragment{
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     EMConversation conversation = conversationListView.getItem(position);
                     listItemClickListener.onListItemClicked(conversation);
+                }
+            });
+            conversationListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                    Log.e("12","长按事件");
+                    //定义AlertDialog.Builder对象，当长按列表项的时候弹出确认删除对话框
+                    AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                    builder.setMessage("确定删除?");
+                    builder.setTitle("提示");
+
+                    //添加AlertDialog.Builder对象的setPositiveButton()方法
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        EMClient.getInstance().chatManager().deleteConversation(conversationList.get(position).conversationId(),true);
+                        conversationList.remove(position);
+//                            notifyDataSetChanged();
+                        Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                            conversationListView.refresh();
+
+                        }
+                    });
+
+                    //添加AlertDialog.Builder对象的setNegativeButton()方法
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    builder.create().show();
+                    return true;
                 }
             });
         }

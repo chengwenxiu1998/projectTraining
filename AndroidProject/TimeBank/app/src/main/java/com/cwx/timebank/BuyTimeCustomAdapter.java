@@ -13,7 +13,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cwx.imhuanxin.controller.activity.ChatActivity;
 import com.cwx.timebank.task.ShowHeadImg;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.EaseUI;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,7 +55,7 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             if(convertView == null){
                 LayoutInflater inflater = LayoutInflater.from(context);
                 convertView = inflater.inflate(R.layout.buy_time_item,null);
@@ -159,23 +165,72 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
                 });
             }
 
-//            Button btnContackSeller = convertView.findViewById(R.id.btn_contact_seller);
-//            btnContackSeller.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    SharedPreferences sp=context.getSharedPreferences("userInfo", MODE_PRIVATE);
-//                    if(sp.getInt("userId",0)!=0) {//若该用户已登录
-//                        Intent intent = new Intent();
-//                        intent.setClassName("com.cwx.timebank","com.cwx.timebank.ContactSellerActivity");
-//                        context.startActivity(intent);
-//                    }else{//用户还没有登陆，跳转到登陆页面
-//                        Intent intent = new Intent(context,LoginActivity.class);
-//                        context.startActivity(intent);
-//                    }
-//                }
-//            });
+            Button btnContackSeller = convertView.findViewById(R.id.btn_contact_seller);
+            btnContackSeller.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sp=context.getSharedPreferences("userInfo", MODE_PRIVATE);
+                    if(sp.getInt("userId",0)!=0) {//若该用户已登录
+                        jumpToTalkDetail(list.get(position).getuIdSend()+"");
+                    }else{//用户还没有登陆，跳转到登陆页面
+                        Intent intent = new Intent(context,LoginActivity.class);
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
             return convertView;
         }
+
+    //跳转到回话详情页面
+    public void jumpToTalkDetail(String hxid) {
+
+        Intent intent1 = new Intent(context, ChatActivity.class);
+        intent1.putExtra(EaseConstant.EXTRA_USER_ID, hxid);
+        intent1.putExtra(EaseConstant.EXTRA_USER_NICK, "");
+        context.startActivity(intent1);
+
+        EMClient.getInstance().chatManager().addMessageListener(emMassageListener);
+    }
+    private EMMessageListener emMassageListener = new EMMessageListener() {
+        @Override
+        public void onMessageReceived(List<EMMessage> list) {
+            //设置数据
+            //EaseUI.getInstance().getNotifier().onNewMesg(list);
+            EaseUI.getInstance().getNotifier().notify(list);
+
+//            for(int i=0;i<list.size();i++){
+//                new Fragment().getArguments().putString(EaseConstant.EXTRA_USER_NICK,list.get(i).getStringAttribute("nickname",""));
+//            }
+
+            //刷新页面
+            new com.hyphenate.easeui.ui.EaseConversationListFragment().refresh();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage emMessage, Object o) {
+
+        }
+    };
     }
 

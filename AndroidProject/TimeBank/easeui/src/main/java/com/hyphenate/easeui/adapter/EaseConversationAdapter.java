@@ -115,12 +115,17 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
             holder.name.setText(group != null ? group.getGroupName() : username);
+            //临时设置的，以后再改-----------------------------------------------------
+            holder.name.setText("满满");
         } else if(conversation.getType() == EMConversationType.ChatRoom){
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(username);
             holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
             holder.motioned.setVisibility(View.GONE);
         }else {
+            //临时设置的，以后再改-----------------------------------------------------
+            username = "满满";
+            holder.name.setText("满满");
             EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
             EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);

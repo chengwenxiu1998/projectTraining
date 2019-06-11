@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cwx.imhuanxin.controller.fragment.ChatFragment;
 import com.cwx.timebank.releasetask.SendActivity1;
@@ -55,10 +56,16 @@ public class MainActivity extends AppCompatActivity {
         tabHost = findViewById(android.R.id.tabhost);
         tabHost.setup(this,getSupportFragmentManager(),android.R.id.tabhost);
 
+        SharedPreferences sp=getSharedPreferences("userInfo", MODE_PRIVATE);
+        if(sp.getInt("userId",0)==0) {//若该用户没有登录
+            fragmentArr[2] =MyInfoActivity.class;
+            Toast.makeText(getApplicationContext(),"请先登录再发布任务！",Toast.LENGTH_SHORT).show();
+        }
         for(int i = 0 ; i < fragmentArr.length ; i++){
             TabHost.TabSpec tabSpec = tabHost.newTabSpec(tabHostText[i]).setIndicator(getTabHostView(i));
             tabHost.addTab(tabSpec,fragmentArr[i],null);
         }
+
 
         //给tabHost控件增加事件监听器
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
