@@ -70,11 +70,12 @@
                 android:layout_weight="0.95"
                 android:orientation="horizontal">
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="44dp"
+                    android:layout_height="22dp"
                     android:text="描述"
                     android:textColor="#ffffff"
                     android:textSize="18dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_shape2"/>
                 <View
                     android:layout_width="10dp"
@@ -84,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="求代取快递："
+                    android:layout_gravity="center"
                     android:textSize="25dp"/>
             </LinearLayout>
         </LinearLayout>

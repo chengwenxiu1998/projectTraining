@@ -25,9 +25,9 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class IndexListTask extends AsyncTask<String, Void, List<NotAccept>> {
-​    private Context mContext = null;
-​    private ListView lv = null;
-​    private Gson gson;
+    private Context mContext = null;
+    private ListView lv = null;
+    private Gson gson;
 
     public IndexListTask(Context mContext, ListView lv) {
         this.mContext = mContext;
@@ -48,42 +48,37 @@ public class IndexListTask extends AsyncTask<String, Void, List<NotAccept>> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType", "utf-8");
->>
->>​    //获取输入流
->>​    InputStream in = connection.getInputStream();
->>​    //字节流转换为字符流
->>​    InputStreamReader inputStreamReader = new InputStreamReader(in);//转换流
->>​    BufferedReader reader = new BufferedReader(inputStreamReader);
->>​    String res = reader.readLine();
->>​    Log.e("res", res);
->>​    gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
->>​    tasksList = gson.fromJson(res, new TypeToken<List<NotAccept>>() {}.getType());
->>​    if (tasksList != null) {
->>​    Log.e("NotAcceptTasksList", tasksList.toString());
->>​    }
->>​    } catch (MalformedURLException e) {
->>​    e.printStackTrace();
->>​    } catch (IOException e) {
->>​    e.printStackTrace();
->>​    }
-
+            //获取输入流
+             InputStream in = connection.getInputStream();
+             //字节流转换为字符流
+             InputStreamReader inputStreamReader = new InputStreamReader(in);//转换流
+             BufferedReader reader = new BufferedReader(inputStreamReader);
+             String res = reader.readLine();
+             Log.e("res", res);
+             gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+             tasksList = gson.fromJson(res, new TypeToken<List<NotAccept>>() {}.getType());
+             if (tasksList != null) {
+                 Log.e("NotAcceptTasksList", tasksList.toString());
+             }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
             return tasksList;
-    
-            }
+    }
 
      
 
-
->@Override
->protected void onPostExecute(List list) {
->if (list != null && list.size() != 0) {
->​    IndexCustomAdapter2 adapter = new IndexCustomAdapter2(mContext, list, lv);
->​    lv.setAdapter(adapter);
->} else {
->​    Toast.makeText(mContext, "数据加载失败", Toast.LENGTH_SHORT).show();
->}
->}
-
+    @Override
+    protected void onPostExecute(List list) {
+        if (list != null && list.size() != 0) {
+            IndexCustomAdapter2 adapter = new IndexCustomAdapter2(mContext, list, lv);
+            lv.setAdapter(adapter);
+        } else {
+            Toast.makeText(mContext, "数据加载失败", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
 
 

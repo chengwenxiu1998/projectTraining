@@ -3,11 +3,11 @@ package com.cwx.timebank;
 import java.util.Date;
 
 public class NotAccept {
-​    private int uId;
-private int tId;
-​    private String uNickName;
-​    private String uImage;
-​    private Date uTime;
+    private int uId;
+    private int tId;
+    private String uNickName;
+    private String uImage;
+    private Date uTime;
 
 private String  tDesc;
 
@@ -19,9 +19,6 @@ private Date tEndtime;
 private String tImageUrl;
 private int tcId;
 
->>
-
-    
     public NotAccept() {
     }
 

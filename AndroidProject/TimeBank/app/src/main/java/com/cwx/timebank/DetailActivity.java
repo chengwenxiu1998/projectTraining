@@ -23,9 +23,8 @@ import com.hyphenate.easeui.EaseUI;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-​    private String hxid;
-
-​    private String nickname;
+    private String hxid;
+    private String nickname;
 
     @Override
 
@@ -60,17 +59,16 @@ setContentView(R.layout.activity_detail);
         nickname = intent.getStringExtra("nickname");
 
 
-​    
->
->String Time = intent.getStringExtra("Time");
->String taskTag = intent.getStringExtra("taskTag");
->String taskDetails = intent.getStringExtra("taskDetails");
->final int tId = intent.getIntExtra("tId", 0);
->TextView petname = findViewById(R.id.tv_detail_petname);
->TextView time = findViewById(R.id.tv_detail_time);
->TextView tag = findViewById(R.id.tv_tag);
->TextView detail = findViewById(R.id.tv_detail);
->CircleImageView touxaing = findViewById(R.id.iv_touxiang);
+
+        String Time = intent.getStringExtra("Time");
+        String taskTag = intent.getStringExtra("taskTag");
+        String taskDetails = intent.getStringExtra("taskDetails");
+        final int tId = intent.getIntExtra("tId", 0);
+        TextView petname = findViewById(R.id.tv_detail_petname);
+        TextView time = findViewById(R.id.tv_detail_time);
+        TextView tag = findViewById(R.id.tv_tag);
+        TextView detail = findViewById(R.id.tv_detail);
+        CircleImageView touxaing = findViewById(R.id.iv_touxiang);
 
         if (uImage != null && !uImage.equals("")) {
             Log.e("uImage", uImage);
