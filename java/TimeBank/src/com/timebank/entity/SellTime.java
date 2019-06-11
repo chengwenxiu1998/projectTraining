@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class SellTime {
 	private int tId;
+	private int uIdSend;
     private String uNickName;
     private String uImage;
     private Date uTime;
@@ -19,10 +20,11 @@ public class SellTime {
     }
 
 
-    public SellTime(int tId, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
+    public SellTime(int tId,int uIdSend, String uNickName, String uImage, Date uTime, String tDesc, int tCoinCount,
 			String tagText, String tState, int uIdAccept, Date tEndtime, String tImageUrl) {
 		super();
 		this.tId = tId;
+		this.uIdSend = uIdSend;
 		this.uNickName = uNickName;
 		this.uImage = uImage;
 		this.uTime = uTime;
@@ -112,4 +114,25 @@ public class SellTime {
     public void settEndtime(Date tEndtime) {
         this.tEndtime = tEndtime;
     }
+
+
+	public int getuIdSend() {
+		return uIdSend;
+	}
+
+
+	public void setuIdSend(int uIdSend) {
+		this.uIdSend = uIdSend;
+	}
+
+
+	@Override
+	public String toString() {
+		return "SellTime [tId=" + tId + ", uIdSend=" + uIdSend + ", uNickName=" + uNickName + ", uImage=" + uImage
+				+ ", uTime=" + uTime + ", tDesc=" + tDesc + ", tCoinCount=" + tCoinCount + ", tagText=" + tagText
+				+ ", tState=" + tState + ", uIdAccept=" + uIdAccept + ", tEndtime=" + tEndtime + ", tImageUrl="
+				+ tImageUrl + "]";
+	}
+    
+    
 }

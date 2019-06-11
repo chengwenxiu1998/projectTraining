@@ -1,5 +1,7 @@
 package com.timebank.selltimetask.selltimecontroller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,9 +29,13 @@ public class SellTimeTaskController {
 	@ResponseBody
 	public String sellTime(Model model) {
 		List<SellTime> list=taskServiceImpl.sellTimeTask();
+		System.out.println(list);
+		Collections.reverse(list);
+		
 		model.addAttribute("sellTimeTask",list);
 		Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String temp=gson.toJson(list);
+		System.out.println(list);
 		return temp;
 	}
 }

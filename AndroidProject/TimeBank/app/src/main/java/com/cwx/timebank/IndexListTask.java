@@ -48,6 +48,7 @@ public class IndexListTask extends AsyncTask<String, Void, List<NotAccept>> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //传入的参数中有中文字符，防止乱码出现
             connection.setRequestProperty("contentType", "utf-8");
+
             //获取输入流
              InputStream in = connection.getInputStream();
              //字节流转换为字符流
@@ -68,7 +69,27 @@ public class IndexListTask extends AsyncTask<String, Void, List<NotAccept>> {
             return tasksList;
     }
 
-     
+//            //获取输入流
+//            InputStream in = connection.getInputStream();
+//            //字节流转换为字符流
+//            InputStreamReader inputStreamReader = new InputStreamReader(in);//转换流
+//            BufferedReader reader = new BufferedReader(inputStreamReader);
+//            String res = reader.readLine();
+//            Log.e("res", res);
+//            gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//            tasksList = gson.fromJson(res, new TypeToken<List<NotAccept>>() {}.getType());
+//            if (tasksList != null) {
+//               Log.e("NotAcceptTasksList", tasksList.toString());
+//            }
+//         } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//         }
+//
+//         return tasksList;
+//
+//    }
 
     @Override
     protected void onPostExecute(List list) {
@@ -79,6 +100,7 @@ public class IndexListTask extends AsyncTask<String, Void, List<NotAccept>> {
             Toast.makeText(mContext, "数据加载失败", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
 
 

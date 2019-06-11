@@ -33,10 +33,12 @@ public class SellTimeCustomAdapter extends BaseAdapter {
         this.list = list;
         this.itemView=itemView;
         this.lv=lv;
+        Log.e("12","adapter里的list"+list);
 
     }
     @Override
     public int getCount() {
+        Log.e("12","adapter的size"+list.size());
         return list.size();
     }
 
@@ -52,6 +54,7 @@ public class SellTimeCustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        Log.e("12","selltime的getView");
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.sell_time_item,null);
@@ -64,6 +67,7 @@ public class SellTimeCustomAdapter extends BaseAdapter {
         TextView taskDetails = convertView.findViewById(R.id.tv_task_details);
 
         final SellTime buyTime = (SellTime) list.get(position);
+        Log.e("12","buytime"+buyTime);
         //获取任务id
         final int tId=buyTime.gettId();
         if(buyTime.getuImage()!=null && !buyTime.getuImage().equals("")) {
@@ -116,6 +120,8 @@ public class SellTimeCustomAdapter extends BaseAdapter {
                     SellTime sellTimeDetail = list.get((int) id);
                     intent.putExtra("uImage",sellTimeDetail.getuImage());
                     intent.putExtra("nickname", sellTimeDetail.getuNickName());
+                    intent.putExtra("hxid",sellTimeDetail.getuIdSend()+"");
+                    Log.e("12","我要卖时间的环信id"+sellTimeDetail.getuIdSend());
                     //当前时间
                     Calendar currentDate=Calendar.getInstance();
                     String getuTime=null;

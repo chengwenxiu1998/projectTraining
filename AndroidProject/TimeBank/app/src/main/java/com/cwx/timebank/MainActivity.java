@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     //创建一个列表，保存选项卡视图
     private List<View> viewList = new ArrayList<>();
     private FragmentTabHost tabHost;
@@ -36,11 +38,9 @@ public class MainActivity extends AppCompatActivity {
         //该APP一启动就将要访问的服务器地址保存在getSharedPreferences，方便以后修改只修改这一个地方
         SharedPreferences sharedPreferences = getSharedPreferences("myServer",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("serverUrl","http://tb.yangke.ink:8080/TimeBank");
 
-        editor.putString("serverUrl","http://106.14.222.186:8080/TimeBank");
-
-//        editor.putString("serverUrl","http://10.7.88.239:8080/TimeBank");
+//        editor.putString("serverUrl","http://106.14.222.186:8080/TimeBank");
+        editor.putString("serverUrl","http://10.7.88.246:8080/TimeBank");
 
         editor.commit();
 

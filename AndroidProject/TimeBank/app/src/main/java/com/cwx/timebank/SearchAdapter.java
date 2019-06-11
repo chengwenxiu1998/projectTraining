@@ -231,23 +231,6 @@ public class SearchAdapter extends BaseAdapter {
             });
         }
 
-        Button btnContackSeller = convertView.findViewById(R.id.btn_contact_seller);
-        if(btnContackSeller!=null) {
-            btnContackSeller.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences sp = context.getSharedPreferences("userInfo", MODE_PRIVATE);
-                    if (sp.getInt("userId", 0) != 0) {//若该用户已登录
-                        Intent intent = new Intent();
-                        intent.setClassName("com.cwx.timebank", "com.cwx.timebank.ContactSellerActivity");
-                        context.startActivity(intent);
-                    } else {//用户还没有登陆，跳转到登陆页面
-                        Intent intent = new Intent(context, LoginActivity.class);
-                        context.startActivity(intent);
-                    }
-                }
-            });
-        }
         return convertView;
     }
 }

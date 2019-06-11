@@ -6,12 +6,13 @@
     android:descendantFocusability="blocksDescendants">
     <!--正文-->
    <!--上边界-->
-   <TextView
+   <!--<TextView
         android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@drawable/layerlist"
-        />
+        />-->
+
     <!--中间内容-->
     <!--中间内容第一部分 头像部分-->
     <LinearLayout
@@ -114,10 +115,11 @@
         android:layout_gravity="right"/>
 
     <!--下边界-->
-  <TextView
+ <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@drawable/layerlist"
         android:layout_marginBottom="3dp"
-        />
+        />-->
+
 </LinearLayout>

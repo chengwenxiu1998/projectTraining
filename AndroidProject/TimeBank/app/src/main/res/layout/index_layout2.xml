@@ -49,12 +49,84 @@
             <RelativeLayout
                 android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="180dp">
-
+                android:layout_height="150dp">
             </RelativeLayout>
-
-
+           <!-- &lt;!&ndash;热门推荐&ndash;&gt;
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="——— 热点推荐 ———"
+                    android:textColor="#ffcc00"
+                    android:textSize="25dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="35dp"
+                        android:layout_height="4dp"
+                        android:background="#4aa3e7" />
+
+                    <View
+                        android:layout_width="35dp"
+                        android:layout_height="4dp"
+                        android:background="#ffe037" />
+
+                    <View
+                        android:layout_width="35dp"
+                        android:layout_height="4dp"
+                        android:background="#2cdc00" />
+                </LinearLayout>
+            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+                <Button
+                    android:textSize="15dp"
+                    android:id="@+id/btn_sell"
+                    android:background="#fff"
+                    android:text="我要卖时间"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:textSize="15dp"
+                    android:id="@+id/btn_buy"
+                    android:background="#fff"
+                    android:text="我要买时间"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+           <!-- <View
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#f1f1f1"/>-->
+        </LinearLayout>
+
+                <ListView
+                    android:id="@+id/lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"></ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:orientation="horizontal"
@@ -108,9 +180,7 @@
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_weight="1"/>-->
+
 </LinearLayout>
 

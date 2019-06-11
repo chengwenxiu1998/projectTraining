@@ -49,6 +49,7 @@ public class SearchListTask extends AsyncTask<String,Void,List<SearchTask>>  {
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("myServer", MODE_PRIVATE);
             String serverUrl = sharedPreferences.getString("serverUrl","");
             URL url=new URL(serverUrl+"/searchtask?searchContent="+searchContent);
+
 //            URL url = new URL("http://10.7.88.211:8080/TimeBank/searchtask?searchContent="+searchContent);
 
             HttpURLConnection connection=(HttpURLConnection)url.openConnection();

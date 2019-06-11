@@ -113,6 +113,8 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
                         intent.setClassName("com.cwx.timebank","com.cwx.timebank.TaskDetailActivityLi" );
                         BuyTime buyTimeDetail = list.get((int) id);
                         intent.putExtra("nickname", buyTimeDetail.getuNickName());
+                        intent.putExtra("hxid",buyTimeDetail.getuIdSend()+"");
+                        Log.e("12","我要买时间的换新"+buyTimeDetail.getuIdSend());
                         //当前时间
                         Calendar currentDate=Calendar.getInstance();
                         String getuTime=null;
@@ -157,21 +159,21 @@ public class BuyTimeCustomAdapter extends BaseAdapter {
                 });
             }
 
-            Button btnContackSeller = convertView.findViewById(R.id.btn_contact_seller);
-            btnContackSeller.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences sp=context.getSharedPreferences("userInfo", MODE_PRIVATE);
-                    if(sp.getInt("userId",0)!=0) {//若该用户已登录
-                        Intent intent = new Intent();
-                        intent.setClassName("com.cwx.timebank","com.cwx.timebank.ContactSellerActivity");
-                        context.startActivity(intent);
-                    }else{//用户还没有登陆，跳转到登陆页面
-                        Intent intent = new Intent(context,LoginActivity.class);
-                        context.startActivity(intent);
-                    }
-                }
-            });
+//            Button btnContackSeller = convertView.findViewById(R.id.btn_contact_seller);
+//            btnContackSeller.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    SharedPreferences sp=context.getSharedPreferences("userInfo", MODE_PRIVATE);
+//                    if(sp.getInt("userId",0)!=0) {//若该用户已登录
+//                        Intent intent = new Intent();
+//                        intent.setClassName("com.cwx.timebank","com.cwx.timebank.ContactSellerActivity");
+//                        context.startActivity(intent);
+//                    }else{//用户还没有登陆，跳转到登陆页面
+//                        Intent intent = new Intent(context,LoginActivity.class);
+//                        context.startActivity(intent);
+//                    }
+//                }
+//            });
 
             return convertView;
         }

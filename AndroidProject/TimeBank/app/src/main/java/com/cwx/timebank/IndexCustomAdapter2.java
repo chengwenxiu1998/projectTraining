@@ -116,8 +116,8 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                         NotAccept sellTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",sellTimeDetail.getuImage());
                         intent.putExtra("nickname", sellTimeDetail.getuNickName());
-                       /* intent.putExtra("hxid",sellTimeDetail.getuId()+"");
-                        Log.e("哈哈哈哈哈1111环信id",sellTimeDetail.getuId()+"");*/
+                        intent.putExtra("hxid",sellTimeDetail.getuId()+"");
+                        Log.e("哈哈哈哈哈1111环信id",sellTimeDetail.getuId()+"");
                         //当前时间
                         Calendar currentDate = Calendar.getInstance();
                         String getuTime = null;
@@ -158,8 +158,8 @@ public class IndexCustomAdapter2 extends BaseAdapter {
                         NotAccept buyTimeDetail = list.get((int) id);
                         intent.putExtra("uImage",buyTimeDetail.getuImage());
                         intent.putExtra("nickname", buyTimeDetail.getuNickName());
-                       /* intent.putExtra("hxid",buyTimeDetail.getuId()+"");
-                        Log.e("哈哈哈哈哈哈哈2222环信id",buyTimeDetail.getuId()+"");*/
+                        intent.putExtra("hxid",buyTimeDetail.getuId()+"");
+                        Log.e("哈哈哈哈哈哈哈2222环信id",buyTimeDetail.getuId()+"");
                         //当前时间
                         Calendar currentDate=Calendar.getInstance();
                         String getuTime=null;
