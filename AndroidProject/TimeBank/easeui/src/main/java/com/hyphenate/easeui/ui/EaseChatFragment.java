@@ -164,7 +164,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
         nickname = fragmentArgs.getString(EaseConstant.EXTRA_USER_NICK);
-        if(nickname==null){
+        if(nickname==null || nickname.equals("")){
             nickname="满满";
         }
         Log.e("nickname","nick--------"+nickname);

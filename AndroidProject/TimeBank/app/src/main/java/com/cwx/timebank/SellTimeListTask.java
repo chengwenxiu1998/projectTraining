@@ -31,8 +31,8 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SellTimeListTask extends AsyncTask<String,Void,List<SellTime>> {
-    private Context mContext=null;
-    private ListView lv=null;
+    private Context mContext;
+    private ListView lv;
     private Gson gson;
 
     public  SellTimeListTask(Context mContext,ListView lv){
@@ -73,6 +73,7 @@ public class SellTimeListTask extends AsyncTask<String,Void,List<SellTime>> {
     @Override
     protected void onPostExecute(List list) {
         if(list!=null &&list.size()!=0){
+            Log.e("12","嘿嘿嘿");
             SellTimeCustomAdapter adapter=new SellTimeCustomAdapter(mContext,list, R.layout.sell_time_item,lv);
             lv.setAdapter(adapter);
         }else{
